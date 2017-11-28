@@ -20,19 +20,41 @@ class LoginForm extends Component {
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-    if(this.state.password===this.state.confirm) {
-      this.setState({
-        match : true
-      })
-    }
-    else {
-      this.setState({
-        match : false
-      })
-    }
+    switch (name) {
+      case "password":
+        if (value === this.state.confirm) {
+          this.setState({
+            [name]: value,
+            match : true
+          });
+        }
+        else {
+          this.setState({
+            [name]: value,
+            match : false
+          });
+        }
+        break;
+      case "confirm" :
+        if (value === this.state.password) {
+          this.setState({
+            [name]: value,
+            match : true
+          });
+        }
+        else {
+          this.setState({
+            [name]: value,
+            match : false
+          });
+        }
+        break;
+      default:
+        this.setState({
+          [name]: value,
+          match : false
+        });
+    }  
   }
 
   goBack = () => {
@@ -51,9 +73,21 @@ class LoginForm extends Component {
 
 
   render() {
-    let button = null;
+    let check = null;
+    if(this.state.match) {
+      check = (
+        <i className="fa fa-check"></i>
+      )
+    }
+    else {
+      check = (
+        <i className="fa fa-times"></i>
+      )
+    }
+
+    let confirm = null;
     if (this.state.type === "create") {
-      button = (
+      confirm = (
         <div className="form-group">
           <label htmlFor="Confirm">Confirm Password {check}</label>
           <input
@@ -66,12 +100,6 @@ class LoginForm extends Component {
             onChange = {this.handleInputChange}
           />
         </div>
-      )
-    }
-    let check = null;
-    if(this.state.match) {
-      check = (
-        <i className="fa fa-check"></i>
       )
     }
     if (this.state.type !== "") {
@@ -100,7 +128,7 @@ class LoginForm extends Component {
               onChange = {this.handleInputChange}
             />
           </div>
-          {button}
+          {confirm}
           <LoginSubmit type={this.state.type} onClick={() => {}}/>
           <button className="pull-right btn btn-danger" onClick={this.goBack}>
             Go Back

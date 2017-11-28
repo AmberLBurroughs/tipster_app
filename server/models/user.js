@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
     username: {
       type: DataTypes.STRING,
-      defaultValue: generateUsername(this.email),
+      //defaultValue: this.generateUsername(this.email),
       required: true
     },
 

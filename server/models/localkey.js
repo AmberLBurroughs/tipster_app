@@ -1,7 +1,7 @@
 'use strict';
 
 const bcrypt     = require('bcrypt');
-
+   
 module.exports   = (sequelize, DataTypes) => {
   const LocalKey = sequelize.define('LocalKey', {
     localPassword: {
@@ -23,9 +23,8 @@ module.exports   = (sequelize, DataTypes) => {
 
   LocalKey.associate = models => {
     LocalKey.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
+      foreignKey: 'UserID',
+      onDelete: 'CASCADE',
     });
   }
   return LocalKey;

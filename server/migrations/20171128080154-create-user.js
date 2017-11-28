@@ -25,3 +25,9 @@ module.exports = {
     return queryInterface.dropTable('Users');
   }
 };
+
+/*
+
+If, for whatever reason, we needed to rollback (undo) the migration, the down function would be executed and it would undo whatever the up function did, thus returning the our database to the same state it was in before we performed the migration.
+
+*/

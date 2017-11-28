@@ -1,2 +1,1 @@
-export { default } from "./LoginBtn.js";
-// export { default } from "./LoginSubmit.js";
+export { LoginBtn, LoginSubmit } from "./LoginBtn.js";

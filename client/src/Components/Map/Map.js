@@ -1,12 +1,13 @@
 import React from "react";
 const google = window.google;
 const _ = require("lodash");
-const { compose, withProps, lifecycle } = require("recompose");
+const { compose, withProps, withStateHandlers, lifecycle } = require("recompose");
 const {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } = require("react-google-maps");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
@@ -24,7 +25,7 @@ const MapWithASearchBox = compose(
       this.setState({
         bounds: null,
         center: {
-          lat: 41.9, lng: -87.624
+          lat: 37.778644, lng: -122.419133
         },
         markers: [],
         onMapMounted: ref => {
@@ -42,8 +43,9 @@ const MapWithASearchBox = compose(
         onPlacesChanged: () => {
           const places = refs.searchBox.getPlaces();
           const bounds = new google.maps.LatLngBounds();
-
+          console.log(places);
           places.forEach(place => {
+
             if (place.geometry.viewport) {
               bounds.union(place.geometry.viewport)
             } else {
@@ -52,6 +54,9 @@ const MapWithASearchBox = compose(
           });
           const nextMarkers = places.map(place => ({
             position: place.geometry.location,
+            name: place.name,
+            id: place.id,
+            address: place.formatted_address
           }));
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
@@ -61,15 +66,26 @@ const MapWithASearchBox = compose(
           });
           // refs.map.fitBounds(bounds);
         },
+        onMarkerClick: (id) => {
+          console.log(id.index);
+          console.log(this.state.markers[id.index]);
+        }
       })
     },
+  }),
+  withStateHandlers(() => ({
+    isOpen: false,
+  }), {
+    onToggleOpen: ({ isOpen }) => () => ({
+      isOpen: !isOpen,
+    })
   }),
   withScriptjs,
   withGoogleMap
 )(props =>
   <GoogleMap
     ref={props.onMapMounted}
-    defaultZoom={15}
+    defaultZoom={14}
     center={props.center}
     onBoundsChanged={props.onBoundsChanged}
   >
@@ -81,7 +97,7 @@ const MapWithASearchBox = compose(
     >
       <input
         type="text"
-        placeholder="Customized your placeholder"
+        placeholder="Find a place"
         style={{
           boxSizing: `border-box`,
           border: `1px solid transparent`,
@@ -98,7 +114,11 @@ const MapWithASearchBox = compose(
       />
     </SearchBox>
     {props.markers.map((marker, index) =>
-      <Marker key={index} position={marker.position} />
+      <Marker key={index} ourKey = {index} position={marker.position} name={marker.name} id={marker.id} onClick={() => props.onMarkerClick({index})}>
+        {/*props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
+        Hello
+        </InfoWindow>*/}
+      </Marker>
     )}
   </GoogleMap>
 );

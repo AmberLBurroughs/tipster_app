@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
-    "database": "tipster_db",
+    "password": null,
+    "database": "tipster_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "tipster_db",
+    "database": "tipster_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": "password",
     "database": "tipster_db",
     "host": "127.0.0.1",
     "dialect": "postgres"

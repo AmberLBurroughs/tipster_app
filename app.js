@@ -2,7 +2,7 @@
 
 const express      = require('express');
 const bodyParser   = require('body-parser');
-const logging      = require('morgan');
+const logger      = require('morgan');
 const axios        = require('axios');
 const pg 				   = require('pg'); // postgresql
 const fileUpload   = require('express-fileupload');
@@ -12,22 +12,22 @@ const flash        = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session'); // cookie session
 
-
-const PORT = process.env.PORT || 3010;
-
-
 // Configuration ==============================================
 
+// Set up the express app
 const app = express();
 
-const db = require('./models');
-require('./config/passport')(passport); // pass passport for configuration
+const db  = require('./server/models');
 
-app.use(logging('dev'));
+// Log requests to the console.
+app.use(logger('dev'));
 
+
+// Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
+
 
 // Enable CORS so that browsers don't block requests.
 app.use((req, res, next) => {
@@ -37,16 +37,19 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use(express.static('./client/build'));
 app.use(function(err, req, res, next) {
     console.log(err);
 });
 
+require('./server/config/passport')(passport); // pass passport for configuration
+
 
 //app.use(session({ secret: 'thueeugurg5hi5ri7ri5tfg576rihufgk76g65ehi4wu3qa23' })); // session secret
 app.use(session({
     key: 'user_sid',
-    secret: 'kjakjasdksdkldksdfklsdkdjkldsif',
+    secret: '}wmpB2uLMMYu>Kt4#9.CDttvp=4KYq9rVfWP',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -58,11 +61,12 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
-const routes = require("./routes/routes");
+const routes = require("./server/routes/routes");
 
-// launch ======================================================
-db.sequelize.sync({}).then(function() {
-	app.listen(PORT, function() {
-	  console.log("App listening on PORT " + PORT);
-	});
-});
+
+// Setup a default catch-all route that sends back a welcome message in JSON format.
+app.get('*', (req, res) => res.status(200).send({
+  message: 'Welcome to the beginning of nothingness.',
+}));
+
+module.exports = app;

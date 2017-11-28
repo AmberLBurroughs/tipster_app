@@ -1,11 +1,7 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
+'use strict';
 
-    username: {
-      type: DataTypes.STRING,
-      defaultValue: generateUsername(),
-      required: true
-    },
+module.exports = (sequelize, DataTypes) => {
+  const User   = sequelize.define('User', {
 
     email: {
       type: DataTypes.STRING,
@@ -15,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
                 isEmail : true
             }
+    },
+
+    username: {
+      type: DataTypes.STRING,
+      defaultValue: generateUsername(this.email),
+      required: true
     },
 
     firstName: {
@@ -27,19 +29,21 @@ module.exports = (sequelize, DataTypes) => {
 
     image: {
       type: DataTypes.STRING,
-      defaultValue: "/assets/uploads/tie-up.png" 
-    },
-
+      defaultValue: "/assets/uploads/default.png" 
+    }
   });
-
+  
   // methods ======================
-  User.generateUsername = (email) => {
+  User.generateUsername = email => {
 
     // email split on @ , anything before @
     // create a random hash of number letters and sybols (4)
     // add hash to the arr of new string of email that was split
-
-    console.log("hello") 
   } 
-      return User;
+
+  User.associate = models => {
+
+  }
+
+  return User;
 };

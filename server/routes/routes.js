@@ -96,14 +96,14 @@ router.post('/login', (req, res, next) => {
 });
 
 
-getCurrentuserId = (req) => {
-  const userId;
-    if(req.isAuthenticated()){
-      userId = req.session.passport.user;
-    } else {
-      userId = false
-    }
-    return userId
-}
+// getCurrentuserId = (req) => {
+//   const userId;
+//     if(req.isAuthenticated()){
+//       userId = req.session.passport.user;
+//     } else {
+//       userId = false
+//     }
+//     return userId
+// }
 
-module.exports = router;
+// module.exports = router;

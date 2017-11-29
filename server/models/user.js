@@ -1,7 +1,14 @@
 'use strict';
+const uuidv1 = require('uuid/v1');
 
 module.exports = (sequelize, DataTypes) => {
   const User   = sequelize.define('User', {
+    uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      isUnique :true
+    },
 
     email: {
       type: DataTypes.STRING,
@@ -12,11 +19,13 @@ module.exports = (sequelize, DataTypes) => {
                 isEmail : true
             }
     },
-
+   //afterCreate
     username: {
       type: DataTypes.STRING,
-      //defaultValue: this.generateUsername(this.email),
-      required: true
+      // defaultValue: () => {
+      //   const emailArr = User.email.split("@");
+      //   return emailArr[0] + Math.random().toString(36).substring(7);
+      // }
     },
 
     firstName: {
@@ -31,17 +40,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: "/assets/uploads/default.png" 
     }
-  });
+  }
+  ,{
+    hooks: {
+      beforeCreate: user => {
+        const emailArr = user.email.split("@");
+        user.username = emailArr[0] + Math.random().toString(36).substring(7);
+      }
+    }
+
+   }
+   );
+
   
   // methods ======================
-  User.generateUsername = email => {
-
-    // email split on @ , anything before @
-    // create a random hash of number letters and sybols (4)
-    // add hash to the arr of new string of email that was split
-  } 
-
-  User.associate = models => {
+  
+    User.associate = models => {
 
   }
 

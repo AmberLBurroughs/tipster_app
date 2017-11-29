@@ -20,12 +20,12 @@ module.exports    = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user.uuid);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        db.User.findById(id).then(function(user) {
+    passport.deserializeUser(function(uuid, done) {
+        db.User.findById(uuid).then(function(user) {
  
 	        if (user) {
 	 
@@ -41,8 +41,6 @@ module.exports    = function(passport) {
     });
 
 
-
-
     // =========================================================================
     // LOCAL SIGNUP ============================================================
     // =========================================================================
@@ -51,13 +49,11 @@ module.exports    = function(passport) {
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-
-        emailField: 'email',
+        usernameField: 'email',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) {
-
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
@@ -66,7 +62,7 @@ module.exports    = function(passport) {
         // we are checking to see if the user trying to login already exists
         db.User.findOne({
             where: {
-            	email: email
+            	email: req.body.email
             }
         }).then(function(user, err){
         	if (err) return done(err);
@@ -79,32 +75,39 @@ module.exports    = function(passport) {
                 // if there is no user with that email
                 // create the user
                 db.User.create({
-
-						      username: req.body.username,
-						      email: req.body.email,
-						      localPassword: db.User.generateHash(password)
-
-						    }).then(function(dbUser) {
-						    	//console.log("created result: ", dbUser);
-						      // send post back to render
-						      return done(null, dbUser);
-
-						    }).catch(function (err) {
-						      // handle error;
-						      console.log(err);
-						    }); 
+    		      email: req.body.email,
+                // chain then create pw
+                })
+                .then(function(dbUser){
+                    db.LocalKey
+                    .create({ 
+                        UserUuid: dbUser.uuid,
+                        localPassword: db.LocalKey.generateHash(req.body.password)
+    		        })
+                    .then(function(localKey) {
+                      // send post back to render
+                      return done(null, dbUser);
+                    })
+                     .catch(function (err) {
+                      // handle error;
+                      console.log(err);
+                    }); 
+                })
+                .catch(function (err) {
+    		      // handle error;
+    		      console.log(err);
+    		    }); 
             }
           });   
 
         });
-
     }));
 
-    // =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
+    // // =========================================================================
+    // // LOCAL LOGIN =============================================================
+    // // =========================================================================
+    // // we are using named strategies since we have one for login and one for signup
+    // // by default, if there was no name, it would just be called 'local'
 
     passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
@@ -130,7 +133,8 @@ module.exports    = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
 
             // if the user is found but the password is wrong
-            if (!user.validPassword(password))
+            // get password associated with user logging in
+            if (!user && db.LocalKey.validPassword(password))
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user

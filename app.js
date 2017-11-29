@@ -2,7 +2,7 @@
 
 const express      = require('express');
 const bodyParser   = require('body-parser');
-const logger      = require('morgan');
+const logger       = require('morgan');
 const axios        = require('axios');
 const pg 				   = require('pg'); // postgresql
 const fileUpload   = require('express-fileupload');
@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 });
 
 
+// views
 app.use(express.static('./client/build'));
 app.use(function(err, req, res, next) {
     console.log(err);
@@ -43,25 +44,23 @@ app.use(function(err, req, res, next) {
 
 require('./server/config/passport')(passport); // pass passport for configuration
 
-
 //app.use(session({ secret: 'thueeugurg5hi5ri7ri5tfg576rihufgk76g65ehi4wu3qa23' })); // session secret
 app.use(session({
     key: 'user_sid',
     secret: '}wmpB2uLMMYu>Kt4#9.CDttvp=4KYq9rVfWP',
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
         expires: 600000
     }
 }));
-
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
 
 
-const routes = require('./server/routes')(app);;
+const routes = require('./server/routes')(app, passport);;
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(200).send({

@@ -1,9 +1,16 @@
 'use strict';
+const uuidv1 = require('uuid/v1');
 
-const bcrypt     = require('bcrypt');
-   
+const bcrypt     = require('bcrypt');   
 module.exports   = (sequelize, DataTypes) => {
   const LocalKey = sequelize.define('LocalKey', {
+    uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      isUnique :true
+    },
+
     localPassword: {
       type: DataTypes.STRING,
       required: true
@@ -21,11 +28,13 @@ module.exports   = (sequelize, DataTypes) => {
       return bcrypt.compareSync(password, this.localPassword);
   };
 
-  LocalKey.associate = models => {
+  LocalKey.associate = function(models) {
     LocalKey.belongsTo(models.User, {
-      foreignKey: 'UserID',
-      onDelete: 'CASCADE',
+     foreignKey: {
+          allowNull: false,
+          onDelete: 'CASCADE',
+        }
     });
-  }
+  } 
   return LocalKey;
 };

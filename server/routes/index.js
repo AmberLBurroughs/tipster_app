@@ -42,18 +42,19 @@ app.get('/logout', function(req, res) {
 // =====================================
 // process the login form
 app.post('/login', function(req, res, next) {
-  passportAuthenticate('local-login');
+  passportAuthenticate('local-login', req, res, next);
 });
+
 // =====================================
 // SIGNUP ==============================
 // =====================================
 // process the signup form
 app.post('/signup', function(req, res, next) {
-  passportAuthenticate('local-signup');
+  passportAuthenticate('local-signup', req, res, next);
 });
 
-passportAuthenticate = local => {
-  passport.authenticate(local, function(err, user, info) {
+passportAuthenticate = (localStrategy, req, res, next) => {
+  passport.authenticate(localStrategy, function(err, user, info) {
     if (err) {
       return next(err); // will generate a 500 error
     }

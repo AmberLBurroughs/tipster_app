@@ -69,6 +69,7 @@ const MapWithASearchBox = compose(
         onMarkerClick: (id) => {
           console.log(id.index);
           console.log(this.state.markers[id.index]);
+          this.props.onMarkerClick(this.state.markers[id.index]);
         }
       })
     },

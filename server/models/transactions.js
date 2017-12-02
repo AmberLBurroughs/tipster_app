@@ -6,19 +6,23 @@ module.exports   = (sequelize, DataTypes) => {
     senderID: {
       type: DataTypes.string,
       required: true,
-      allowNull:false,
+      allowNull:false
     },
 
     recieverID: {
       type: DataTypes.string,
       required: true,
-      allowNull:false,
+      allowNull:false
     },
 
     Amount: {
       type: DataTypes.integer,
       required: true,
-      allowNull:false,
+      allowNull:false
+    },
+    Status: {
+      type: DataTypes.string,
+      required: true,
+      default: "pending"
     }
-
   }

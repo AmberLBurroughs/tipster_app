@@ -1,3 +1,5 @@
+//authenticationRoutes.js
+
 const UserController = require('../controllers').user;
 const passport = require('passport');
 
@@ -77,12 +79,26 @@ passportAuthenticate = (localStrategy, req, res, next) => {
       }
       console.log(req.isAuthenticated());
       console.log('sucess');
-      return res.redirect("/api/user");
+      return res.redirect("/api/user"); //redirects to dashboard
+      //take out API ? -- not for public viewing.
+      //api routes in seperate file?
+
     });      
   })(req, res, next);
 }
 
 //=======================================================================
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -107,8 +123,8 @@ getCurrentuserId = (req) => {
 //     res.redirect('/');
 // }
 
- // currentUser: getCurrentuserId(req),
- // isLoggedIn: req.isAuthenticated()
+//  currentUser: getCurrentuserId(req),
+//  isLoggedIn: req.isAuthenticated()
 
 
-};
+ };

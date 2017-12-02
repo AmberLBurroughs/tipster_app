@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import ReactStripeElements from 'react-stripe-elements';
+import ReactStripeElements, { CardElement, injectStripe } from 'react-stripe-elements';
 
-const {
-  CardElement,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  PostalCodeElement,
-  PaymentRequestButtonElement,
-  StripeProvider,
-  Elements,
-  injectStripe,
-} = ReactStripeElements;
+// const {
+//   CardElement,
+//   CardNumberElement,
+//   CardExpiryElement,
+//   CardCVCElement,
+//   PostalCodeElement,
+//   PaymentRequestButtonElement,
+//   StripeProvider,
+//   Elements,
+//   injectStripe,
+// } = ReactStripeElements;
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -48,7 +48,7 @@ const createOptions = (fontSize) => {
   };
 };
 
-class _CardForm extends React.Component {
+class _CardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
     this.props.stripe.createToken().then(payload => console.log(payload));

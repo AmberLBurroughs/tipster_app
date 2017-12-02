@@ -12,3 +12,5 @@ const LoginSubmit = (props) => {
     )
   }
 }
+
+export default LoginSubmit

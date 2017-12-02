@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoginBtn, LoginSubmit } from '../../Components/Buttons';
+import { LoginBtn, LoginSubmit } from '../Buttons';
 
 import Utils from '../../Utils/index.js';
 

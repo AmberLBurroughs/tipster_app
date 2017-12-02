@@ -1,5 +1,10 @@
 const UserController = require('../controllers').user;
-const passport = require('passport');
+const passport       = require('passport');
+const authKey        = require('../utils/authKey');
+
+const stripe = require("stripe")(
+  authKey.stripeKey["secretKey"]
+);
 
 
 module.exports = (app, passport) => {
@@ -83,8 +88,6 @@ passportAuthenticate = (localStrategy, req, res, next) => {
 }
 
 //=======================================================================
-
-
 
 // helpers
 getCurrentuserId = (req) => {

@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <StripeProvider apiKey="pk_test_4qto2Oywx4MSKq0x8G1VvjeC">
-        <div className="container">
+        <div className="container-fluid">
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />

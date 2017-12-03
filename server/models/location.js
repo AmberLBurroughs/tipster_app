@@ -12,24 +12,23 @@ module.exports   = (sequelize, DataTypes) => {
     },
 
 		placeID: {
-      type: DataTypes.string,
+      type: DataTypes.STRING,
       required: true,
       allowNull:false,
       isUnique :true
     },
 
     locationName: {
-      type: DataTypes.string,
+      type: DataTypes.STRING,
       required: true,
       allowNull:false,
       isUnique :true
     },
 
     locationAddress: {
-      type: DataTypes.string,
+      type: DataTypes.STRING,
       required: true,
       allowNull:false,
-      isUnique :true
     }
 
 	});
@@ -37,7 +36,7 @@ module.exports   = (sequelize, DataTypes) => {
 // methods ======================
 	Location.associate = function(models) {
 	  // HAS MANY
-	  Location.hasMany(models.User,{
+	  Location.belongsToMany(models.User,{
 	  	as:'Workers', through: 'userLocation', foreignKey: 'locationUUID'
 	  });
 	} 

@@ -49,11 +49,10 @@ module.exports = (sequelize, DataTypes) => {
    }
    );
 
-  
   // methods ======================
   
     User.associate = models => {
-      User.belongsToMany(models.Locations, { as: 'workPlace', through: 'userLocation', foreignKey: 'userUUID' })
+      User.belongsToMany(models.Location, { as: 'workPlace', through: 'userLocation', foreignKey: 'userUUID' })
   }
 
   return User;

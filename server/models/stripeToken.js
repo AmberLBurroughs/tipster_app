@@ -3,7 +3,7 @@ const uuidv1 = require('uuid/v1');
 
 
 module.exports = (sequelize, DataTypes) => {
-  const User   = sequelize.define('User', {
+  const StripeToken   = sequelize.define('StripeToken', {
   	uuid: {
       primaryKey: true,
       type: DataTypes.UUID,
@@ -17,6 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     }
 
   });
-
-  return User;
+  
+  StripeToken.associate = function(models) {
+    StripeToken.belongsTo(models.User, {
+     foreignKey: {
+          allowNull: false,
+          onDelete: 'CASCADE',
+        }
+    });
+  } 
+  return StripeToken;
 };

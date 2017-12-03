@@ -13,14 +13,10 @@ module.exports = (app, passport) => {
 app.get("favicon.ico", function(request, response) {
   response.status(204);
 });
-
-
 // test route for account landing page
 app.get('/search', (req, res) => {
   if(req.isAuthenticated()){
     res.status(200)
-    
-    
     .send({
       message: 'Welcome to the Tipster User API!',
       id: getCurrentuserId(req)

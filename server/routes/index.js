@@ -13,12 +13,21 @@ module.exports = (app, passport) => {
 app.get("favicon.ico", function(request, response) {
   response.status(204);
 });
+
+app.get('/testes', function(req, res) {
+  if(req.isAuthenticated()){
+    console.log(getCurrentuserId(req));
+  }
+  else{
+    console.log("testes false")
+  }
+})
+
 // test route for account landing page
 app.get('/search', (req, res) => {
   if(req.isAuthenticated()){
-    res.status(200)
-    .send({
-      message: 'Welcome to the Tipster User API!',
+    res.json({
+      message: 'Welcome to the Tipster User search!',
       id: getCurrentuserId(req)
     })
   }
@@ -79,7 +88,10 @@ passportAuthenticate = (localStrategy, req, res, next) => {
       }
       console.log(req.isAuthenticated());
       console.log('sucess');
-      return res.redirect("/api/user");
+      //return res.redirect("/search");
+
+      res.json("hello")
+      return 
     });      
   })(req, res, next);
 }

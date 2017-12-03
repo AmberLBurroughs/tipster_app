@@ -16,9 +16,11 @@ app.get("favicon.ico", function(request, response) {
 
 
 // test route for account landing page
-app.get('/api/user', (req, res) => {
+app.get('/search', (req, res) => {
   if(req.isAuthenticated()){
     res.status(200)
+    
+    
     .send({
       message: 'Welcome to the Tipster User API!',
       id: getCurrentuserId(req)
@@ -38,7 +40,6 @@ app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-
 
 // process the signup form (passport) ==============================================
 
@@ -100,15 +101,15 @@ getCurrentuserId = (req) => {
     return userId
 }
 
-// function isLoggedIn(req, res, next) {
+isLoggedIn = (req, res, next) => {
 
-//     // if user is authenticated in the session, carry on 
-//     if (req.isAuthenticated())
-//         return next();
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
 
-//     // if they aren't redirect them to the home page
-//     res.redirect('/');
-// }
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
  // currentUser: getCurrentuserId(req),
  // isLoggedIn: req.isAuthenticated()

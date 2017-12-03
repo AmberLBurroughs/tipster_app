@@ -22,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
    //afterCreate
     username: {
       type: DataTypes.STRING,
-      // defaultValue: () => {
-      //   const emailArr = User.email.split("@");
-      //   return emailArr[0] + Math.random().toString(36).substring(7);
-      // }
     },
 
     firstName: {
@@ -40,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: "/assets/uploads/default.png" 
     }
+    // locations 
   }
   ,{
     hooks: {
@@ -56,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   // methods ======================
   
     User.associate = models => {
-
+      User.belongsToMany(models.Locations, { as: 'workPlace', through: 'userLocation', foreignKey: 'userUUID' })
   }
 
   return User;

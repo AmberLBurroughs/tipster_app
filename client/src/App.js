@@ -4,6 +4,8 @@ import {StripeProvider} from 'react-stripe-elements';
 
 import Login from './Pages/Login.js';
 import Search from './Pages/Search.js';
+import ProfilePage from './Pages/Profile.js';
+import HistoryPage from './Pages/History.js';
 
 class App extends Component {
   render() {
@@ -16,6 +18,8 @@ class App extends Component {
               <Route exact path="/search">
                 <Search />
               </Route>
+              <Route exact path="/profile" component={ProfilePage} />
+              <Route exact path="/history" component={HistoryPage} />
               <Route path="/" component={Login} />
             </Switch>
           </Router>

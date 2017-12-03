@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
+import { Elements } from 'react-stripe-elements';
+
 import { TipSubmit } from "../Buttons";
+import StripeCheckout from "../Stripe-Checkout";
+
+
 
 class TipCard extends Component {
   state = {
@@ -104,8 +109,9 @@ class TipCard extends Component {
           </div>
           <TipSubmit submitTip={this.submitTip}/>
         </form>
-
-
+        <Elements>
+          <StripeCheckout serverProps={this.props} formState={this.state} />
+        </Elements>
       </div>
     )
   }

@@ -1,5 +1,6 @@
-import React, { Comoponent } from 'react';
-import { Elements } from 'react-stripe-elements';
+import React, { Component } from 'react';
+
+import "./style.css";
 
 import CardForm from './CardForm.js';
 import SplitForm from './SplitForm.js';
@@ -7,11 +8,11 @@ import SplitForm from './SplitForm.js';
 class StripeCheckout extends Component {
 
   render() {
+    console.log(this.props.serverProps, this.props.formState);
     return (
-      <Elements>
-        <CardForm/>
-
-      </Elements>
+      <div id="stripeForm">
+        <CardForm />
+      </div>
 
     )
   }

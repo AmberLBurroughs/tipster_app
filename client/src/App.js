@@ -8,19 +8,19 @@ import Search from './Pages/Search.js';
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/search">
-              <StripeProvider apiKey="pk_test_4qto2Oywx4MSKq0x8G1VvjeC">
+      <StripeProvider apiKey="pk_test_4qto2Oywx4MSKq0x8G1VvjeC">
+        <div className="container-fluid">
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/search">
                 <Search />
-              </StripeProvider>
-            </Route>
-            <Route path="/" component={Login} />
-          </Switch>
-        </Router>
-      </div>
+              </Route>
+              <Route path="/" component={Login} />
+            </Switch>
+          </Router>
+        </div>
+      </StripeProvider>
     );
   }
 }

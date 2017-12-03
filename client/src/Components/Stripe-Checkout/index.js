@@ -1,1 +1,1 @@
-export { default } from './StripeCheckout.js';
+export { default } from "./StripeCheckout.js";

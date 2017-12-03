@@ -27,7 +27,7 @@ class Search extends Component {
     return (
       <div className="container">
         <GMap onMarkerClick={this.onMarkerClick}/>
-        
+
         <TipCard
           img={`http://localhost:3000/assets/images/default.png`}
           firstName="Sahil"
@@ -41,5 +41,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-`${window.location.hostname}/assets/images/default.png`

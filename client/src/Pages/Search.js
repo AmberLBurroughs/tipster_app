@@ -3,6 +3,10 @@ import TipCard from "../Components/TipCard"
 import GMap from '../Components/Map';
 import defaultImage from "../Images/default.png";
 
+import Banner from '../Components/Banner';
+import Nav from '../Components/Nav';
+import Roster from '../Components/Roster';
+
 class Search extends Component {
   state = {
     markerClicked: {
@@ -26,7 +30,10 @@ class Search extends Component {
   render() {
     return (
       <div className="container">
+        <Nav />
+        <Banner handle="@tofuguy"/>
         <GMap onMarkerClick={this.onMarkerClick}/>
+        <Roster location={this.state.markerClicked} />
 
         <TipCard
           img={`http://localhost:3000/assets/images/default.png`}

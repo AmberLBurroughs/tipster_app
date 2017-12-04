@@ -29,7 +29,8 @@ app.use(bodyParser.json());
 
 // Enable CORS so that browsers don't block requests.
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  //access-control-allow-origin http://localhost:3000
+  //res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE'); 
   next();
@@ -37,10 +38,10 @@ app.use((req, res, next) => {
 
 
 // views
-// app.use(express.static('./client/build'));
-app.use(function(err, req, res, next) {
-    console.log(err);
-});
+app.use(express.static('./client/build'));
+// app.use(function(err, req, res, next) {
+//     console.log(err);
+// });
 
 require('./server/config/passport')(passport); // pass passport for configuration
 
@@ -49,17 +50,18 @@ app.use(cookieParser());
 
 app.use(session({
     key: 'user_sid',
+    resave: true,
     secret: '}wmpB2uLMMYu>Kt4#9.CDttvp=4KYq9rVfWP',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
-        expires: 600000
+        expires: 600000,
+        httpOnly: false
     }
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
-
 
 
 const routes = require('./server/routes')(app, passport);;

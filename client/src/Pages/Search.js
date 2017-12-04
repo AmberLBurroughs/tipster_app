@@ -31,6 +31,13 @@ class Search extends Component {
     })
     .then(function(res){
       console.log(res);
+    }).catch(function(res){
+      // console.log("error")
+      // if(error code ){
+      //   // do stuff
+      // }
+      document.cookie = ""; // clear cookie
+      window.location.href = "/" // redirect to login
     })
   } 
 

@@ -18,7 +18,7 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    console.log("test");
+    console.log("testey");
     axios.get("http://localhost:8000/api/search")
     .then(function(res){
       console.log(res);
@@ -46,7 +46,7 @@ class Search extends Component {
         <Roster location={this.state.markerClicked} />
 
         <TipCard
-          img={`http://localhost:3000/assets/images/default.png`}
+          img={`localhost:3000/assets/images/default.png`}
           firstName="Sahil"
           handle="@dr_najeeb"
           title="JerseyClub DJ"

@@ -95,9 +95,13 @@ class LoginForm extends Component {
         <i className="fa fa-times"></i>
       )
     }
+    let action = null;
+    if(this.state.type !== null) {
+      action = `http://localhost:8000/api/${this.state.type}`;
+    }
 
     let confirm = null;
-    if (this.state.type === "create") {
+    if (this.state.type === "signup") {
       confirm = (
         <div className="form-group">
           <label htmlFor="Confirm">Confirm Password {check}</label>
@@ -115,7 +119,7 @@ class LoginForm extends Component {
     }
     if (this.state.type !== "") {
       return (
-        <form method="POST" action="http://localhost:8000/api/login">
+        <form method="POST" action={action}>
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input 
@@ -151,7 +155,7 @@ class LoginForm extends Component {
       return (
         <form>
           <LoginBtn type="login" onClick={() => this.changeState("login")}/>
-          <LoginBtn type="create" onClick={() => this.changeState("create")} />
+          <LoginBtn type="signup" onClick={() => this.changeState("signup")} />
         </form>
       )
     }

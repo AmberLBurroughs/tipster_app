@@ -24,7 +24,7 @@ app.use(logger('dev'));
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/json' }));
+app.use(bodyParser.json());
 
 
 // Enable CORS so that browsers don't block requests.

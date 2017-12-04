@@ -3,7 +3,7 @@ import { LoginBtn, LoginSubmit } from '../Buttons';
 
 import helper from '../../Utils/helper.js';
 
-const { loginHelper } = helper;
+const { loginHelper, signUpHelper } = helper;
 
 class LoginForm extends Component {
   state = {
@@ -24,7 +24,7 @@ class LoginForm extends Component {
     const { name, value } = event.target;
     switch (name) {
       case "password":
-        if (value === this.state.confirm) {
+        if (value === this.state.confirm && value !== "") {
           this.setState({
             [name]: value,
             match : true
@@ -38,7 +38,7 @@ class LoginForm extends Component {
         }
         break;
       case "confirm" :
-        if (value === this.state.password) {
+        if (value === this.state.password && value !== "") {
           this.setState({
             [name]: value,
             match : true
@@ -75,7 +75,12 @@ class LoginForm extends Component {
 
   login = (event) => {
     event.preventDefault();
-    loginHelper(this.state);
+    if (this.state.type === "login") {
+      loginHelper(this.state);
+    }
+    else {
+      signUpHelper(this.state);
+    }
   } 
 
   render() {

@@ -117,7 +117,8 @@ module.exports    = function(passport) {
         //console.log("\n>>>>>>>>>>>>>> localsignin: ", req);
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        console.log(`validPassword returns: ${db.LocalKey.validPassword(password)}`);
+        // const validPass = db.LocalKey.validPassword(password);
+        // console.log(`validPassword returns: ${validPass}`);
         db.User.findOne({
             where: {
                 email:  email 

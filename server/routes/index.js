@@ -96,6 +96,11 @@ passportAuthenticate = (localStrategy, req, res, next) => {
   })(req, res, next);
 }
 
+app.post("/api/tip", (req, res) => {
+  console.log(req.body, req.headers);
+  res.json(tip received);
+});
+
 //=======================================================================
 
 // helpers

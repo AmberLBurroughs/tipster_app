@@ -5,7 +5,8 @@ import { Elements } from 'react-stripe-elements';
 import { TipSubmit } from "../Buttons";
 import StripeCheckout from "../Stripe-Checkout";
 
-
+import helper from "../../Utils/helper.js";
+const { tipHelper } = helper;
 
 class TipCard extends Component {
   state = {
@@ -53,10 +54,26 @@ class TipCard extends Component {
     })
   }
 
-  submitTip = () => {
+  submitTip = (token) => {
+    // console.log({
+    //   amount: this.state.amount,
+    //   anonymous: this.state.anonymous,
+    //   note: this.state.note
+    // })
+    let transaction = {
+      location: this.props.state.markerClicked.id,
+      receiver: this.props.id,
+      amount: this.state.amount,
+      anonymous: this.state.anonymous,
+      note: this.state.note,
+      token: token
+    }
+    console.log(transaction);
+    tipHelper(transaction);
     this.resetState();
     console.log(`tip sent!`)
   }
+
 
   render() {
     return (
@@ -110,7 +127,7 @@ class TipCard extends Component {
           <TipSubmit submitTip={this.submitTip}/>
         </form>
         <Elements>
-          <StripeCheckout serverProps={this.props} formState={this.state} />
+          <StripeCheckout serverProps={this.props} formState={this.state} tip={this.submitTip} />
         </Elements>
       </div>
     )

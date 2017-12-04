@@ -14,34 +14,17 @@ app.get("favicon.ico", function(request, response) {
   response.status(204); 
 });
 
-// test route 
-app.get('/testes', function(req, res) {
-  if(req.isAuthenticated()){
-    console.log(getCurrentuserId(req));
-  }
-  else{
-    console.log("testes false")
-  }
-})
-
-
 
 //==============================================
 app.get('/api/search', (req, res) => {
-  // res.json({
-  //   message: 'Welcome to the Tipster User search!',
-  //   id: getCurrentuserId(req)
-  // })
- if(req.isAuthenticated()){ 
-  console.log("\n>>>>>>hello",getCurrentuserId(req));
+  // console.log("\n#######id,", req.session)
+  // console.log("\n>>>>>>hello", req.headers);
+  // console.log("%%%%%",req.isAuthenticated())
+  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
   res.json({
-      message: 'Welcome to the Tipster User search!',
-      id: getCurrentuserId(req)
-    })
- }
-  else {
-    res.redirect('http://localhost:3000/');
-  }
+    message: 'Welcome to the Tipster User search!',
+    id: getCurrentuserId(req)
+  });
 });
 
 // example controller call
@@ -93,21 +76,23 @@ passportAuthenticate = (localStrategy, req, res, next) => {
     // a response."
     // Source: http://passportjs.org/docs
     // ***********************************************************************
+    else{
+      req.login(user, loginErr => {
+        if (loginErr) {
+          //console.log("loginerr", loginErr)
+          return next(loginErr);
+        }
+        console.log(req.isAuthenticated());
+        console.log('sucess');
+        console.log(req.session.passport.user);
+        //return res.redirect("/search");
 
-    req.login(user, loginErr => {
-      if (loginErr) {
-        //console.log("loginerr", loginErr)
-        return next(loginErr);
-      }
-      console.log(req.isAuthenticated());
-      console.log('sucess');
-      //return res.redirect("/search");
+        // do i need to send anthing back for a creating a cookie?
 
-      // do i need to send anthing back for a creating a cookie?
-
-      // res.json("hello")
-      return res.redirect("http://localhost:3000/search");
-    });      
+        // res.json("hello")
+        return res.json({success: true});
+      });  
+    }  
   })(req, res, next);
 }
 

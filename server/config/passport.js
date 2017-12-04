@@ -26,11 +26,9 @@ module.exports    = function(passport) {
     // used to deserialize the user
     passport.deserializeUser(function(uuid, done) {
         db.User.findById(uuid).then(function(user) {
- 
 	        if (user) {
-	 
 	            done(null, user.get());
-	 
+ 
 	        } else {
 	 
 	            done(user.errors, null);

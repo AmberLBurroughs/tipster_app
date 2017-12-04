@@ -11,23 +11,36 @@ module.exports = (app, passport) => {
 
 // hack for console error
 app.get("favicon.ico", function(request, response) {
-  response.status(204);
+  response.status(204); 
 });
 
-
-// test route for account landing page
-app.get('/search', (req, res) => {
+// test route 
+app.get('/testes', function(req, res) {
   if(req.isAuthenticated()){
-    res.status(200)
-    
-    
-    .send({
-      message: 'Welcome to the Tipster User API!',
+    console.log(getCurrentuserId(req));
+  }
+  else{
+    console.log("testes false")
+  }
+})
+
+
+
+//==============================================
+app.get('/api/search', (req, res) => {
+  // res.json({
+  //   message: 'Welcome to the Tipster User search!',
+  //   id: getCurrentuserId(req)
+  // })
+ if(req.isAuthenticated()){ 
+  console.log("\n>>>>>>hello",getCurrentuserId(req));
+  res.json({
+      message: 'Welcome to the Tipster User search!',
       id: getCurrentuserId(req)
     })
-  }
+ }
   else {
-    res.redirect('/');
+    res.redirect('http://localhost:3000/');
   }
 });
 
@@ -36,9 +49,14 @@ app.get('/search', (req, res) => {
 
 
 // logout of user account
-app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+app.get('/api/logout', function(req, res) {
+    //req.logout();
+    req.session.destroy(function(err){
+      res.redirect('http://localhost:3000/');
+      if(err){
+        consoloe.log(err)
+      }
+    })
 });
 
 // process the signup form (passport) ==============================================
@@ -47,7 +65,7 @@ app.get('/logout', function(req, res) {
 // LOGIN ===============================
 // =====================================
 // process the login form
-app.post('/login', function(req, res, next) {
+app.post('/api/login', function(req, res, next) {
   passportAuthenticate('local-login', req, res, next);
 });
 
@@ -55,7 +73,7 @@ app.post('/login', function(req, res, next) {
 // SIGNUP ==============================
 // =====================================
 // process the signup form
-app.post('/signup', function(req, res, next) {
+app.post('/api/signup', function(req, res, next) {
   passportAuthenticate('local-signup', req, res, next);
 });
 
@@ -83,7 +101,12 @@ passportAuthenticate = (localStrategy, req, res, next) => {
       }
       console.log(req.isAuthenticated());
       console.log('sucess');
-      return res.redirect("/api/user");
+      //return res.redirect("/search");
+
+      // do i need to send anthing back for a creating a cookie?
+
+      // res.json("hello")
+      return res.redirect("http://localhost:3000/search");
     });      
   })(req, res, next);
 }
@@ -101,15 +124,15 @@ getCurrentuserId = (req) => {
     return userId
 }
 
-isLoggedIn = (req, res, next) => {
+// isLoggedIn = (req, res, next) => {
 
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
+//     // if user is authenticated in the session, carry on 
+//     if (req.isAuthenticated())
+//         return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
+//     // if they aren't redirect them to the home page
+//     res.redirect('http://localhost:3000/');
+// }
 
  // currentUser: getCurrentuserId(req),
  // isLoggedIn: req.isAuthenticated()

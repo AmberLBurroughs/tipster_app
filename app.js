@@ -50,9 +50,18 @@ app.use(session({
     secret: '}wmpB2uLMMYu>Kt4#9.CDttvp=4KYq9rVfWP',
     resave: true,
     saveUninitialized: true,
-    cookie: {
-        expires: 600000
-    }
+    store: new (require('express-sessions'))({
+        storage: 'mongodb',
+        instance: mongoose, // optional 
+        host: 'localhost', // optional 
+        port: 27017, // optional 
+        db: 'test', // optional 
+        collection: 'sessions', // optional 
+        expire: 86400 // optional 
+    })
+    // cookie: {
+    //     expires: 600000
+    // }
 }));
 app.use(passport.initialize());
 // app.use(passport.session()); // persistent login sessions

@@ -12,21 +12,21 @@ module.exports   = (sequelize, DataTypes) => {
     },
 
 		placeID: {
-      type: DataTypes.string,
+      type: DataTypes.STRING,
       required: true,
       allowNull:false,
       isUnique :true
     },
 
     locationName: {
-      type: DataTypes.string,
+      type: DataTypes.STRING,
       required: true,
       allowNull:false,
       isUnique :true
     },
 
     locationAddress: {
-      type: DataTypes.string,
+      type: DataTypes.STRING,
       required: true,
       allowNull:false,
       isUnique :true

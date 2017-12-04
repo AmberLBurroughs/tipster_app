@@ -53,10 +53,12 @@ class TipCard extends Component {
     })
   }
 
-  submitTip = () => {
+  submitTip = (token) => {
+    
     this.resetState();
     console.log(`tip sent!`)
   }
+
 
   render() {
     return (

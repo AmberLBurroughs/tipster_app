@@ -8,7 +8,7 @@ export default{
 			email: loginState.email,
 			password: loginState.password
 		};
-		axios.post('/login', user)
+		axios.post('localhost://8000/login', user)
 		.then(response => console.log(response));
 	},
 
@@ -36,7 +36,7 @@ export default{
       token: token
     }
     axios.post('/tip', transaction)
-    .then();
+    .then(res => console.log(res));
 
   }
 

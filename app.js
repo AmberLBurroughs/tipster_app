@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 
 // views
-app.use(express.static('./client/build'));
+// app.use(express.static('./client/build'));
 app.use(function(err, req, res, next) {
     console.log(err);
 });

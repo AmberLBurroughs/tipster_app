@@ -110,7 +110,7 @@ class LoginForm extends Component {
     }
     if (this.state.type !== "") {
       return (
-        <form>
+        <form method="POST" action="http://localhost:8000/api/login">
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input 
@@ -135,7 +135,7 @@ class LoginForm extends Component {
             />
           </div>
           {confirm}
-          <LoginSubmit type={this.state.type} clicky={(event) => {this.login(event)}}/>
+          <LoginSubmit type={this.state.type} />
           <button className="pull-right btn btn-danger" onClick={this.goBack}>
             Go Back
           </button>

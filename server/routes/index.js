@@ -11,9 +11,10 @@ module.exports = (app, passport) => {
 
 // hack for console error
 app.get("favicon.ico", function(request, response) {
-  response.status(204);
+  response.status(204); 
 });
 
+// test route 
 app.get('/testes', function(req, res) {
   if(req.isAuthenticated()){
     console.log(getCurrentuserId(req));
@@ -23,16 +24,18 @@ app.get('/testes', function(req, res) {
   }
 })
 
-// test route for account landing page
-app.get('/search', (req, res) => {
-  if(req.isAuthenticated()){
-    res.json({
+
+
+//==============================================
+app.get('/api/search', (req, res) => {
+ if(req.isAuthenticated()){ 
+  res.json({
       message: 'Welcome to the Tipster User search!',
       id: getCurrentuserId(req)
     })
-  }
+ }
   else {
-    res.redirect('/');
+    res.redirect('http://localhost:3000/');
   }
 });
 
@@ -41,9 +44,14 @@ app.get('/search', (req, res) => {
 
 
 // logout of user account
-app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+app.get('/api/logout', function(req, res) {
+    //req.logout();
+    req.session.destroy(function(err){
+      res.redirect('http://localhost:3000/');
+      if(err){
+        consoloe.log(err)
+      }
+    })
 });
 
 // process the signup form (passport) ==============================================
@@ -52,7 +60,7 @@ app.get('/logout', function(req, res) {
 // LOGIN ===============================
 // =====================================
 // process the login form
-app.post('/login', function(req, res, next) {
+app.post('/api/login', function(req, res, next) {
   passportAuthenticate('local-login', req, res, next);
 });
 
@@ -60,7 +68,7 @@ app.post('/login', function(req, res, next) {
 // SIGNUP ==============================
 // =====================================
 // process the signup form
-app.post('/signup', function(req, res, next) {
+app.post('/api/signup', function(req, res, next) {
   passportAuthenticate('local-signup', req, res, next);
 });
 
@@ -90,8 +98,10 @@ passportAuthenticate = (localStrategy, req, res, next) => {
       console.log('sucess');
       //return res.redirect("/search");
 
-      res.json("hello")
-      return 
+      // do i need to send anthing back for a creating a cookie?
+
+      // res.json("hello")
+      return res.redirect("http://localhost:3000/search");
     });      
   })(req, res, next);
 }
@@ -116,7 +126,7 @@ isLoggedIn = (req, res, next) => {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('http://localhost:3000/');
 }
 
  // currentUser: getCurrentuserId(req),

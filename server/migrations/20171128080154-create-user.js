@@ -2,23 +2,50 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      username: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+    uuid: {
+      primaryKey: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV1,
+      isUnique :true
+    },
+    email: {
+      type: Sequelize.STRING,
+      isUnique :true,
+      allowNull:false,
+      required: true,
+      validate: {
+                isEmail : true
+            }
+    },
+    username: {
+      type: Sequelize.STRING,
+    },
+    firstName: {
+      type: Sequelize.STRING,
+    },
+    lastName: {
+      type: Sequelize.STRING,
+    },
+    image: {
+      type: Sequelize.STRING,
+      defaultValue: "/assets/uploads/default.png" 
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE
+    },
+    locationUUID: {
+      type: Sequelize.UUID,
+        references: {
+          model: 'Location',
+          key: 'uuid',
+          as: 'locationUUID',
+        },
+    }
     });
   },
   down: (queryInterface, Sequelize) => {

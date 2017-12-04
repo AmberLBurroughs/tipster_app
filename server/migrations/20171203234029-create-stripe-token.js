@@ -1,16 +1,16 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('LocalKeys', {
+    return queryInterface.createTable('StripeTokens', {
       uuid: {
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
         isUnique :true
       },
-      localPassword: {
+      token: {
         type: Sequelize.STRING,
-        required: true
+        isUnique :true
       },
       createdAt: {
         allowNull: false,
@@ -31,12 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('LocalKeys');
+    return queryInterface.dropTable('StripeTokens');
   }
 };
-
-/*
-
-If, for whatever reason, we needed to rollback (undo) the migration, the down function would be executed and it would undo whatever the up function did, thus returning the our database to the same state it was in before we performed the migration.
-
-*/

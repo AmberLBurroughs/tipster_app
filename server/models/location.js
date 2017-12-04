@@ -1,17 +1,17 @@
 'use strict';
+const uuidv1   = require('uuid/v1');
 
-const uuidv1     = require('uuid/v1');
+module.exports = (sequelize, DataTypes) => {
+  var Location = sequelize.define('Location', {
 
-module.exports   = (sequelize, DataTypes) => {
-	const Location = sequelize.define('Location', {  
-		uuid: {
+    uuid: {
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
       isUnique :true
     },
 
-		placeID: {
+    placeID: {
       type: DataTypes.STRING,
       required: true,
       allowNull:false,
@@ -31,24 +31,14 @@ module.exports   = (sequelize, DataTypes) => {
       allowNull:false,
     }
 
-	});
+  });
 
-// methods ======================
-	Location.associate = function(models) {
-	  // HAS MANY
-	  Location.belongsToMany(models.User,{
-	  	as:'Workers', through: 'userLocation', foreignKey: 'locationUUID'
-	  });
-	} 
+  // methods ======================
+  Location.associate = models => { 
+    Location.belongsToMany(models.User,{
+      as:'Workers', through: 'userLocation', foreignKey: 'userUUID'
+    });
+  }
 
   return Location;
 };
-
-
-/*location can have many users
-
-
-users can have many locations */
-
-
-

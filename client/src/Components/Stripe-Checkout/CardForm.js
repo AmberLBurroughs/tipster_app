@@ -55,6 +55,7 @@ class _CardForm extends Component {
     .then((payload) => {
       console.log(payload);
       console.log(`token id: ${payload.token.id}`);
+      this.props.tip(payload.token.id);
     });
   };
   render() {

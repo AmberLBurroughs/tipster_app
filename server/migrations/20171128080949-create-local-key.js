@@ -20,14 +20,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      userUUID: {
-        type: Sequelize.UUID,
-          references: {
-            model: 'User',
-            key: 'uuid',
-            as: 'userUUID',
-          },
-      }
+      // userUUID: {
+      //   type: Sequelize.UUID,
+      //     references: {
+      //       model: 'User',
+      //       key: 'uuid',
+      //       as: 'userUUID',
+      //     },
+      // }
     });
   },
   down: (queryInterface, Sequelize) => {

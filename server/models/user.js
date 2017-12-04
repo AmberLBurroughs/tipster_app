@@ -1,5 +1,5 @@
 'use strict';
-const uuidv1 = require('uuid/v1');
+const uuidv1   = require('uuid/v1');
 
 module.exports = (sequelize, DataTypes) => {
   const User   = sequelize.define('User', {
@@ -45,14 +45,14 @@ module.exports = (sequelize, DataTypes) => {
         user.username = emailArr[0] + Math.random().toString(36).substring(7);
       }
     }
-
-   }
-   );
+  });
 
   // methods ======================
-  
-    User.associate = models => {
-      User.belongsToMany(models.Location, { as: 'workPlace', through: 'userLocation', foreignKey: 'userUUID' })
+  User.associate = models => {
+    User.belongsToMany(models.Location, { as: 'workPlace', through: 'userLocation', foreignKey: 'LocationUUID' }),
+
+    // has many transactions
+    User.hasMany(models.Transaction);
   }
 
   return User;

@@ -58,15 +58,16 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-// app.use(flash());
+app.use(flash());
 
 
 
 const routes = require('./server/routes')(app, passport);;
 
+/*
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the beginning of nothingness.',
 }));
-
+*/
 module.exports = app;

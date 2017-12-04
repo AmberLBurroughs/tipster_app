@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import TipCard from "../Components/TipCard"
 import GMap from '../Components/Map';
 import defaultImage from "../Images/default.png";
-
+import axios from 'axios';
 import Banner from '../Components/Banner';
 import Nav from '../Components/Nav';
 import Roster from '../Components/Roster';
+
 
 class Search extends Component {
   state = {
@@ -15,6 +16,14 @@ class Search extends Component {
       name: ""
     }
   }
+
+  componentDidMount() {
+    console.log("test");
+    axios.get("http://localhost:8000/api/search")
+    .then(function(res){
+      console.log(res);
+    })
+  } 
 
   onMarkerClick = (info) => {
     console.log(info);
@@ -28,6 +37,7 @@ class Search extends Component {
   }
 
   render() {
+    console.log('test')
     return (
       <div className="container">
         <Nav />

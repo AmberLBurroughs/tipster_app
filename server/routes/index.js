@@ -28,7 +28,12 @@ app.get('/testes', function(req, res) {
 
 //==============================================
 app.get('/api/search', (req, res) => {
+  // res.json({
+  //   message: 'Welcome to the Tipster User search!',
+  //   id: getCurrentuserId(req)
+  // })
  if(req.isAuthenticated()){ 
+  console.log("\n>>>>>>hello",getCurrentuserId(req));
   res.json({
       message: 'Welcome to the Tipster User search!',
       id: getCurrentuserId(req)
@@ -119,15 +124,15 @@ getCurrentuserId = (req) => {
     return userId
 }
 
-isLoggedIn = (req, res, next) => {
+// isLoggedIn = (req, res, next) => {
 
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
+//     // if user is authenticated in the session, carry on 
+//     if (req.isAuthenticated())
+//         return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('http://localhost:3000/');
-}
+//     // if they aren't redirect them to the home page
+//     res.redirect('http://localhost:3000/');
+// }
 
  // currentUser: getCurrentuserId(req),
  // isLoggedIn: req.isAuthenticated()

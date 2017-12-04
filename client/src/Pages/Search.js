@@ -18,7 +18,7 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    console.log("test");
+    console.log("testey");
     axios.get("http://localhost:8000/api/search")
     .then(function(res){
       console.log(res);

@@ -31,9 +31,9 @@ module.exports   = (sequelize, DataTypes) => {
 
   LocalKey.associate = function(models) {
     LocalKey.belongsTo(models.User, {
-      foreignKey: 'userUUID',
-      onDelete: 'CASCADE',
+      foreignKey: {
       allowNull: false
+      }
     });
   } 
   return LocalKey;

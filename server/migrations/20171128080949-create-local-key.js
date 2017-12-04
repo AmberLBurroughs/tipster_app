@@ -2,14 +2,15 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('LocalKeys', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+      uuid: {
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV1,
+        isUnique :true
       },
       localPassword: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        required: true
       },
       createdAt: {
         allowNull: false,
@@ -18,6 +19,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      userUUID: {
+        type: Sequelize.UUID,
+          references: {
+            model: 'User',
+            key: 'uuid',
+            as: 'userUUID',
+          },
       }
     });
   },

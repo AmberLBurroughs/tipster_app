@@ -1,6 +1,7 @@
-const user = require('./user');
-const location = require('./location');
+const User = require('./user');
+const Location = require('./location');
+const Transaction = require('./transaction');
 
 module.exports = {
-  user, location
+  User, Location, Transaction
 };

@@ -5,5 +5,20 @@
     "database": "tipster_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+
+  "test": {
+    "username": "amberburroughs",
+    "password": null,
+    "database": "tipster_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "amberburroughs",
+    "password": null,
+    "database": "tipster_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   }
 }

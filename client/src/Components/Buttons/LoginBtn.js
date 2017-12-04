@@ -8,22 +8,10 @@ const LoginBtn = (props) => {
   }
   else {
     return (
-      <button className="btn btn-info" onClick={props.onClick}>Create</button>
+      <button className="btn btn-info" onClick={props.onClick}>Sign Up</button>
     )
   }
 }
 
-const LoginSubmit = (props) => {
-  if (props.type === "login") {
-    return (
-      <button className="btn btn-primary pull-right" onClick={props.onClick}>Login</button>
-    )
-  }
-  else {
-    return (
-      <button className="btn btn-primary pull-right" onClick={props.onClick}>Login</button>
-    )
-  }
-}
 
-export { LoginBtn, LoginSubmit };
+export default LoginBtn;

@@ -1,10 +1,11 @@
 'use strict';
-const uuidv1 = require('uuid/v1');
 
+const uuidv1          = require('uuid/v1');
 
-module.exports = (sequelize, DataTypes) => {
-  const User   = sequelize.define('User', {
-  	uuid: {
+module.exports        = (sequelize, DataTypes) => {
+  const StripeToken   = sequelize.define('StripeToken', {
+
+    uuid: {
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
@@ -12,11 +13,18 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     token: {
-    	type: DataTypes.STRING,
-    	isUnique :true
+      type: DataTypes.STRING,
+      isUnique :true
     }
 
   });
-
-  return User;
+  
+  StripeToken.associate = function(models) {
+    StripeToken.belongsTo(models.User, {
+      foreignKey: 'userUUID',
+      onDelete: 'CASCADE',
+      allowNull: false
+    });
+  } 
+  return StripeToken;
 };

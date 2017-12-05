@@ -28,25 +28,19 @@ class Search extends Component {
     // check for document.cookie here. if user_sid is not set, redirect.
     // on AJAX request, validate cookie. set handler to delete cookie and redirect if
     // cookie is invalid
-
-    console.log("testey");
     fetch("http://localhost:8000/api/search", {
       method: 'GET',
-      credentials: 'include'  ,
+      credentials: 'include',
       mode: 'cors'
     })
     .then(function(res){
       console.log(res);
     }).catch(function(res){
-      // console.log("error")
       if(res.error_code && res.error_code == 'invalid_login' ){
         document.cookie = ""; // clear cookie
         window.location.href = "/" // redirect to login
       }
       console.log("error", res);
-      //if
-      // document.cookie = ""; // clear cookie
-      // window.location.href = "/" // redirect to login
     })
   } 
 

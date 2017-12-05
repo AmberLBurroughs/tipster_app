@@ -31,7 +31,7 @@ app.get('/api/search', (req, res) => {
 // get user connecfg token 
 
   
-  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
+  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in", err_code:"invalid_login"})}
   res.json({
     message: 'Welcome to the Tipster User search!',
     id: getCurrentuserId(req)

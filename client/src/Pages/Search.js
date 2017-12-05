@@ -23,11 +23,12 @@ class Search extends Component {
     // check for document.cookie here. if user_sid is not set, redirect.
     // on AJAX request, validate cookie. set handler to delete cookie and redirect if
     // cookie is invalid
-
+    
     console.log("testey");
     fetch("http://localhost:8000/api/search", {
       method: 'GET',
-      credentials: 'include'  
+      credentials: 'include'  ,
+      mode: 'cors'
     })
     .then(function(res){
       console.log(res);
@@ -36,8 +37,9 @@ class Search extends Component {
       // if(error code ){
       //   // do stuff
       // }
-      document.cookie = ""; // clear cookie
-      window.location.href = "/" // redirect to login
+      console.log(res);
+      // document.cookie = ""; // clear cookie
+      // window.location.href = "/" // redirect to login
     })
   } 
 
@@ -62,8 +64,7 @@ class Search extends Component {
         <Roster location={this.state.markerClicked} />
 
         <TipCard
-          id={"test.id"}
-          img={`http://localhost:3000/assets/images/default.png`}
+          img={`localhost:3000/assets/images/default.png`}
           firstName="Sahil"
           handle="@dr_najeeb"
           title="JerseyClub DJ"

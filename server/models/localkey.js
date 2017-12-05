@@ -26,14 +26,16 @@ module.exports   = (sequelize, DataTypes) => {
 
   // checking if password is valid
   LocalKey.validPassword = password => {
+      console.log(password);
+      console.log(this.localPassword);
       return bcrypt.compareSync(password, this.localPassword);
   };
 
   LocalKey.associate = function(models) {
     LocalKey.belongsTo(models.User, {
-      foreignKey: 'userUUID',
-      onDelete: 'CASCADE',
+      foreignKey: {
       allowNull: false
+      }
     });
   } 
   return LocalKey;

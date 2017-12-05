@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from '../Components/Form';
-
+import './login.css';
 import Utils from '../Utils/index.js';
 
 class Login extends Component {
@@ -8,7 +8,7 @@ class Login extends Component {
 
   render() {
     return (
-    	<div>
+    	<div className="homeWrap">
     	<div id="hero">
     		<div className="content">
     			<img src="/assets/images/tipster-logo.png" alt={"logo"}/>

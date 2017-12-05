@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default {
+export default{
 
 	loginHelper: loginState => {
 
@@ -8,7 +8,7 @@ export default {
 			email: loginState.email,
 			password: loginState.password
 		};
-		axios.post('http://localhost:8000/login', user)
+		axios.post('/login', user)
 		.then(response => console.log(response));
 	},
 
@@ -22,14 +22,22 @@ export default {
         email: signUpState.email,
         password: signUpState.password
       };
-      axios.post('http://localhost:8000/signup', newUser)
+      axios.post('/signup', newUser)
       .then(response => console.log(response));
     }
   },
 
-  tipHelper: (transaction) => {
-    axios.post('http://localhost:8000/api/tip', transaction)
-    .then(res => console.log(res));
+  tipHelper: (token) => {
+    let transaction = {
+      location: this.props.state.markerClicked.id,
+      amount: this.state.amount,
+      anonymous: this.state.anonymous,
+      note: this.state.note,
+      token: token
+    }
+    axios.post('/tip', transaction)
+    .then();
+
   }
 
 }

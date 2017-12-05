@@ -1,4 +1,6 @@
 import React from "react";
+import './Map.css';
+
 const google = window.google;
 const _ = require("lodash");
 const { compose, withProps, withStateHandlers, lifecycle } = require("recompose");
@@ -16,7 +18,7 @@ const MapWithASearchBox = compose(
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAG50yVbYuTM_743fEPWpAtkKWPr_fxkpA&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+    mapElement: <div className="mapdesign" style={{ height: `100%` }} />,
   }),
   lifecycle({
     componentWillMount() {
@@ -84,7 +86,8 @@ const MapWithASearchBox = compose(
   withScriptjs,
   withGoogleMap
 )(props =>
-  <GoogleMap
+<div className="container">
+  <GoogleMap 
     ref={props.onMapMounted}
     defaultZoom={14}
     center={props.center}
@@ -122,6 +125,7 @@ const MapWithASearchBox = compose(
       </Marker>
     )}
   </GoogleMap>
+</div>
 );
 
 export default MapWithASearchBox

@@ -29,6 +29,8 @@ app.get('/api/search', (req, res) => {
 // get user username , user first name, user last name, user image
 
 // get user connecfg token 
+
+  
   if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
   res.json({
     message: 'Welcome to the Tipster User search!',
@@ -111,11 +113,6 @@ passportAuthenticate = (localStrategy, req, res, next) => {
     }  
   })(req, res, next);
 }
-
-app.post("/api/tip", (req, res) => {
-  console.log(req.body, req.headers);
-  res.json("tip received");
-});
 
 //=======================================================================
 

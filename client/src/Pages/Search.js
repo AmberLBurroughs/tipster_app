@@ -64,7 +64,8 @@ class Search extends Component {
         <Roster location={this.state.markerClicked} />
 
         <TipCard
-          img={`localhost:3000/assets/images/default.png`}
+          id={"test.id"}
+          img={`http://localhost:3000/assets/images/default.png`}
           firstName="Sahil"
           handle="@dr_najeeb"
           title="JerseyClub DJ"

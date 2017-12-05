@@ -1,5 +1,6 @@
 'use strict';
-const uuidv1 = require('uuid/v1');
+
+const uuidv1     = require('uuid/v1');
 
 const bcrypt     = require('bcrypt');   
 module.exports   = (sequelize, DataTypes) => {
@@ -25,15 +26,16 @@ module.exports   = (sequelize, DataTypes) => {
 
   // checking if password is valid
   LocalKey.validPassword = password => {
+      console.log(password);
+      console.log(this.localPassword);
       return bcrypt.compareSync(password, this.localPassword);
   };
 
   LocalKey.associate = function(models) {
     LocalKey.belongsTo(models.User, {
-     foreignKey: {
-          allowNull: false,
-          onDelete: 'CASCADE',
-        }
+      foreignKey: {
+      allowNull: false
+      }
     });
   } 
   return LocalKey;

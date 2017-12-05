@@ -51,7 +51,12 @@ const createOptions = (fontSize) => {
 class _CardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
-    this.props.stripe.createToken().then(payload => console.log(payload));
+    this.props.stripe.createToken()
+    .then((payload) => {
+      console.log(payload);
+      console.log(`token id: ${payload.token.id}`);
+      this.props.tip(payload.token.id);
+    });
   };
   render() {
     return (

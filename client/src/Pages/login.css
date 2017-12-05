@@ -1,0 +1,19 @@
+.homeWrap {
+	background-color: #171837;
+	min-height:100vh;
+}
+#hero {
+	background-color: #7571ff;
+	color:#fff;
+	text-align: center;
+	background: url("/assets/images/background.png") no-repeat bottom;
+	background-size: cover;
+	min-height: 550px;
+	margin-bottom: 5%
+}
+#hero>.content {
+	padding-top: 12%;
+}
+.btns {
+	border:1px solid #FFF;
+}

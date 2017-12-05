@@ -3,7 +3,7 @@ import { LoginBtn, LoginSubmit } from '../Buttons';
 
 import helper from '../../Utils/helper.js';
 
-const { loginHelper } = helper;
+const { loginHelper, signUpHelper } = helper;
 
 class LoginForm extends Component {
   state = {
@@ -24,7 +24,7 @@ class LoginForm extends Component {
     const { name, value } = event.target;
     switch (name) {
       case "password":
-        if (value === this.state.confirm) {
+        if (value === this.state.confirm && value !== "") {
           this.setState({
             [name]: value,
             match : true
@@ -38,7 +38,7 @@ class LoginForm extends Component {
         }
         break;
       case "confirm" :
-        if (value === this.state.password) {
+        if (value === this.state.password && value !== "") {
           this.setState({
             [name]: value,
             match : true
@@ -75,7 +75,12 @@ class LoginForm extends Component {
 
   login = (event) => {
     event.preventDefault();
-    loginHelper(this.state);
+    if (this.state.type === "login") {
+      loginHelper(this.state);
+    }
+    else {
+      signUpHelper(this.state);
+    }
   } 
 
   render() {
@@ -90,9 +95,13 @@ class LoginForm extends Component {
         <i className="fa fa-times"></i>
       )
     }
+    let action = null;
+    if(this.state.type !== null) {
+      action = `http://localhost:8000/${this.state.type}`;
+    }
 
     let confirm = null;
-    if (this.state.type === "create") {
+    if (this.state.type === "signup") {
       confirm = (
         <div className="form-group">
           <label htmlFor="Confirm">Confirm Password {check}</label>
@@ -110,7 +119,7 @@ class LoginForm extends Component {
     }
     if (this.state.type !== "") {
       return (
-        <form>
+        <form method="POST" action={action}>
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input 
@@ -135,7 +144,7 @@ class LoginForm extends Component {
             />
           </div>
           {confirm}
-          <LoginSubmit type={this.state.type} clicky={(event) => {this.login(event)}}/>
+          <LoginSubmit type={this.state.type} />
           <button className="pull-right btn btn-danger" onClick={this.goBack}>
             Go Back
           </button>
@@ -146,7 +155,7 @@ class LoginForm extends Component {
       return (
         <form>
           <LoginBtn type="login" onClick={() => this.changeState("login")}/>
-          <LoginBtn type="create" onClick={() => this.changeState("create")} />
+          <LoginBtn type="signup" onClick={() => this.changeState("signup")} />
         </form>
       )
     }

@@ -9,15 +9,24 @@ import HistoryPage from './Pages/History.js';
 
 class App extends Component {
   render() {
+    // var isLoggedIn = document.cookie.length > 0;
+    // if(!isLoggedIn){
+    //   return (
+    //     <Router>
+    //       <Switch>
+    //         <Route path="*" component={Login} />
+    //       </Switch>
+    //     </Router>
+    //   )
+    // }
+    
     return (
       <StripeProvider apiKey="pk_test_4qto2Oywx4MSKq0x8G1VvjeC">
-        <div className="container-fluid">
+        <div className="">
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
-              <Route exact path="/search">
-                <Search />
-              </Route>
+              <Route path="/search" component={Search} />
               <Route exact path="/profile" component={ProfilePage} />
               <Route exact path="/history" component={HistoryPage} />
               <Route path="/" component={Login} />

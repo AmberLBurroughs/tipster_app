@@ -6,13 +6,17 @@ import { TipSubmit } from "../Buttons";
 import StripeCheckout from "../Stripe-Checkout";
 
 import helper from "../../Utils/helper.js";
+import './TipCard.css';
+
 const { tipHelper } = helper;
+
 
 class TipCard extends Component {
   state = {
     anonymous: false,
     amount: "",
-    note: ""
+    note: "",
+    page1: true
   }
 
   handleInputChange = (event) => {
@@ -74,14 +78,21 @@ class TipCard extends Component {
     console.log(`tip sent!`)
   }
 
+  toggleModal = (bool) => {
+    this.setState({
+      page1: bool
+    })
+  }
 
   render() {
     return (
-      <div className="col-xs-12">
-        <img src={this.props.img} alt="default user image"/>
-        <h3>{this.props.firstName}</h3>
-        <h4>{this.props.handle}</h4>
-        <h4>{`${this.props.title} @ ${this.props.state.markerClicked.name}`}</h4>
+      <div className="col-xs-12 tipcard">
+        <center>
+          <img className="tipcardpic" src={this.props.img} alt="default user image"/>
+          <h3>{this.props.firstName}</h3>
+          <h4>{this.props.handle}</h4>
+          <h4>{`${this.props.title} @ ${this.props.state.markerClicked.name}`}</h4>
+        </center>
         <form>
           <div className="form-inline">
             <div className="form-group">

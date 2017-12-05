@@ -71,7 +71,7 @@ class _CardForm extends Component {
             {...createOptions(this.props.fontSize)}
           />
         </label>
-        <button>Pay</button>
+        <button>Tip</button>
       </form>
     );
   }

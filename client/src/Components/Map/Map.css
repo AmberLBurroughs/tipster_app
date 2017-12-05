@@ -10,4 +10,9 @@
   font-size: '14px';
   outline: 'none';
   text-overflow: 'ellipses';
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.mapdesign {
+  margin-top: -10%;
 }

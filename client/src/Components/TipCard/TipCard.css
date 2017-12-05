@@ -1,0 +1,13 @@
+.tipcardpic {
+  height: 200px;
+  width: 200px;
+}
+
+h2, h4 {
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+}
+
+.tipcard {
+  margin-top: -120px;
+}

@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "amberburroughs",
-    "password": null,
-    "database": "tipster_dev",
+    "username": "Mobius",
+    "password": "unforgiven",
+    "database": "tipster_db",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

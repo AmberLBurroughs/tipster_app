@@ -28,7 +28,7 @@ export default {
   },
 
   tipHelper: (transaction) => {
-    axios.post('http://localhost:8000/api/tip', transaction)
+    axios.post('/api/tip', transaction)
     .then(res => console.log(res));
   }
 

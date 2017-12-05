@@ -1,0 +1,34 @@
+img.cardpic {
+  display: block;;
+  width: 80%;
+}
+
+.card {
+  background: #7571ff;
+}
+
+.cardpic {
+  margin-top: -120px;
+}
+
+.papercard {
+  margin-top: 80px;
+}
+
+.cardbtn {
+  -webkit-border-radius: 7;
+  -moz-border-radius: 7;
+  border-radius: 7px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+  font-size: 24px;
+  background: #7571ff;
+  padding: 15px 15px 0 15px;
+  border: solid #7571ff 2px;
+  text-decoration: none;
+}
+
+.cardbtn:hover {
+  background: #8b88ff;
+  text-decoration: none;
+}

@@ -1,19 +1,12 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import './Banner.css';
+import Nav from '../Banner';
 
 const Banner = props =>
-  <div className="container">
-    <div className="row">
-      <div className="col-sm-1" />
-      <div className="col-sm-2">
-        <img src="http://images.clipartpanda.com/thank-you-smiley-animated-smiley_animation_1_by_pocky_and_pandas-d4m9x5g.jpg" alt="pic" />
-        <h3 className="text-center">{props.handle}</h3>
-      </div>
-      <div className="col-sm-2" />
-      <div className="col-sm-7"><br/><br/><br/>
-        <h1>logo</h1>
-      </div>
-    </div>
+  <div className="banner">
+    <br/><br/><p className="bannerwelcome">Welcome Tipster</p>
+    <center><img className="logo" src="https://i.imgur.com/M1VQJnz.png" alt="logo" /></center><br/>
+    <p className="bannerintro">SEARCH A LOCATION TO START TIPPING</p>
   </div>
 
 

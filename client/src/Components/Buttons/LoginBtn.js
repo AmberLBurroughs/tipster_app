@@ -26,4 +26,4 @@ const LoginSubmit = (props) => {
   }
 }
 
-export { LoginBtn, LoginSubmit };
+export default LoginBtn;

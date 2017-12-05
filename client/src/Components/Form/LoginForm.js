@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { LoginBtn, LoginSubmit } from '../../Components/Buttons';
+import { LoginBtn, LoginSubmit } from '../Buttons';
 
-import Utils from '../../Utils/index.js';
+import helper from '../../Utils/helper.js';
+
+const { loginHelper } = helper;
 
 class LoginForm extends Component {
   state = {
@@ -71,6 +73,10 @@ class LoginForm extends Component {
     }
   }
 
+  login = (event) => {
+    event.preventDefault();
+    loginHelper(this.state);
+  } 
 
   render() {
     let check = null;
@@ -129,7 +135,7 @@ class LoginForm extends Component {
             />
           </div>
           {confirm}
-          <LoginSubmit type={this.state.type} onClick={() => {}}/>
+          <LoginSubmit type={this.state.type} clicky={(event) => {this.login(event)}}/>
           <button className="pull-right btn btn-danger" onClick={this.goBack}>
             Go Back
           </button>

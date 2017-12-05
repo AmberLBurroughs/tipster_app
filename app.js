@@ -45,10 +45,12 @@ app.use(function(err, req, res, next) {
 require('./server/config/passport')(passport); // pass passport for configuration
 
 //app.use(session({ secret: 'thueeugurg5hi5ri7ri5tfg576rihufgk76g65ehi4wu3qa23' })); // session secret
+app.use(cookieParser());
+
 app.use(session({
     key: 'user_sid',
     secret: '}wmpB2uLMMYu>Kt4#9.CDttvp=4KYq9rVfWP',
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     cookie: {
         expires: 600000
@@ -56,7 +58,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash());
+// app.use(flash());
 
 
 

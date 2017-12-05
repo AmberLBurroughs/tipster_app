@@ -1,7 +1,12 @@
 //authenticationRoutes.js
 
 const UserController = require('../controllers').user;
-const passport = require('passport');
+const passport       = require('passport');
+const authKey        = require('../utils/authKey');
+
+const stripe = require("stripe")(
+  authKey.stripeKey["secretKey"]
+);
 
 
 module.exports = (app, passport) => {
@@ -11,13 +16,20 @@ app.get("favicon.ico", function(request, response) {
   response.status(204);
 });
 
+app.get('/testes', function(req, res) {
+  if(req.isAuthenticated()){
+    console.log(getCurrentuserId(req));
+  }
+  else{
+    console.log("testes false")
+  }
+})
 
 // test route for account landing page
-app.get('/api/user', (req, res) => {
+app.get('/search', (req, res) => {
   if(req.isAuthenticated()){
-    res.status(200)
-    .send({
-      message: 'Welcome to the Tipster User API!',
+    res.json({
+      message: 'Welcome to the Tipster User search!',
       id: getCurrentuserId(req)
     })
   }
@@ -35,7 +47,6 @@ app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-
 
 // process the signup form (passport) ==============================================
 
@@ -79,16 +90,24 @@ passportAuthenticate = (localStrategy, req, res, next) => {
       }
       console.log(req.isAuthenticated());
       console.log('sucess');
+<<<<<<< HEAD
       return res.redirect("/api/user"); //redirects to dashboard
       //take out API ? -- not for public viewing.
       //api routes in seperate file?
 
+=======
+      //return res.redirect("/search");
+
+      res.json("hello")
+      return 
+>>>>>>> 130943c8fae8faff38c8c3c7f844dde722932dc4
     });      
   })(req, res, next);
 }
 
 //=======================================================================
 
+<<<<<<< HEAD
 
 
 
@@ -102,6 +121,8 @@ passportAuthenticate = (localStrategy, req, res, next) => {
 
 
 
+=======
+>>>>>>> 130943c8fae8faff38c8c3c7f844dde722932dc4
 // helpers
 getCurrentuserId = (req) => {
   let userId;
@@ -113,15 +134,15 @@ getCurrentuserId = (req) => {
     return userId
 }
 
-// function isLoggedIn(req, res, next) {
+isLoggedIn = (req, res, next) => {
 
-//     // if user is authenticated in the session, carry on 
-//     if (req.isAuthenticated())
-//         return next();
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
 
-//     // if they aren't redirect them to the home page
-//     res.redirect('/');
-// }
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 //  currentUser: getCurrentuserId(req),
 //  isLoggedIn: req.isAuthenticated()

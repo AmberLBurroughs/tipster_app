@@ -1,4 +1,4 @@
-const UserController = require('../controllers').user;
+const UserController = require('../controllers/user');
 
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
@@ -17,25 +17,29 @@ app.get("favicon.ico", function(request, response) {
 
 
 //==============================================
-app.get('/api/search', (req, res) => {
+app.get('/api/search', function(req, res) {
   console.log("\n#######id,", req.session)
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
-
-
-
+  console.log(getCurrentuserId(req));
 // get current user sesion id 
 // query user table
 // get user username , user first name, user last name, user image
 
 // get user connecfg token 
+function results(userData){
+  console.log("\nYYYYYYYY", userData);
+  res.json(userData)
+}
+UserController(getCurrentuserId(req), results);
 
-  
-  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in", err_code:"invalid_login"})}
-  res.json({
-    message: 'Welcome to the Tipster User search!',
-    id: getCurrentuserId(req)
-  });
+if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
+
+    //send response from controller
+  // res.json({
+  //   message: 'Welcome to the Tipster User search!',
+  //   id: getCurrentuserId(req)
+  // });
 });
 
 

@@ -73,7 +73,9 @@ app.post('/login', function(req, res, next) {
 // SIGNUP ==============================
 // =====================================
 // process the signup form
+
 app.post('/signup', function(req, res, next) {
+
   passportAuthenticate('local-signup', req, res, next);
 });
 
@@ -113,6 +115,11 @@ passportAuthenticate = (localStrategy, req, res, next) => {
     }  
   })(req, res, next);
 }
+
+app.post("/api/tip", (req, res) => {
+  console.log(req.body, req.headers);
+  res.json("tip received");
+});
 
 //=======================================================================
 

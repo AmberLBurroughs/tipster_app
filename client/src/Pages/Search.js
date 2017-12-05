@@ -23,7 +23,7 @@ class Search extends Component {
     // check for document.cookie here. if user_sid is not set, redirect.
     // on AJAX request, validate cookie. set handler to delete cookie and redirect if
     // cookie is invalid
-
+    
     console.log("testey");
     fetch("http://localhost:8000/api/search", {
       method: 'GET',

@@ -1,4 +1,5 @@
 const UserController = require('../controllers').user;
+
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
 
@@ -24,14 +25,24 @@ app.get('/api/search', (req, res) => {
 
 
 // get current user sesion id 
-// query u
+// query user table
+// get user username , user first name, user last name, user image
 
+// get user connecfg token 
+
+  
   if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
   res.json({
     message: 'Welcome to the Tipster User search!',
     id: getCurrentuserId(req)
   });
 });
+
+
+// api/user
+
+
+
 
 // example controller call
 //app.post('/api/user', todosController.create);

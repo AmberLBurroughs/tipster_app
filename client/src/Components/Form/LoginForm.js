@@ -115,7 +115,7 @@ class LoginForm extends Component {
     }
     if (this.state.type !== "") {
       return (
-        <form method="POST" action="http://localhost:8000/api/login">
+        <form method="POST" action="http://localhost:8000/login">
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input 

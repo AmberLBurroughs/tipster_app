@@ -17,9 +17,15 @@ app.get("favicon.ico", function(request, response) {
 
 //==============================================
 app.get('/api/search', (req, res) => {
-  // console.log("\n#######id,", req.session)
-  // console.log("\n>>>>>>hello", req.headers);
-  // console.log("%%%%%",req.isAuthenticated())
+  console.log("\n#######id,", req.session)
+  console.log("\n>>>>>>hello", req.headers);
+  console.log("%%%%%",req.isAuthenticated())
+
+
+
+// get current user sesion id 
+// query u
+
   if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
   res.json({
     message: 'Welcome to the Tipster User search!',
@@ -32,7 +38,7 @@ app.get('/api/search', (req, res) => {
 
 
 // logout of user account
-app.get('/api/logout', function(req, res) {
+app.get('/logout', function(req, res) {
     //req.logout();
     req.session.destroy(function(err){
       res.redirect('http://localhost:3000/');
@@ -48,7 +54,7 @@ app.get('/api/logout', function(req, res) {
 // LOGIN ===============================
 // =====================================
 // process the login form
-app.post('/api/login', function(req, res, next) {
+app.post('/login', function(req, res, next) {
   passportAuthenticate('local-login', req, res, next);
 });
 
@@ -56,7 +62,7 @@ app.post('/api/login', function(req, res, next) {
 // SIGNUP ==============================
 // =====================================
 // process the signup form
-app.post('/api/signup', function(req, res, next) {
+app.post('/signup', function(req, res, next) {
   passportAuthenticate('local-signup', req, res, next);
 });
 
@@ -85,12 +91,13 @@ passportAuthenticate = (localStrategy, req, res, next) => {
         console.log(req.isAuthenticated());
         console.log('sucess');
         console.log(req.session.passport.user);
-        //return res.redirect("/search");
+        //
 
         // do i need to send anthing back for a creating a cookie?
 
         // res.json("hello")
-        return res.json({success: true});
+        // res.status(400).json( res.json({success: true});
+        return res.redirect("http://localhost:3000/search");
       });  
     }  
   })(req, res, next);

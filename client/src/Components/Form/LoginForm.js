@@ -97,7 +97,7 @@ class LoginForm extends Component {
     }
     let action = null;
     if(this.state.type !== null) {
-      action = `http://localhost:8000/api/${this.state.type}`;
+      action = `http://localhost:8000/${this.state.type}`;
     }
 
     let confirm = null;

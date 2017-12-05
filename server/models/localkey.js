@@ -26,6 +26,8 @@ module.exports   = (sequelize, DataTypes) => {
 
   // checking if password is valid
   LocalKey.validPassword = password => {
+      console.log(password);
+      console.log(this.localPassword);
       return bcrypt.compareSync(password, this.localPassword);
   };
 

@@ -27,7 +27,8 @@ class Search extends Component {
     console.log("testey");
     fetch("http://localhost:8000/api/search", {
       method: 'GET',
-      credentials: 'include'  
+      credentials: 'include'  ,
+      mode: 'cors'
     })
     .then(function(res){
       console.log(res);
@@ -36,8 +37,9 @@ class Search extends Component {
       // if(error code ){
       //   // do stuff
       // }
-      document.cookie = ""; // clear cookie
-      window.location.href = "/" // redirect to login
+      console.log(res);
+      // document.cookie = ""; // clear cookie
+      // window.location.href = "/" // redirect to login
     })
   } 
 

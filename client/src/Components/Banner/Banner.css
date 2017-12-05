@@ -1,0 +1,25 @@
+.banner {
+  background: #7571ff;
+  padding-bottom: 150px;
+}
+
+.logo {
+  height: 200px;
+  width: 200px;
+}
+
+.bannerwelcome {
+  font-size: 24px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+  text-align: center;
+  width: auto;
+}
+
+.bannerintro {
+  font-size: 18px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+  text-align: center;
+  width: auto;
+}

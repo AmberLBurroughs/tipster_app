@@ -6,6 +6,10 @@ import Banner from '../Components/Banner';
 import Nav from '../Components/Nav';
 import Roster from '../Components/Roster';
 
+import ReactDOM from 'react-dom';
+import Modal from 'react-responsive-modal';
+
+import './Search.css';
 
 class Search extends Component {
   state = {
@@ -13,7 +17,8 @@ class Search extends Component {
       address: "",
       id: "",
       name: ""
-    }
+    },
+    open: false
   }
 
   componentDidMount() {
@@ -54,22 +59,36 @@ class Search extends Component {
     })
   }
 
+  onOpenModal = () => {
+    this.setState({ open: true });
+  }
+ 
+  onCloseModal = () => {
+    this.setState({ open: false });
+  }
+
   render() {
     console.log('test')
     return (
-      <div className="container">
+      <div>
         <Nav />
         <Banner handle="@tofuguy"/>
-        <GMap onMarkerClick={this.onMarkerClick}/>
-        <Roster location={this.state.markerClicked} />
-
-        <TipCard
-          id={"test.id"}
-          img={`http://localhost:3000/assets/images/default.png`}
-          firstName="Sahil"
-          handle="@dr_najeeb"
-          title="JerseyClub DJ"
-          state={this.state}/>
+        <div className="container">
+          <GMap onMarkerClick={this.onMarkerClick}/>
+          <Roster location={this.state.markerClicked} buttonclick={this.onOpenModal}/>
+          <Modal
+            open={this.state.open}
+            onClose={this.onCloseModal}
+            classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
+            closeIconSize={0}>
+            <TipCard
+              img={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png`}
+              firstName="Sahil"
+              handle="@dr_najeeb"
+              title="JerseyClub DJ"
+              state={this.state}/>
+          </Modal>
+        </div>
       </div>
     )
   }

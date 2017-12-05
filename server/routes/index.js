@@ -1,4 +1,5 @@
-const UserController = require('../controllers').user;
+const UserController = require('../controllers').User;
+const { getUser2 } = UserController;
 
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
@@ -6,6 +7,8 @@ const authKey        = require('../utils/authKey');
 const stripe = require("stripe")(
   authKey.stripeKey["secretKey"]
 );
+
+const { getTipsterBalance, createCustomer } = require('../stripe/stripe-api');
 
 
 module.exports = (app, passport) => {
@@ -21,16 +24,12 @@ app.get('/api/search', (req, res) => {
   console.log("\n#######id,", req.session)
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
-
-
-
 // get current user sesion id 
 // query user table
 // get user username , user first name, user last name, user image
 
 // get user connecfg token 
 
-  
   if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
   res.json({
     message: 'Welcome to the Tipster User search!',
@@ -116,8 +115,35 @@ passportAuthenticate = (localStrategy, req, res, next) => {
 
 app.post("/api/tip", (req, res) => {
   console.log(req.body, req.headers);
-  res.json("tip received");
+  console.log(req.isAuthenticated());
+  let user = getCurrentuserId(req);
+  console.log(user);
+  let user_email = null;
+  getUser2(user, ['email'], data => {
+    user_email = data.email;
+    let newCustomer = {
+      default_source: req.body.token,
+      source: req.body.token,
+      email: user_email,
+    }
+    console.log(newCustomer);
+  // stripe.customer.create({
+  //   default_source: req.body.token,
+  //   source: req.body.token,
+  //   email: user_email,
+  // }).then(response => {
+  //   console.log(response);
+  // })
+    createCustomer(newCustomer);
+    res.json("tip received");
+  })
 });
+
+app.get("/api/admin/balance", (req, res) => {
+  console.log(req.headers);
+  getTipsterBalance((bal) => res.json(bal));
+
+})
 
 //=======================================================================
 
@@ -144,6 +170,5 @@ getCurrentuserId = (req) => {
 
  // currentUser: getCurrentuserId(req),
  // isLoggedIn: req.isAuthenticated()
-
 
 };

@@ -12,4 +12,13 @@ module.exports = {
  		})
  	},
 
+  getUser2(id, fields, func) {
+    User.find({
+      attributes: fields,
+      where: {
+        uuid: id
+      }
+    }).then(data => func(data.dataValues));
+  }
+
 };

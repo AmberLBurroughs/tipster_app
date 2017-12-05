@@ -1,7 +1,7 @@
-body {
+.homeWrap {
 	background-color: #171837;
+	min-height:100vh;
 }
-
 #hero {
 	background-color: #7571ff;
 	color:#fff;

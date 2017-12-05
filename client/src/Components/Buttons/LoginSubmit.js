@@ -7,7 +7,7 @@ const LoginSubmit = (props) => {
       <button className="btn btn-primary pull-right" onClick={props.onClick}>Login</button>
     )
   }
-  else if (props.type === "create") {
+  else if (props.type === "signup") {
     return (
       <button className="btn btn-primary pull-right" onClick={props.onClick}>Sign Up</button>
     )

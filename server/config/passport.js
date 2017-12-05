@@ -117,6 +117,8 @@ module.exports    = function(passport) {
         //console.log("\n>>>>>>>>>>>>>> localsignin: ", req);
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
+        // const validPass = db.LocalKey.validPassword(password);
+        // console.log(`validPassword returns: ${validPass}`);
         db.User.findOne({
             where: {
                 email:  email 
@@ -132,7 +134,7 @@ module.exports    = function(passport) {
 
             // if the user is found but the password is wrong
             // get password associated with user logging in
-            if (!user && db.LocalKey.validPassword(password))
+            if (user && db.LocalKey.validPassword(password))
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user

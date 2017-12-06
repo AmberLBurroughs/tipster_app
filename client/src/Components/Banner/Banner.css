@@ -4,22 +4,25 @@
 }
 
 .logo {
-  height: 200px;
-  width: 200px;
+  height: 125px;
+  width: 125wpx;
 }
 
 .bannerwelcome {
-  font-size: 24px;
-  font-family: 'Fjalla One', sans-serif;
-  color: #171837;
+  font-size: 1.8em;
+  font-family: 'Quicksand', sans-serif;
+  color: #fff;
   text-align: center;
   width: auto;
+  margin-top: 0px;
 }
 
 .bannerintro {
-  font-size: 18px;
+  font-size: 2em;
   font-family: 'Fjalla One', sans-serif;
   color: #171837;
   text-align: center;
   width: auto;
+  font-weight: 200;
+  text-transform: uppercase;
 }

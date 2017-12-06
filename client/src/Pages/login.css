@@ -8,11 +8,13 @@
 	text-align: center;
 	background: url("/assets/images/background.png") no-repeat bottom;
 	background-size: cover;
-	min-height: 550px;
-	margin-bottom: 5%
+	min-height: 485px;
+}
+.home-btn-wrap {
+	padding-top: 3%;
 }
 #hero>.content {
-	padding-top: 12%;
+	padding-top: 6%;
 }
 .btns {
 	border:1px solid #FFF;

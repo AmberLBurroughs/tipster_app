@@ -33,7 +33,7 @@ class Nav extends React.Component {
                 ACCCOUNT
               </a></center>
             : ""
-        }<br/>
+        }
         {
           window.location.pathname === "/profile" ||
           window.location.pathname === "/search"

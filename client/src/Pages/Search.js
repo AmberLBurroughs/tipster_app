@@ -19,6 +19,7 @@ class Search extends Component {
       name: "",
     },
     open: false,
+    page1: true,
     user: {
       username: "",
       image: ""
@@ -28,7 +29,7 @@ class Search extends Component {
   constructor(props){
     super(props);
     const that = this;
-    fetch("http://localhost:8000/api/search", {
+    fetch("/api/search", {
       method: 'GET',
       credentials: 'include',
       mode: 'cors'
@@ -82,6 +83,12 @@ class Search extends Component {
     this.setState({ open: false });
   }
 
+  toggleModal = (bool) => {
+    this.setState({
+      page1: bool
+    })
+  }
+
   render() {
     console.log('test')
     return (
@@ -100,7 +107,8 @@ class Search extends Component {
               img={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png`}
               firstName="Sahil"
               title="JerseyClub DJ"
-              state={this.state}/>
+              state={this.state}
+              toggleModal={this.toggleModal}/>
           </Modal>
         </div>
       </div>

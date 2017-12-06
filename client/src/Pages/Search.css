@@ -16,9 +16,9 @@
   background: rgba(0, 0, 0, 0.85) !important;
 }
 .custom-modal {
-  border-top: 200px solid blue;
+  border-top: 200px solid #7571ff;
   background: white !important;
-  max-width: 500px !important;
+  max-width: 600px !important;
   width: 100%;
-  height: 800px;
+  height: 835px;
 }

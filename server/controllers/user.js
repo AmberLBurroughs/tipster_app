@@ -4,8 +4,11 @@ const User = require('../models').User;
   // getUser: function(req, res) {
   // 	console.log(req);
   // }
-var getUser = function(id, cb) {
-	//console.log("\n%%%%%%%%%",id)
+
+module.exports = {
+
+  getUser: (id, cb) => {
+	  console.log("\n%%%%%%%%%",id)
  		User.find({
  			attributes: ['username', 'firstName', 'lastName', 'image'],
  			where: {
@@ -17,10 +20,22 @@ var getUser = function(id, cb) {
  			 return cb(user.dataValues);
  		})
  		.catch(err => console.log(err));
- 		
- 	}
+ 	},
 
+  getUser2: (id, fields, func) => {
+    User.find({
+      attributes: fields,
+      where: {
+        uuid: id
+      }
+    }).then(data => func(data.dataValues));
+  },
 
-
-
-module.exports = getUser;
+  updateUser: (identifier, newData, func) => {
+    User.update(
+      newData,{
+        where: identifier
+      }
+    ).then(data => func(data));
+  }
+}

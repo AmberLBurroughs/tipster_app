@@ -20,12 +20,12 @@ module.exports    = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.uuid);
+        done(null, [user.uuid, user.fk_StripeCustomer, user.fk_StripeConnect]);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(uuid, done) {
-        db.User.findById(uuid).then(function(user) {
+    passport.deserializeUser(function(user, done) {
+        db.User.findById(user[0]).then(function(user) {
 	        if (user) {
 	            done(null, user.get());
  

@@ -18,7 +18,7 @@ class TipSubmit extends Component {
   render() {
     if(this.state.submit) {
       return (
-        <Button
+        <Button className="nextbutton"
           bsStyle="primary"
           onClick = {(e)=>this.onMarkerClick(e)}>
           Next
@@ -30,7 +30,7 @@ class TipSubmit extends Component {
         <Button
           bsStyle="success"
           // onClick = {this.props.submitTip}
-          onClick = {this.props.toggle(false)}>
+          onClick = {this.props.toggleModal(false)}>
           Confirm
         </Button>
       )

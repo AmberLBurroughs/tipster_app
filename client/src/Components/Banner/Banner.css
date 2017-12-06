@@ -27,4 +27,13 @@
   width: auto;
   font-weight: 200;
   text-transform: lowercase;
+
+}
+
+.bannernologo {
+  font-size: 36px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+  text-align: center;
+  width: auto;
 }

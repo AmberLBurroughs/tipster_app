@@ -1,3 +1,16 @@
+input.tipcardname {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  color: #909eaf;
+}
+
+p.tipcarddetails {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 18px;
+  color: #909eaf;
+}
 
 #stripeForm h2 {
   color: #32325d;

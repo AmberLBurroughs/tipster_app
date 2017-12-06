@@ -10,12 +10,12 @@ import './TipCard.css';
 
 const { tipHelper } = helper;
 
+
 class TipCard extends Component {
   state = {
     anonymous: false,
     amount: "",
-    note: "",
-    page1: true
+    note: ""
   }
 
   handleInputChange = (event) => {
@@ -77,25 +77,18 @@ class TipCard extends Component {
     console.log(`tip sent!`)
   }
 
-  toggleModal = (bool) => {
-    this.setState({
-      page1: bool
-    })
-  }
-
   render() {
     return (
       <div className="col-xs-12 tipcard">
-        <center>
-          <img className="tipcardpic" src={this.props.img} alt="default user image"/>
-          <h3>{this.props.firstName}</h3>
-          <h4>{`${this.props.title} @ ${this.props.state.markerClicked.name}`}</h4>
-        </center><br/><br/><br/>
+        <center><img className="tipcardpic img-circle" src={this.props.img} alt="default user image"/></center>
 
         <form>
-          {this.state.page1
+          {this.props.state.page1
             ? 
             <center><div>
+              <h3>{this.props.firstName}</h3>
+              <h4>{`${this.props.title} @ ${this.props.state.markerClicked.name}`}</h4><br/><br/>
+
               <div className="form-inline">
                 <div className="form-group">
                   <label className="sr-only" htmlFor="exampleInputAmount">Amount (in USD</label>
@@ -111,41 +104,37 @@ class TipCard extends Component {
                       onChange={this.handleInputChange}/>
                   </div>
                 </div>
-                <button 
-                  className="btn btn-danger"
+                <button
+                  className="btn clearbutton"
                   onClick={this.clearAmount}
                 >Clear
                 </button>
-              </div><br/><br/>
-
-              <div className="form-group">
-                <label htmlFor="note">Leave a note</label>
-                <textarea
-                  className="form-control"
-                  rows="3"
-                  value={this.state.note}
-                  name="note"
-                  id="note"
-                  onChange={this.handleInputChange}>
-                </textarea>
               </div><br/>
-              <TipSubmit submitTip={this.submitTip} toggle={this.toggleModal}/>
-            </div></center>
-            : ""
-          }
 
-          {!this.state.page1
-            ? 
-            <center><div>
-              <div className="checkbox">
-                <label>
+              <textarea name="note" rows="2" className="form-control note" id="note" required autocomplete="off"
+              onChange={this.handleInputChange} value={this.state.note}></textarea>
+              <label className="note" for="note"><span className="note">Note</span></label><br/>
+
+              <div className="anoncheckbox">
+                <label className="checkbox-inline">
                   <input
                     type="checkbox"
                     onClick={this.toggleAnon}
                     />
-                     I want to tip anonymously
+                    I want to tip anonymously
                 </label>
-              </div>
+              </div><br/>
+
+              <TipSubmit submitTip={this.submitTip} toggleModal={this.props.toggleModal}/>
+            </div></center>
+            : ""
+          }
+
+          {!this.props.state.page1
+            ? 
+            <center><div><br/>
+
+              <h4>Tipping {this.props.firstName} ${this.state.amount} {this.state.anonymous ?"anonymously" :""}</h4><br/><br/>
 
               <Elements>
                 <StripeCheckout serverProps={this.props} formState={this.state} tip={this.submitTip} />

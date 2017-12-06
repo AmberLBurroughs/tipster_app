@@ -61,8 +61,9 @@ class _CardForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+          <p className="tipcarddetails"> Card details</p>
+          <input className="tipcardname" placeholder="Name"></input>
         <label>
-          Card details
           <CardElement
             onBlur={handleBlur}
             onChange={handleChange}

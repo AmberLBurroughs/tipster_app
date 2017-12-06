@@ -1,0 +1,44 @@
+.fileInput {
+  border: 1px solid #23d3ac;
+  padding: 10px;
+  margin: 15px auto 10px auto;
+}
+
+.imgPreview {
+  text-align: center;
+  margin: 5px 15px;
+  height: 200px;
+  width: auto;
+  border: 1px solid #23d3ac;
+  height: 100%;
+}
+
+.previewText{
+  width: 100%;
+  margin-top: 20px;
+}
+
+.submitButton {
+  padding: 12px;
+  margin: 0 auto 10px auto;
+  background: white;
+  border: 1px solid #23d3ac;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 10pt;
+  width: auto;
+}
+
+.submitButton:hover {
+  background: #23d3ac;
+}
+
+.centerText {
+  text-align: center;
+  width: 500px;
+}
+
+.imgPreview {
+  height: 400px;
+  width: 400px;
+}

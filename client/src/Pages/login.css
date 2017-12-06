@@ -10,6 +10,9 @@
 	background-size: cover;
 	min-height: 485px;
 }
+h1 {
+	font-size: 2em;
+}
 .home-btn-wrap {
 	padding-top: 3%;
 }

@@ -17,10 +17,10 @@ module.exports = {
     })
   },
 
-  createCustomer: (customer) => {
+  createCustomer: (customer, func) => {
     stripe.customers.create(customer)
     .then(response => {
-      console.log(response);
+      func(response);
     })
   }
   

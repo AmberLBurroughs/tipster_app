@@ -1,5 +1,7 @@
 const UserController = require('../controllers').User;
-const { getUser2 } = UserController;
+const { getUser2, updateUser } = UserController;
+
+const { StripeCustomer } = require('../models');
 
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
@@ -23,7 +25,8 @@ app.get("favicon.ico", function(request, response) {
 app.get('/api/search', (req, res) => {
   console.log("\n#######id,", req.session)
   console.log("\n>>>>>>hello", req.headers);
-  console.log("%%%%%",req.isAuthenticated())
+  console.log("%%%%%",req.isAuthenticated());
+  console.log("&*&*&*&*&*&",getCurrentUserAccts(req));
 // get current user sesion id 
 // query user table
 // get user username , user first name, user last name, user image
@@ -118,25 +121,64 @@ app.post("/api/tip", (req, res) => {
   console.log(req.isAuthenticated());
   let user = getCurrentuserId(req);
   console.log(user);
-  let user_email = null;
-  getUser2(user, ['email'], data => {
-    user_email = data.email;
-    let newCustomer = {
-      default_source: req.body.token,
-      source: req.body.token,
-      email: user_email,
-    }
-    console.log(newCustomer);
-  // stripe.customer.create({
-  //   default_source: req.body.token,
-  //   source: req.body.token,
-  //   email: user_email,
-  // }).then(response => {
-  //   console.log(response);
-  // })
-    createCustomer(newCustomer);
-    res.json("tip received");
-  })
+  let userAccts = getCurrentUserAccts(req);
+  if(userAccts.customer === null) {
+    let user_email = null;
+    getUser2(user, ['email'], data => {
+      user_email = data.email;
+      let newCustomer = {
+        // default_source: req.body.token,
+        source: req.body.token.id,
+        email: user_email,
+      }
+      console.log(newCustomer);
+    // stripe.customer.create({
+    //   default_source: req.body.token,
+    //   source: req.body.token,
+    //   email: user_email,
+    // }).then(response => {
+    //   console.log(response);
+    // })
+      createCustomer(newCustomer, ((newStripeCustomer) => {
+        console.log(newStripeCustomer);
+        StripeCustomer.create({
+          key: newStripeCustomer.id,
+          lastFour: req.body.token.card.last4
+        }).then((newEntry) => {
+          console.log(newEntry.dataValues);
+          updateUser({
+            uuid: user
+          },{
+            fk_StripeCustomer: newEntry.dataValues.uuid
+          }, (result) => {
+            console.log(result);
+            req.login(req.user, function(err) {
+              if (err) {
+                throw err;
+                console.log(err);
+                return next(err);
+              }
+              else {
+                res.json("tip received");
+              }
+            });
+          })
+        })
+
+      }));
+      // req.login(user, function(err) {
+      //   if (err) {
+      //     console.log(err);
+      //     return next(err);
+      //   }
+      //   else {
+      //     res.json("tip received");
+      //   }
+      // })
+      // res.json("tip received");
+    })
+  }
+  else {}
 });
 
 app.get("/api/admin/balance", (req, res) => {
@@ -150,12 +192,25 @@ app.get("/api/admin/balance", (req, res) => {
 // helpers
 getCurrentuserId = (req) => {
   let userId;
-    if(req.isAuthenticated()){
-      userId = req.session.passport.user;
-    } else {
-      userId = false
-    }
-    return userId
+  if(req.isAuthenticated()){
+    userId = req.session.passport.user[0];
+    console.log(`user: ${userId}`);
+  } else {
+    userId = false
+  }
+  return userId
+}
+
+getCurrentUserAccts = (req) => {
+  let userAccts = {};
+  if(req.isAuthenticated()){
+    userAccts.customer = req.session.passport.user[1];
+    userAccts.connect = req.session.passport.user[2];
+  } else {
+    userAccts = null;
+  }
+  return userAccts
+
 }
 
 // isLoggedIn = (req, res, next) => {

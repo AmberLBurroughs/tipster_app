@@ -19,6 +19,14 @@ module.exports = {
         uuid: id
       }
     }).then(data => func(data.dataValues));
+  },
+
+  updateUser(identifier, newData, func) {
+    User.update(
+      newData,{
+        where: identifier
+      }
+    ).then(data => func(data));
   }
 
 };

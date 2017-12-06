@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
-      isUnique :true
+      isUnique: true
     },
 
     email: {
@@ -53,6 +53,16 @@ module.exports = (sequelize, DataTypes) => {
 
     // has many transactions
     User.hasMany(models.Transaction);
+
+    User.belongsTo(models.StripeCustomer, {
+      foreignKey: 'fk_StripeCustomer',
+      onDelete: 'CASCADE'
+    });
+
+    User.belongsTo(models.StripeConnect, { 
+      foreignKey: 'fk_StripeConnect',
+      onDelete: 'CASCADE'
+    });
   }
 
   return User;

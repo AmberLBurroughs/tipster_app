@@ -18,7 +18,7 @@ class TipSubmit extends Component {
   render() {
     if(this.state.submit) {
       return (
-        <Button
+        <Button className="nextbutton"
           bsStyle="primary"
           onClick = {(e)=>this.onMarkerClick(e)}>
           Next

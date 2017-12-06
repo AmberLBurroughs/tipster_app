@@ -5,7 +5,7 @@
 
 .logo {
   height: 125px;
-  width: 125wpx;
+  width: 125px;
 }
 
 .bannerwelcome {
@@ -25,4 +25,12 @@
   width: auto;
   font-weight: 200;
   text-transform: uppercase;
+}
+
+.bannernologo {
+  font-size: 36px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+  text-align: center;
+  width: auto;
 }

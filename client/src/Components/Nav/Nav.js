@@ -12,7 +12,7 @@ class Nav extends React.Component {
     return (
       <Menu right bodyClassName="nav">
         <center><Toggle /></center><br/>
-        <center><h5>slide toggle to become a tipster</h5></center><br/>
+        <center><h5>SLIDE TOGGLE TO BECOME A TIPSTER</h5></center><br/>
         {
           window.location.pathname === "/profile" ||
           window.location.pathname === "/history"
@@ -20,7 +20,7 @@ class Nav extends React.Component {
                 Search
               </a></center>
             : ""
-        }<br/>
+        }
         {
           window.location.pathname === "/search" ||
           window.location.pathname === "/history"
@@ -28,18 +28,15 @@ class Nav extends React.Component {
                 Profile
               </a></center>
             : ""
-        }<br/>
+        }
         {
           window.location.pathname === "/profile" ||
           window.location.pathname === "/search"
             ? <center><a id="history" className="menu-item" href="/history">
-                History
+                Past Tips
               </a></center>
             : ""
-        }<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <center><a onClick={this.showSettings} className="menu-item" href="/settings">
-          Settings
-        </a></center><br/>
+        }<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <center><a id="logout" className="menu-item" href="/logout">
           Log Out
         </a></center>

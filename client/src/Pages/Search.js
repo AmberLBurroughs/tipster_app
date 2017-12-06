@@ -16,9 +16,41 @@ class Search extends Component {
     markerClicked: {
       address: "",
       id: "",
-      name: ""
+      name: "",
     },
-    open: false
+    open: false,
+    user: {
+      username: ""
+    }
+  }
+
+  constructor(props){
+    super(props);
+    const that = this;
+    fetch("http://localhost:8000/api/search", {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors'
+    })
+    .then(function(res){
+      console.log("$$$$$$$$$$$")
+       const contentType = res.headers.get("content-type");
+       if(contentType && contentType.includes("application/json")) {
+        return res.json();
+      }
+    })
+    .then(function(json){
+      console.log("&&&&&&&", json.username);
+      that.setState({user:{username:json.username}});
+    })
+    .catch(function(res){
+      if(res.error_code && res.error_code == 'invalid_login' ){
+        document.cookie = ""; // clear cookie
+        window.location.href = "/" // redirect to login
+      }
+      console.log("error", res);
+    })
+
   }
 
   componentDidMount() {
@@ -28,21 +60,6 @@ class Search extends Component {
     // check for document.cookie here. if user_sid is not set, redirect.
     // on AJAX request, validate cookie. set handler to delete cookie and redirect if
     // cookie is invalid
-
-    fetch("http://localhost:8000/api/search", {
-      method: 'GET',
-      credentials: 'include',
-      mode: 'cors'
-    })
-    .then(function(res){
-      console.log(res);
-    }).catch(function(res){
-      if(res.error_code && res.error_code == 'invalid_login' ){
-        document.cookie = ""; // clear cookie
-        window.location.href = "/" // redirect to login
-      }
-      console.log("error", res);
-    })
   } 
 
   onMarkerClick = (info) => {
@@ -69,7 +86,7 @@ class Search extends Component {
     return (
       <div>
         <Nav />
-        <Banner handle="@tofuguy"/>
+        <Banner user={this.state.user}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
           <Roster location={this.state.markerClicked} buttonclick={this.onOpenModal}/>

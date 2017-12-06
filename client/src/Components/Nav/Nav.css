@@ -9,6 +9,7 @@
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #FFF;
+  height: 10% !important;
 }
 
 /* Position and sizing of clickable cross button */
@@ -51,6 +52,10 @@
   color: #fff;
   font-weight: 400;
 }
+.nav-header{
+  border-bottom: 1px solid #16d5b3;
+  margin-bottom: 10px;
+}
 .nav-header img {
   height: 75px;
   width: auto;
@@ -58,7 +63,7 @@
 .nav-header h3 {
   font-family: 'Julius Sans One', sans-serif;
   color: #fff;
-  font-weight: 400;
+  font-weight: 600;
   margin-bottom: 15%;
   font-size: 2em;
 }

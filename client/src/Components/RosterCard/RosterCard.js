@@ -8,8 +8,8 @@ class RosterCard extends Component {
     return(
       <Paper className="papercard">
         <div className="card"><br/><br/>
-          <center><img className="cardpic img-circle" src="http://via.placeholder.com/150x150" alt="cardpic" /></center><br/>
-          <center><button className="cardbtn" onClick={this.props.buttonclick}><p className="btntext">TIP SAHIL</p></button></center>
+          <center><img className="cardpic img-circle" src="http://via.placeholder.com/150x150" alt="cardpic" /></center>
+          <center><button className="btns btnz" onClick={this.props.buttonclick}>TIP SAHIL</button></center>
         </div>
       </Paper>
     )

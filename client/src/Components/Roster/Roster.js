@@ -24,7 +24,7 @@ function Roster(props) {
 
   return (
     <div className={classes.root}>
-      <div id="roster" className="panel-body" key={props.location.name}>
+      <div id="roster" className="panel-body clearfix" key={props.location.name}>
         <p className="locationname">{props.location.name}</p>
         <p className="locationaddress">{props.location.address}</p>
         <hr className="hr" />

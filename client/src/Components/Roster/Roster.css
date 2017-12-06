@@ -16,3 +16,7 @@
   color: #23d3ac;
   border-top: 1px solid #23d3ac
 }
+
+#roster {
+  min-height: 150px;
+}

@@ -8,7 +8,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #FFF;
 }
 
 /* Position and sizing of clickable cross button */
@@ -24,8 +24,8 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #7571ff;
-  padding: 2.5em 1.5em 0;
+  background: #fff;
+  padding: 1em 1.5em 0;
   font-size: 1.15em;
 }
 
@@ -46,9 +46,27 @@
 }
 
 .menu-item {
-  font-size: 28px;
-  font-family: 'Fjalla One', sans-serif;
-  color: #171837;
+  font-size: 20px;
+  font-family: 'Julius Sans One', sans-serif;
+  color: #fff;
+  font-weight: 400;
+}
+.nav-header img {
+  height: 75px;
+  width: auto;
+}
+.nav-header h3 {
+  font-family: 'Julius Sans One', sans-serif;
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 15%;
+  font-size: 2em;
+}
+.nav-header h5{
+  color: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:200;
+  font-size: 16px;
 }
 
 h5 {

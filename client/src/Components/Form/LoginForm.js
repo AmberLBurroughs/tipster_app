@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { LoginBtn, LoginSubmit } from '../Buttons';
+import './style.css';
 
 import helper from '../../Utils/helper.js';
 
@@ -110,7 +111,7 @@ class LoginForm extends Component {
             className="form-control"
             id="Confirm"
             name="confirm"
-            placeholder="Confirm Password"
+            placeholder="confirm password"
             value={this.state.confirm}
             onChange = {this.handleInputChange}
           />
@@ -119,14 +120,14 @@ class LoginForm extends Component {
     }
     if (this.state.type !== "") {
       return (
-        <form method="POST" action={action}>
+        <form method="POST" action={action} className="clearfix">
           <div className="form-group">
             <label htmlFor="Email">Email address</label>
             <input 
               type="email"
               className="form-control"
               id="Email" name="email"
-              placeholder="Email"
+              placeholder="email"
               value={this.state.email}
               onChange = {this.handleInputChange}
             />
@@ -138,22 +139,22 @@ class LoginForm extends Component {
               className="form-control"
               id="Password"
               name="password"
-              placeholder="Password"
+              placeholder="password"
               value={this.state.password}
               onChange = {this.handleInputChange}
             />
           </div>
           {confirm}
-          <LoginSubmit type={this.state.type} />
-          <button className="pull-right btn btn-danger" onClick={this.goBack}>
+          <button className="btn btns" onClick={this.goBack}>
             Go Back
           </button>
+          <LoginSubmit type={this.state.type} />
         </form>
       )
     }
     else {
       return (
-        <form>
+        <form className="home-btn-wrap">
           <LoginBtn type="login" onClick={() => this.changeState("login")}/>
           <LoginBtn type="signup" onClick={() => this.changeState("signup")} />
         </form>

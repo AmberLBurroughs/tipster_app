@@ -1,6 +1,6 @@
-// import axios from 'axios'
+import axios from 'axios'
 
-// export default {
+export default {
 
 // 	loginHelper: loginState => {
 
@@ -27,9 +27,9 @@
 //     }
 //   },
 
-//   tipHelper: (transaction) => {
-//     axios.post('http://localhost:8000/api/tip', transaction)
-//     .then(res => console.log(res));
-//   }
+  tipHelper: (transaction) => {
+    axios.post('/api/tip', transaction)
+    .then(res => console.log(res));
+  }
 
-// }
+}

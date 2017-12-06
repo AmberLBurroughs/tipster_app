@@ -1,4 +1,7 @@
 const UserController = require('../controllers/user');
+const { getUser2, updateUser, getUser } = UserController;
+
+const { StripeCustomer } = require('../models');
 
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
@@ -7,6 +10,7 @@ const stripe = require("stripe")(
   authKey.stripeKey["secretKey"]
 );
 
+const { getTipsterBalance, createCustomer } = require('../stripe/stripe-api');
 
 module.exports = (app, passport) => {
 
@@ -31,7 +35,7 @@ function results(userData){
   console.log("\nYYYYYYYY", userData);
   res.json(userData)
 }
-UserController(getCurrentuserId(req), results);
+getUser(getCurrentuserId(req), results);
 
 if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
 
@@ -118,17 +122,103 @@ passportAuthenticate = (localStrategy, req, res, next) => {
   })(req, res, next);
 }
 
+app.post("/api/tip", (req, res) => {
+  console.log(req.body, req.headers);
+  console.log(req.isAuthenticated());
+  let user = getCurrentuserId(req);
+  console.log(user);
+  let userAccts = getCurrentUserAccts(req);
+  if(userAccts.customer === null) {
+    let user_email = null;
+    getUser2(user, ['email'], data => {
+      user_email = data.email;
+      let newCustomer = {
+        // default_source: req.body.token,
+        source: req.body.token.id,
+        email: user_email,
+      }
+      console.log(newCustomer);
+    // stripe.customer.create({
+    //   default_source: req.body.token,
+    //   source: req.body.token,
+    //   email: user_email,
+    // }).then(response => {
+    //   console.log(response);
+    // })
+      createCustomer(newCustomer, ((newStripeCustomer) => {
+        console.log(newStripeCustomer);
+        StripeCustomer.create({
+          key: newStripeCustomer.id,
+          lastFour: req.body.token.card.last4
+        }).then((newEntry) => {
+          console.log(newEntry.dataValues);
+          updateUser({
+            uuid: user
+          },{
+            fk_StripeCustomer: newEntry.dataValues.uuid
+          }, (result) => {
+            console.log(result);
+            req.login(req.user, function(err) {
+              if (err) {
+                throw err;
+                console.log(err);
+                return next(err);
+              }
+              else {
+                res.json("tip received");
+              }
+            });
+          })
+        })
+
+      }));
+      // req.login(user, function(err) {
+      //   if (err) {
+      //     console.log(err);
+      //     return next(err);
+      //   }
+      //   else {
+      //     res.json("tip received");
+      //   }
+      // })
+      // res.json("tip received");
+    })
+  }
+  else {
+    res.json("user already has a customer account");
+  }
+});
+
+app.get("/api/admin/balance", (req, res) => {
+  console.log(req.headers);
+  getTipsterBalance((bal) => res.json(bal));
+
+})
+
 //=======================================================================
 
 // helpers
 getCurrentuserId = (req) => {
   let userId;
-    if(req.isAuthenticated()){
-      userId = req.session.passport.user;
-    } else {
-      userId = false
-    }
-    return userId
+  if(req.isAuthenticated()){
+    userId = req.session.passport.user[0];
+    console.log(`user: ${userId}`);
+  } else {
+    userId = false
+  }
+  return userId
+}
+
+getCurrentUserAccts = (req) => {
+  let userAccts = {};
+  if(req.isAuthenticated()){
+    userAccts.customer = req.session.passport.user[1];
+    userAccts.connect = req.session.passport.user[2];
+  } else {
+    userAccts = null;
+  }
+  return userAccts
+
 }
 
 // isLoggedIn = (req, res, next) => {
@@ -143,6 +233,5 @@ getCurrentuserId = (req) => {
 
  // currentUser: getCurrentuserId(req),
  // isLoggedIn: req.isAuthenticated()
-
 
 };

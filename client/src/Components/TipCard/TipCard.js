@@ -10,7 +10,6 @@ import './TipCard.css';
 
 const { tipHelper } = helper;
 
-
 class TipCard extends Component {
   state = {
     anonymous: false,

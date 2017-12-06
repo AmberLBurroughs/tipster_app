@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
     email: {
       type: DataTypes.STRING,
-      isUnique :true,
+      isUnique: true,
       allowNull:false,
       required: true,
       validate: {
@@ -53,6 +53,16 @@ module.exports = (sequelize, DataTypes) => {
 
     // has many transactions
     User.hasMany(models.Transaction);
+
+    User.belongsTo(models.StripeCustomer, {
+      foreignKey: 'fk_StripeCustomer',
+      onDelete: 'CASCADE'
+    });
+
+    User.belongsTo(models.StripeConnect, { 
+      foreignKey: 'fk_StripeConnect',
+      onDelete: 'CASCADE'
+    });
   }
 
   return User;

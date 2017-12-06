@@ -27,7 +27,7 @@ function Roster(props) {
       <div id="roster" className="panel-body" key={props.location.name}>
         <p className="locationname">{props.location.name}</p>
         <p className="locationaddress">{props.location.address}</p>
-        <hr class="hr" />
+        <hr className="hr" />
       </div>
       <Grid container spacing={24}>
         <Grid item xs={6} sm={3}>

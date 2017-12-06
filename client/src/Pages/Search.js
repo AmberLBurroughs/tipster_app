@@ -28,7 +28,7 @@ class Search extends Component {
   constructor(props){
     super(props);
     const that = this;
-    fetch("http://localhost:8000/api/search", {
+    fetch("/api/search", {
       method: 'GET',
       credentials: 'include',
       mode: 'cors'

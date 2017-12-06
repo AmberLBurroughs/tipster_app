@@ -20,7 +20,8 @@ class Search extends Component {
     },
     open: false,
     user: {
-      username: ""
+      username: "",
+      image: ""
     }
   }
 
@@ -41,7 +42,7 @@ class Search extends Component {
     })
     .then(function(json){
       console.log("&&&&&&&", json.username);
-      that.setState({user:{username:json.username}});
+      that.setState({user:{username:json.username, image:json.image }});
     })
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){

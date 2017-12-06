@@ -30,7 +30,7 @@ class TipSubmit extends Component {
         <Button
           bsStyle="success"
           // onClick = {this.props.submitTip}
-          onClick = {this.props.toggle(false)}>
+          onClick = {this.props.toggleModal(false)}>
           Confirm
         </Button>
       )

@@ -11,7 +11,7 @@ class StripeCheckout extends Component {
     console.log(this.props.serverProps, this.props.formState);
     return (
       <div id="stripeForm">
-        <CardForm tip={this.props.tip}/>
+        <CardForm tip={this.props.tip} cardchange={this.props.cardchange}/>
       </div>
 
     )

@@ -105,7 +105,7 @@ class Search extends Component {
           })
         }
       }
-    });
+    })
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){
         document.cookie = ""; // clear cookie

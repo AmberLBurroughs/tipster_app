@@ -33,7 +33,7 @@ app.get('/api/search', (req, res) => {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
-  
+  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
   // get user connecfg token 
   function results(userData){
     console.log("\nYYYYYYYY", userData);
@@ -41,23 +41,6 @@ app.get('/api/search', (req, res) => {
   }
   getUser(getCurrentuserId(req), results);
 
-  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
-
-});
-
-
-// api/user
-
-  results = (userData) =>{
-    console.log("\nYYYYYYYY", userData);
-    res.json(userData)
-  }
-
-  getUser(getCurrentuserId(req), results);
-
-  if(!req.isAuthenticated()){ 
-    res.status(400).json({success: false, message: "Not logged in"})
-  }
 });
 
 // example controller call

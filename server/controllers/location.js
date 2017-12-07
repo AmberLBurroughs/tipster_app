@@ -1,4 +1,4 @@
-const Location = require('../models').Location;
+const { Location, User } = require('../models');
 
 module.exports = {
   // crud mthods

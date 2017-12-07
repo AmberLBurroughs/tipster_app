@@ -37,7 +37,7 @@ class Search extends Component {
     },
     {
       first: "dude",
-      username: "tipsterDude",
+      username: "sahilxmnkpc",
       image: "/assets/images/tipster2.jpg"
     },
     {

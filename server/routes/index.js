@@ -2,7 +2,7 @@ const UserController                    = require('../controllers/user');
 const { getUser2, updateUser, getUser } = UserController;
 
 const LocationController = require('../controllers/location');
-const { getWorkers }     = UserController;
+const { getWorkers }     = LocationController;
 
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
@@ -113,67 +113,6 @@ passportAuthenticate = (localStrategy, req, res, next) => {
     }  
   })(req, res, next);
 }
-
-// app.post("/api/tip", (req, res) => {
-//   console.log(req.body, req.headers);
-//   console.log(req.isAuthenticated());
-//   let user = getCurrentuserId(req);
-//   console.log(user);
-//   let userAccts = getCurrentUserAccts(req);
-//   if(userAccts.customer === null) {
-//     let realStripeCust = null;
-//     getUser2(user, ['email', 'fk_StripeCustomer'], (value) => {
-//       realStripeCust = value.fk_StripeCustomer;
-//       if(realStripeCust === null) {
-//         let user_email = value.email;
-//         let newCustomer = {
-//           // default_source: req.body.token,
-//           source: req.body.token.id,
-//           email: user_email,
-//         }
-//         console.log(newCustomer);
-//         createCustomer(newCustomer, ((newStripeCustomer) => {
-//           console.log(newStripeCustomer);
-//           StripeCustomer.create({
-//             key: newStripeCustomer.id,
-//             lastFour: req.body.token.card.last4
-//           }).then((newEntry) => {
-//             console.log(newEntry.dataValues);
-//             updateUser({
-//               uuid: user
-//             },{
-//               fk_StripeCustomer: newEntry.dataValues.uuid
-//             }, (result) => {
-//               console.log(result);
-//               // req.login(req.user, function(err) {
-//               //   if (err) {
-//               //     throw err;
-//               //     console.log(err);
-//               //     return next(err);
-//               //   }
-//               //   else {
-//               //     res.json("tip received");
-//               //   }
-//               // });
-//               res.json({
-//                 message: "StripeCustomer Acct created!",
-//                 data: result
-//               });
-//             })
-//           })
-//         }));
-//       }
-//       else {
-//         console.log(`this is the user's first time on the site. and they have a stripeCustomer account not reflected in this session`);
-//         res.json(`this is the user's first time on the site. and they have a stripeCustomer account not reflected in this session`);
-//       }
-//     })
-//   }
-//   else {
-//     console.log(`this customer has a stripeCustomer account in their session`);
-//     res.json(`this customer has a stripeCustomer account in their session`)
-//   }
-// });
 
 app.use("/api/tip", tipRoutes);
 

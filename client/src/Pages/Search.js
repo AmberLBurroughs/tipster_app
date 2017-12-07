@@ -79,16 +79,9 @@ class Search extends Component {
       }
       console.log("error", res);
     })
-
   }
 
   componentDidMount() {
-
-  // if cookie valid
-  // if invalid
-    // check for document.cookie here. if user_sid is not set, redirect.
-    // on AJAX request, validate cookie. set handler to delete cookie and redirect if
-    // cookie is invalid
   } 
 
   onMarkerClick = (info) => {
@@ -99,7 +92,8 @@ class Search extends Component {
         address: info.address,
         id: info.id,
         name: info.name
-      }
+      },
+
     })
     // fetch(`/api/location/${this.state.searchLocation.id}/users`, {
     //   method: 'GET',

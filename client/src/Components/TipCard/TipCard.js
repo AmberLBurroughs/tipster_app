@@ -81,7 +81,7 @@ class TipCard extends Component {
     return (
       <div className="col-xs-12 tipcard">
         <center><img className="tipcardpic img-circle" src={this.props.image} alt="default user image"/></center>
-
+        <center>
         <form>
           {this.props.page1
             ? 
@@ -143,6 +143,7 @@ class TipCard extends Component {
             : ""
           }
         </form>
+        </center>
       </div>
     )
   }

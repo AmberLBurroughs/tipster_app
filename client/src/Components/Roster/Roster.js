@@ -31,11 +31,12 @@ function Roster(props) {
         <hr className="hr" />
       </div>
       <Grid container spacing={24}>
-      {console.log(props.connectUsers.users)}
       {props.connectUsers.map(function(element) {
-        return(<Grid item xs={6} sm={3}>
-          <RosterCard user={element} buttonclick={props.buttonclick}/>
-        </Grid>)
+        return(
+          <Grid item xs={6} sm={3}>
+            <RosterCard user={element} buttonclick={props.buttonclick}/>
+          </Grid>
+        )
       })}
       </Grid>
     </div>

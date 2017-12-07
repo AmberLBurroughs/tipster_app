@@ -21,9 +21,10 @@ class RosterCard extends Component {
   render() {
     return(
       <Paper className="papercard">
-        <div className="card" data-username={this.props.user.username}><br/><br/>
+        <div className="card" data-name={this.props.user.username}><br/><br/>
           <center><img className="cardpic img-circle" src={this.props.user.image} alt="cardpic" /></center><br/>
-          <center><button className="btnz btns" onClick={this.props.buttonclick}><p className="btntext">TIP {this.props.user.firstName}</p></button></center>
+          <center><button className="btns btnz" onClick={this.grabberhelper}>
+          TIP {this.props.user.first}</button></center>
         </div>
       </Paper>
     )

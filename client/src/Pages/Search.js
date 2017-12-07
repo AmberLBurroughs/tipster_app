@@ -23,7 +23,8 @@ class Search extends Component {
     user: {
       username: "",
       image: ""
-    }
+    },
+    connectusers: []
   }
 
   constructor(props){
@@ -128,7 +129,7 @@ class Search extends Component {
         <Banner user={this.state.user}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
-          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal}/>
+          <Roster location={this.state.markerClicked} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
           <Modal
             open={this.state.open}
             onClose={this.onCloseModal}

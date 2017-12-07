@@ -26,7 +26,7 @@ class Search extends Component {
     },
     connectusers: [{
       first: "first",
-      username: "usernametest",
+      username: "sahilxmnkpc",
       image: "#"
     }],
     recipient: {

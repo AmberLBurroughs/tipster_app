@@ -8,7 +8,7 @@ const Banner = props =>
       ?
       <div>
        <h3 className="bannerwelcome">Welcome Tipster</h3>
-       <center><img className="logo" src={props.user.image} alt="logo" /></center>
+       <center><img className="logo" src={props.currentUser.image} alt="logo" /></center>
        <h2 className="bannerintro">SEARCH A LOCATION TO START TIPPING</h2>
       </div>
       : ""

@@ -4,11 +4,10 @@ module.exports = {
   // crud mthods
   getWorkers:(id, cb) => {
   	Location.find({
-  		where: id
+  		where: id,
   		include:[
   			{
   				model: User, 
-  				as:'workPlace'
   			}
   		]
   	})

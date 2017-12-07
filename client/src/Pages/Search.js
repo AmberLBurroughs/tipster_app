@@ -1,3 +1,23 @@
+Skip to content
+Help save net neutrality! A free, open internet is once again at stake—and we need your help.
+Learn more  Dismiss
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @AmberLBurroughs
+ Sign out
+ Unwatch 2
+  Star 1  Fork 0 AmberLBurroughs/tipster_app Private
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+Branch: master Find file Copy pathtipster_app/client/src/Pages/Search.js
+50217a9  3 hours ago
+@FEEDKurumu FEEDKurumu Merge pull request #41 from AmberLBurroughs/derr2
+3 contributors @AmberLBurroughs @FEEDKurumu @jwong1219
+RawBlameHistory     
+Executable File  168 lines (154 sloc)  4.06 KB
 import React, { Component } from 'react';
 import TipCard from "../Components/TipCard"
 import GMap from '../Components/Map';
@@ -16,13 +36,23 @@ class Search extends Component {
     searchLocation: {
       address: "",
       id: "",
-      name: "",
+      name: ""
     },
     open: false,
     page1: true,
     user: {
       username: "",
       image: ""
+    },
+    connectusers: [{
+      first: "first",
+      username: "usernametest",
+      image: "#"
+    }],
+    recipient: {
+      username: "",
+      image: "",
+      first: ""
     }
   }
 
@@ -65,6 +95,7 @@ class Search extends Component {
   } 
 
   onMarkerClick = (info) => {
+    let that = this;
     console.log(info);
     this.setState({
       searchLocation: {
@@ -73,7 +104,6 @@ class Search extends Component {
         name: info.name
       }
     })
-
     fetch(`/api/location/${this.state.searchLocation.id}/users`, {
       method: 'GET',
       credentials: 'include',
@@ -87,14 +117,15 @@ class Search extends Component {
       }
     })
     .then(function(json){
-      // check if users (objects)
-      // add connectUsers to an array
-      // add connectUsers to state
-      // pass state to roster card component
-
-      // example
-      // that.setState({user:{username:json.username, image:json.image }});
-    })
+      console.log("&&&&&&&\n", json);
+      for (let index in json) {
+        if (json[index].username.includes("sahil")) {
+          that.setState({
+            recipient: json[index].username
+          })
+        }
+      }
+    });
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){
         document.cookie = ""; // clear cookie
@@ -102,12 +133,17 @@ class Search extends Component {
       }
       console.log("error", res);
     })
-
-
   }
-
-  onOpenModal = () => {
-    this.setState({ open: true });
+//also updates recipient
+  onOpenModal = (name, image, first) => {
+    this.setState({
+      recipient: {
+        username: name,
+        image: image,
+        first: first
+      },
+      open: true
+    })
   }
  
   onCloseModal = () => {
@@ -128,18 +164,18 @@ class Search extends Component {
         <Banner user={this.state.user}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
-          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal}/>
+          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
           <Modal
             open={this.state.open}
             onClose={this.onCloseModal}
             classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
             closeIconSize={0}>
             <TipCard
-              img={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png`}
-              firstName="Sahil"
-              title="JerseyClub DJ"
-              state={this.state}
-              toggleModal={this.toggleModal}/>
+              image={this.state.recipient.image}
+              location={this.state.searchLocation.name}
+              firstName={this.state.recipient.first}
+              toggleModal={this.toggleModal}
+              page1={this.state.page1}/>
           </Modal>
         </div>
       </div>
@@ -147,5 +183,3 @@ class Search extends Component {
   }
 
 }
-
-export default Search;

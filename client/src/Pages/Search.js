@@ -13,16 +13,18 @@ import './Search.css';
 
 class Search extends Component {
   state = {
-    markerClicked: {
+    searchLocation: {
       address: "",
       id: "",
       name: "",
     },
     open: false,
+    page1: true,
     user: {
       username: "",
       image: ""
-    }
+    },
+    connectusers: []
   }
 
   constructor(props){
@@ -67,19 +69,19 @@ class Search extends Component {
     let that = this;
     console.log(info);
     this.setState({
-      markerClicked: {
+      searchLocation: {
         address: info.address,
         id: info.id,
         name: info.name
       }
     })
-    fetch("/api/location/users", {
+    fetch(`/api/location/${this.state.searchLocation.id}/users`, {
       method: 'GET',
       credentials: 'include',
       mode: 'cors'
     })
     .then(function(res){
-      console.log("$$$$$$$$$$$")
+      console.log("##########")
        const contentType = res.headers.get("content-type");
        if(contentType && contentType.includes("application/json")) {
         return res.json();
@@ -95,6 +97,13 @@ class Search extends Component {
         }
       }
     });
+    .catch(function(res){
+      if(res.error_code && res.error_code == 'invalid_login' ){
+        document.cookie = ""; // clear cookie
+        window.location.href = "/" // redirect to login
+      }
+      console.log("error", res);
+    })
   }
 
   onOpenModal = () => {
@@ -105,6 +114,12 @@ class Search extends Component {
     this.setState({ open: false });
   }
 
+  toggleModal = (bool) => {
+    this.setState({
+      page1: bool
+    })
+  }
+
   render() {
     console.log('test')
     return (
@@ -113,7 +128,7 @@ class Search extends Component {
         <Banner user={this.state.user}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
-          <Roster location={this.state.markerClicked} buttonclick={this.onOpenModal}/>
+          <Roster location={this.state.markerClicked} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
           <Modal
             open={this.state.open}
             onClose={this.onCloseModal}
@@ -123,7 +138,8 @@ class Search extends Component {
               img={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png`}
               firstName="Sahil"
               title="JerseyClub DJ"
-              state={this.state}/>
+              state={this.state}
+              toggleModal={this.toggleModal}/>
           </Modal>
         </div>
       </div>

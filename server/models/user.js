@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // methods ======================
   User.associate = models => {
-    User.belongsToMany(models.Location, { as: 'workPlace', through: 'user_locations', foreignKey: 'LocationUUID' }),
+    User.belongsToMany(models.Location, { as: 'workPlace', through: 'userLocations', foreignKey: 'placeID' }),
 
     // has many transactions
     User.hasMany(models.Transaction);

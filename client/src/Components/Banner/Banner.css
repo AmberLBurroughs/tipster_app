@@ -3,14 +3,20 @@
   padding-bottom: 150px;
 }
 
+.bannergreen {
+  background: #23d3ac;
+  padding-bottom: 150px;
+}
+
 .logo {
-  height: 125px;
-  width: 125wpx;
+  height: 115px;
+  width: 115px;
 }
 
 .bannerwelcome {
-  font-size: 1.8em;
-  font-family: 'Quicksand', sans-serif;
+  padding-top: 3%;
+  font-size: 2em;
+  font-family: 'Julius Sans One', sans-serif;
   color: #fff;
   text-align: center;
   width: auto;
@@ -18,11 +24,21 @@
 }
 
 .bannerintro {
-  font-size: 2em;
-  font-family: 'Fjalla One', sans-serif;
+  margin-top: 0;
+  font-size: 1.8em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #171837;
   text-align: center;
   width: auto;
   font-weight: 200;
-  text-transform: uppercase;
+  text-transform: lowercase;
+
+}
+
+.bannernologo {
+  font-size: 36px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #171837;
+  text-align: center;
+  width: auto;
 }

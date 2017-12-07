@@ -1,0 +1,66 @@
+.historypanel {
+  margin-top: -112px;
+}
+
+.historypic {
+  height: 225px;
+  width: 225px;
+  margin-bottom: 25px;
+  border: 8px solid white;
+  background: white;
+}
+
+.historyheader {
+  margin: -80px 0 40px 0;
+}
+
+.headertips, .headeractive {
+  font-size: 18px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.headertipsnum {
+  color: #23d3ac;
+  font-size: 18px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.headeractivenum {
+  color: #7571ff;
+  font-size: 18px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.hpanel {
+  background: #f4f4f4;
+  padding: 10px 0;
+  border: 1px solid #23d3ac;
+  margin-bottom: 3px;
+}
+
+.hpanelpic {
+  height: 125px;
+  width: 125px;
+  margin-left: 13px;
+}
+
+.hpaneltext {
+  color: #171837;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.hpanelrecname, .hpanelreclocation {
+  font-size: 24px;
+  padding: 10px 0;
+}
+
+.hpanelstatus {
+  font-size: 18px;
+  padding-top: 5px;
+}
+
+.hpanelanon {
+  color: #7571ff;
+  font-size: 14px;
+  padding: 7px 0;
+}

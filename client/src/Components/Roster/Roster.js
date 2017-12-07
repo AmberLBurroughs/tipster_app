@@ -24,27 +24,17 @@ function Roster(props) {
 
   return (
     <div className={classes.root}>
-      <div id="roster" className="panel-body" key={props.location.name}>
+      <div id="roster" className="panel-body clearfix" key={props.location.name}>
         <p className="locationname">{props.location.name}</p>
         <p className="locationaddress">{props.location.address}</p>
         <hr className="hr" />
       </div>
       <Grid container spacing={24}>
+      {props.connectusers.map(function(element) {
         <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
+          <RosterCard user={element} buttonclick={props.buttonclick}/>
         </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
+      })}
       </Grid>
     </div>
   );

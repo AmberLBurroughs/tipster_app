@@ -8,8 +8,8 @@ const HistoryPage = props => {
   return(
     <div>
       <Nav />
-      <div className="container">
-        <Banner handle="@tofuguy"/>
+      <Banner handle="@tofuguy"/>
+      <div>
         <History />
       </div>
     </div>

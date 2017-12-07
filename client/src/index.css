@@ -3,32 +3,65 @@ body {
   padding: 0;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 18px;
+  color:#171837;
 }
 h1 {
-	font-size: 42px;
-	/*font-family: 'Poiret One', cursive;*/
-	/*font-family: 'Julius Sans One', sans-serif; */
-	font-family: 'Quicksand', sans-serif;
-	/*font-family: 'Open Sans Condensed', sans-serif;*/
-	/*font-family: 'Raleway', sans-serif;*/
- /*font-family: 'Bubbler One', sans-serif;*/
+	font-size: 2.3em !important;
+	font-family: 'Julius Sans One', sans-serif; 
+  margin-bottom:0 !important; 
+  font-weight: 600;
 }
 h4 {
 	font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .btns {
 	width: 150px;
   padding: 16px 0;
-  border-radius: 0px;
+  border-radius: 5px;
   margin: 0 12px;
   background-color: #171837;
   border: none;
   color: #fff;
   text-transform: uppercase;
   font-size: 18px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 200;
+  /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+  font-family: 'Julius Sans One', sans-serif;
+  font-weight: 400;
 }
-.btns:hover {
+
+.btnz {
+  background-color: #fff;
+  color: #171837;
+  width: 85%;
+  margin: 12px 0;
+}
+
+.btns:hover, .btnz:hover {
 	color: #fff;
+}
+.btnz:hover {
+  color: #171837;
+}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-control {
+  border-radius: 0px;
+  background-color: #f6f6f6;
+  border:none;
+  border-top: 1px solid #16d5b3;
+}
+
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.bm-menu-wrap {
+    box-shadow: rgb(0, 0, 0) 2px 0px 5px 2px !important;
+}
+.bm-menu {
+  background-color: #171937 !important;
 }

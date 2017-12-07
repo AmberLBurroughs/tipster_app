@@ -58,7 +58,8 @@ const MapWithASearchBox = compose(
             position: place.geometry.location,
             name: place.name,
             id: place.id,
-            address: place.formatted_address
+            address: place.formatted_address,
+            icon: "/assets/images/marker.ico"
           }));
           const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
@@ -118,7 +119,7 @@ const MapWithASearchBox = compose(
       />
     </SearchBox>
     {props.markers.map((marker, index) =>
-      <Marker key={index} ourKey = {index} position={marker.position} name={marker.name} id={marker.id} onClick={() => props.onMarkerClick({index})}>
+      <Marker key={index} ourKey = {index} position={marker.position} name={marker.name} id={marker.id} icon={marker.icon} onClick={() => props.onMarkerClick({index})}>
         {/*props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
         Hello
         </InfoWindow>*/}

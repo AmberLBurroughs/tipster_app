@@ -3,20 +3,16 @@ const { Location, User } = require('../models');
 module.exports = {
   // crud mthods
   getWorkers:(id, cb) => {
-  	// Location.find({
-  	// 	where: id,
-  	// 	include:[
-  	// 		{
-  	// 			model: User, 
-  	// 			as:'Workers'
-  	// 		}
-  	// 	]
-  	// })
-    Location.getUsers({
-      where: {
-        locationUUID: id
-      }
-    })
+  	Location.find({
+  		where:{
+        uuid: id
+      },
+  		include:[
+  			{
+  				model: User, 
+  			}
+  		]
+  	})
   	.then(users =>{
   		console.log(users.dataValues);
   		//return cb(users.dataValues);

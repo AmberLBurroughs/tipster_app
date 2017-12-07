@@ -20,7 +20,7 @@ class Search extends Component {
     },
     open: false,
     page1: true,
-    user: {
+    currentUser: {
       username: "",
       image: ""
     },
@@ -70,7 +70,7 @@ class Search extends Component {
     })
     .then(function(json){
       console.log("&&&&&&&", json.username);
-      that.setState({user:{username:json.username, image:json.image }});
+      that.setState({currentUser:{username:json.username, image:json.image }});
     })
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){
@@ -79,16 +79,9 @@ class Search extends Component {
       }
       console.log("error", res);
     })
-
   }
 
   componentDidMount() {
-
-  // if cookie valid
-  // if invalid
-    // check for document.cookie here. if user_sid is not set, redirect.
-    // on AJAX request, validate cookie. set handler to delete cookie and redirect if
-    // cookie is invalid
   } 
 
   onMarkerClick = (info) => {
@@ -100,36 +93,38 @@ class Search extends Component {
         id: info.id,
         name: info.name
       }
-    })
-    fetch(`/api/location/${this.state.searchLocation.id}/users`, {
-      method: 'GET',
-      credentials: 'include',
-      mode: 'cors'
-    })
-    .then(function(res){
-      console.log("##########")
-       const contentType = res.headers.get("content-type");
-       if(contentType && contentType.includes("application/json")) {
-        return res.json();
       }
     })
-    .then(function(json){
-      console.log("&&&&&&&\n", json);
-      for (let index in json) {
-        if (json[index].username.includes("sahil")) {
-          that.setState({
-            recipient: json[index].username
-          })
-        }
-      }
-    })
-    .catch(function(res){
-      if(res.error_code && res.error_code == 'invalid_login' ){
-        document.cookie = ""; // clear cookie
-        window.location.href = "/" // redirect to login
-      }
-      console.log("error", res);
-    })
+   
+    // fetch(`/api/location/${this.state.searchLocation.id}/users`, {
+    //   method: 'GET',
+    //   credentials: 'include',
+    //   mode: 'cors'
+    // })
+    // .then(function(res){
+    //   console.log("##########")
+    //    const contentType = res.headers.get("content-type");
+    //    if(contentType && contentType.includes("application/json")) {
+    //     return res.json();
+    //   }
+    // })
+    // .then(function(json){
+    //   console.log("&&&&&&&\n", json);
+    //   for (let index in json) {
+    //     if (json[index].username.includes("sahil")) {
+    //       that.setState({
+    //         recipient: json[index].username
+    //       })
+    //     }
+    //   }
+    // })
+    // .catch(function(res){
+    //   if(res.error_code && res.error_code == 'invalid_login' ){
+    //     document.cookie = ""; // clear cookie
+    //     window.location.href = "/" // redirect to login
+    //   }
+    //   console.log("error", res);
+    // })
   }
 //also updates recipient
   onOpenModal = (name, image, first) => {
@@ -158,10 +153,10 @@ class Search extends Component {
     return (
       <div>
         <Nav />
-        <Banner user={this.state.user}/>
+        <Banner currentUser={this.state.currentUser}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
-          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
+          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal} connectUsers={this.state.connectUsers}/>
           <Modal
             open={this.state.open}
             onClose={this.onCloseModal}

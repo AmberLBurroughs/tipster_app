@@ -33,7 +33,9 @@ app.get('/api/search', (req, res) => {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
-  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
+if(!req.isAuthenticated()){ 
+    res.status(400).json({success: false, message: "Not logged in"})
+  }
   // get user connecfg token 
   function results(userData){
     console.log("\nYYYYYYYY", userData);
@@ -181,16 +183,16 @@ app.get("/api/admin/balance", (req, res) => {
 })
 
 app.get("/api/location/:id/users", (req, res) =>{
-
+if(!req.isAuthenticated()){ 
+    res.status(400).json({success: false, message: "Not logged in"})
+  }
   results = (usersData) => {
     res.json(userData)
   }
 
   getWorkers(req.params.id, results);
 
-  if(!req.isAuthenticated()){ 
-    res.status(400).json({success: false, message: "Not logged in"})
-  }
+  
 });
 
 // logout of user account

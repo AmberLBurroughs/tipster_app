@@ -10,7 +10,6 @@ module.exports = {
   		include:[
   			{
   				model: User, 
-  				as:'workPlace'
   			}
   		]
   	})

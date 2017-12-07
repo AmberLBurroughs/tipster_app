@@ -12,12 +12,10 @@ module.exports    = (sequelize, DataTypes) => {
     placeID: {
       type: DataTypes.STRING,
       required: true,
-      allowNull:false,
-      isUnique :true
+      allowNull: false
     },
-    recieverID: {
+    receiverID: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV1,
       required: true,
       allowNull:false
     },
@@ -35,7 +33,7 @@ module.exports    = (sequelize, DataTypes) => {
       type:DataTypes.BOOLEAN
     },
 
-    Status: {
+    status: {
       type: DataTypes.STRING,
       required: true,
       default: "pending"

@@ -1,10 +1,13 @@
 const UserController = require('../controllers/user');
 const { getUser2, updateUser, getUser } = UserController;
 
-const { StripeCustomer } = require('../models');
+// const { StripeCustomer } = require('../models');
 
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
+
+const locationRoutes = require("./api-location");
+const tipRoutes      = require("./api-tips");
 
 const stripe = require("stripe")(
   authKey.stripeKey["secretKey"]
@@ -19,6 +22,8 @@ app.get("favicon.ico", function(request, response) {
   response.status(204); 
 });
 
+app.use("/api/location", locationRoutes);
+
 
 //==============================================
 app.get('/api/search', function(req, res) {
@@ -26,24 +31,16 @@ app.get('/api/search', function(req, res) {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
-// get current user sesion id 
-// query user table
-// get user username , user first name, user last name, user image
+  
+  // get user connecfg token 
+  function results(userData){
+    console.log("\nYYYYYYYY", userData);
+    res.json(userData)
+  }
+  getUser(getCurrentuserId(req), results);
 
-// get user connecfg token 
-function results(userData){
-  console.log("\nYYYYYYYY", userData);
-  res.json(userData)
-}
-getUser(getCurrentuserId(req), results);
+  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
 
-if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
-
-    //send response from controller
-  // res.json({
-  //   message: 'Welcome to the Tipster User search!',
-  //   id: getCurrentuserId(req)
-  // });
 });
 
 
@@ -122,72 +119,68 @@ passportAuthenticate = (localStrategy, req, res, next) => {
   })(req, res, next);
 }
 
-app.post("/api/tip", (req, res) => {
-  console.log(req.body, req.headers);
-  console.log(req.isAuthenticated());
-  let user = getCurrentuserId(req);
-  console.log(user);
-  let userAccts = getCurrentUserAccts(req);
-  if(userAccts.customer === null) {
-    let user_email = null;
-    getUser2(user, ['email'], data => {
-      user_email = data.email;
-      let newCustomer = {
-        // default_source: req.body.token,
-        source: req.body.token.id,
-        email: user_email,
-      }
-      console.log(newCustomer);
-    // stripe.customer.create({
-    //   default_source: req.body.token,
-    //   source: req.body.token,
-    //   email: user_email,
-    // }).then(response => {
-    //   console.log(response);
-    // })
-      createCustomer(newCustomer, ((newStripeCustomer) => {
-        console.log(newStripeCustomer);
-        StripeCustomer.create({
-          key: newStripeCustomer.id,
-          lastFour: req.body.token.card.last4
-        }).then((newEntry) => {
-          console.log(newEntry.dataValues);
-          updateUser({
-            uuid: user
-          },{
-            fk_StripeCustomer: newEntry.dataValues.uuid
-          }, (result) => {
-            console.log(result);
-            req.login(req.user, function(err) {
-              if (err) {
-                throw err;
-                console.log(err);
-                return next(err);
-              }
-              else {
-                res.json("tip received");
-              }
-            });
-          })
-        })
+// app.post("/api/tip", (req, res) => {
+//   console.log(req.body, req.headers);
+//   console.log(req.isAuthenticated());
+//   let user = getCurrentuserId(req);
+//   console.log(user);
+//   let userAccts = getCurrentUserAccts(req);
+//   if(userAccts.customer === null) {
+//     let realStripeCust = null;
+//     getUser2(user, ['email', 'fk_StripeCustomer'], (value) => {
+//       realStripeCust = value.fk_StripeCustomer;
+//       if(realStripeCust === null) {
+//         let user_email = value.email;
+//         let newCustomer = {
+//           // default_source: req.body.token,
+//           source: req.body.token.id,
+//           email: user_email,
+//         }
+//         console.log(newCustomer);
+//         createCustomer(newCustomer, ((newStripeCustomer) => {
+//           console.log(newStripeCustomer);
+//           StripeCustomer.create({
+//             key: newStripeCustomer.id,
+//             lastFour: req.body.token.card.last4
+//           }).then((newEntry) => {
+//             console.log(newEntry.dataValues);
+//             updateUser({
+//               uuid: user
+//             },{
+//               fk_StripeCustomer: newEntry.dataValues.uuid
+//             }, (result) => {
+//               console.log(result);
+//               // req.login(req.user, function(err) {
+//               //   if (err) {
+//               //     throw err;
+//               //     console.log(err);
+//               //     return next(err);
+//               //   }
+//               //   else {
+//               //     res.json("tip received");
+//               //   }
+//               // });
+//               res.json({
+//                 message: "StripeCustomer Acct created!",
+//                 data: result
+//               });
+//             })
+//           })
+//         }));
+//       }
+//       else {
+//         console.log(`this is the user's first time on the site. and they have a stripeCustomer account not reflected in this session`);
+//         res.json(`this is the user's first time on the site. and they have a stripeCustomer account not reflected in this session`);
+//       }
+//     })
+//   }
+//   else {
+//     console.log(`this customer has a stripeCustomer account in their session`);
+//     res.json(`this customer has a stripeCustomer account in their session`)
+//   }
+// });
 
-      }));
-      // req.login(user, function(err) {
-      //   if (err) {
-      //     console.log(err);
-      //     return next(err);
-      //   }
-      //   else {
-      //     res.json("tip received");
-      //   }
-      // })
-      // res.json("tip received");
-    })
-  }
-  else {
-    res.json("user already has a customer account");
-  }
-});
+app.use("/api/tip", tipRoutes);
 
 app.get("/api/admin/balance", (req, res) => {
   console.log(req.headers);

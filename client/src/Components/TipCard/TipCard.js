@@ -64,8 +64,8 @@ class TipCard extends Component {
     //   note: this.state.note
     // })
     let transaction = {
-      location: this.props.state.markerClicked.id,
-      receiver: this.props.id,
+      location: this.props.state.markerClicked,
+      recipient: this.props.state.recipient,
       amount: this.state.amount,
       anonymous: this.state.anonymous,
       note: this.state.note,

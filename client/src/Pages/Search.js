@@ -64,6 +64,7 @@ class Search extends Component {
   } 
 
   onMarkerClick = (info) => {
+    let that = this;
     console.log(info);
     this.setState({
       markerClicked: {
@@ -72,6 +73,28 @@ class Search extends Component {
         name: info.name
       }
     })
+    fetch("/api/location/users", {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors'
+    })
+    .then(function(res){
+      console.log("$$$$$$$$$$$")
+       const contentType = res.headers.get("content-type");
+       if(contentType && contentType.includes("application/json")) {
+        return res.json();
+      }
+    })
+    .then(function(json){
+      console.log("&&&&&&&\n", json);
+      for (let index in json) {
+        if (json[index].username.includes("sahil")) {
+          that.setState({
+            recipient: json[index].username
+          })
+        }
+      }
+    });
   }
 
   onOpenModal = () => {

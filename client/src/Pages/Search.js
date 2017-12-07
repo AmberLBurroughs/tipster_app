@@ -1,23 +1,3 @@
-Skip to content
-Help save net neutrality! A free, open internet is once again at stake—and we need your help.
-Learn more  Dismiss
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @AmberLBurroughs
- Sign out
- Unwatch 2
-  Star 1  Fork 0 AmberLBurroughs/tipster_app Private
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-Branch: master Find file Copy pathtipster_app/client/src/Pages/Search.js
-50217a9  3 hours ago
-@FEEDKurumu FEEDKurumu Merge pull request #41 from AmberLBurroughs/derr2
-3 contributors @AmberLBurroughs @FEEDKurumu @jwong1219
-RawBlameHistory     
-Executable File  168 lines (154 sloc)  4.06 KB
 import React, { Component } from 'react';
 import TipCard from "../Components/TipCard"
 import GMap from '../Components/Map';
@@ -40,15 +20,32 @@ class Search extends Component {
     },
     open: false,
     page1: true,
-    user: {
+    currentUser: {
       username: "",
       image: ""
     },
-    connectusers: [{
-      first: "first",
-      username: "usernametest",
-      image: "#"
-    }],
+    connectUsers: [
+    {
+      first: "girl",
+      username: "tipsterGirl",
+      image: "/assets/images/tipster4.jpg"
+    },
+    {
+      first: "guy",
+      username: "tipsterGuy",
+      image: "/assets/images/tipster1.jpg"
+    },
+    {
+      first: "dude",
+      username: "tipsterDude",
+      image: "/assets/images/tipster2.jpg"
+    },
+    {
+      first: "gal",
+      username: "tipsterGal",
+      image: "/assets/images/tipster3.jpg"
+    }
+    ],
     recipient: {
       username: "",
       image: "",
@@ -73,7 +70,7 @@ class Search extends Component {
     })
     .then(function(json){
       console.log("&&&&&&&", json.username);
-      that.setState({user:{username:json.username, image:json.image }});
+      that.setState({currentUser:{username:json.username, image:json.image }});
     })
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){
@@ -104,35 +101,35 @@ class Search extends Component {
         name: info.name
       }
     })
-    fetch(`/api/location/${this.state.searchLocation.id}/users`, {
-      method: 'GET',
-      credentials: 'include',
-      mode: 'cors'
-    })
-    .then(function(res){
-      console.log("##########")
-       const contentType = res.headers.get("content-type");
-       if(contentType && contentType.includes("application/json")) {
-        return res.json();
-      }
-    })
-    .then(function(json){
-      console.log("&&&&&&&\n", json);
-      for (let index in json) {
-        if (json[index].username.includes("sahil")) {
-          that.setState({
-            recipient: json[index].username
-          })
-        }
-      }
-    });
-    .catch(function(res){
-      if(res.error_code && res.error_code == 'invalid_login' ){
-        document.cookie = ""; // clear cookie
-        window.location.href = "/" // redirect to login
-      }
-      console.log("error", res);
-    })
+    // fetch(`/api/location/${this.state.searchLocation.id}/users`, {
+    //   method: 'GET',
+    //   credentials: 'include',
+    //   mode: 'cors'
+    // })
+    // .then(function(res){
+    //   console.log("##########")
+    //    const contentType = res.headers.get("content-type");
+    //    if(contentType && contentType.includes("application/json")) {
+    //     return res.json();
+    //   }
+    // })
+    // .then(function(json){
+    //   console.log("&&&&&&&\n", json);
+    //   for (let index in json) {
+    //     if (json[index].username.includes("sahil")) {
+    //       that.setState({
+    //         recipient: json[index].username
+    //       })
+    //     }
+    //   }
+    // })
+    // .catch(function(res){
+    //   if(res.error_code && res.error_code == 'invalid_login' ){
+    //     document.cookie = ""; // clear cookie
+    //     window.location.href = "/" // redirect to login
+    //   }
+    //   console.log("error", res);
+    // })
   }
 //also updates recipient
   onOpenModal = (name, image, first) => {
@@ -161,10 +158,10 @@ class Search extends Component {
     return (
       <div>
         <Nav />
-        <Banner user={this.state.user}/>
+        <Banner currentUser={this.state.currentUser}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
-          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
+          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal} connectUsers={this.state.connectUsers}/>
           <Modal
             open={this.state.open}
             onClose={this.onCloseModal}
@@ -183,3 +180,5 @@ class Search extends Component {
   }
 
 }
+
+export default Search;

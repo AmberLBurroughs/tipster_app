@@ -33,13 +33,10 @@ app.get('/api/search', (req, res) => {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
-<<<<<<< HEAD
 if(!req.isAuthenticated()){ 
     res.status(400).json({success: false, message: "Not logged in"})
   }
-||||||| merged common ancestors
 
-=======
   
   // get user connecfg token 
   function results(userData){
@@ -48,23 +45,8 @@ if(!req.isAuthenticated()){
   }
   getUser(getCurrentuserId(req), results);
 
-  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
-
 });
 
-
-// api/user
-
->>>>>>> 50217a9a94caae4919aeb57e01a3c4149f767248
-  results = (userData) =>{
-    console.log("\nYYYYYYYY", userData);
-    res.json(userData)
-  }
-
-  getUser(getCurrentuserId(req), results);
-
-  
-});
 
 // example controller call
 //app.post('/api/user', todosController.create);

@@ -64,8 +64,8 @@ class TipCard extends Component {
     //   note: this.state.note
     // })
     let transaction = {
-      location: this.props.state.markerClicked,
-      recipient: this.props.state.recipient,
+      location: this.props.location,
+      recipient: this.props.recipient.username,
       amount: this.state.amount,
       anonymous: this.state.anonymous,
       note: this.state.note,
@@ -87,7 +87,7 @@ class TipCard extends Component {
             ? 
             <center><div>
               <h3>{this.props.first}</h3>
-              <h4>@{this.props.location}</h4><br/><br/>
+              <h4>@{this.props.location.name}</h4><br/><br/>
 
               <div className="form-inline">
                 <div className="form-group">

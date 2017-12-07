@@ -23,6 +23,7 @@ function Roster(props) {
   const { classes } = props;
 
   return (
+
     <div className={classes.root}>
       <div id="roster" className="panel-body clearfix" key={props.location.name}>
         <p className="locationname">{props.location.name}</p>
@@ -30,12 +31,26 @@ function Roster(props) {
         <hr className="hr" />
       </div>
       <Grid container spacing={24}>
+<<<<<<< HEAD
       {console.log(props.connectUsers.users)}
       {props.connectUsers.map(function(element) {
         return(<Grid item xs={6} sm={3}>
           <RosterCard user={element} buttonclick={props.buttonclick}/>
         </Grid>)
       })}
+||||||| merged common ancestors
+        <Grid item xs={6} sm={3}>
+          <RosterCard buttonclick={props.buttonclick}/>
+        </Grid>
+=======
+      {props.connectusers.map(function(element) {
+        return(
+          <Grid item xs={6} sm={3}>
+            <RosterCard user={element} buttonclick={props.buttonclick}/>
+          </Grid>
+        )
+      })}
+>>>>>>> 50217a9a94caae4919aeb57e01a3c4149f767248
       </Grid>
     </div>
   );

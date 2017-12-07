@@ -33,18 +33,6 @@ function Roster(props) {
         <Grid item xs={6} sm={3}>
           <RosterCard buttonclick={props.buttonclick}/>
         </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
-        </Grid>
       </Grid>
     </div>
   );

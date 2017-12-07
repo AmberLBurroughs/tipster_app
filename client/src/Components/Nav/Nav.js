@@ -16,7 +16,8 @@ class Nav extends React.Component {
         <img src="/assets/images/tipster-logo.png" alt={"logo"}/>
         <h3>TIPSTER</h3>
         <Toggle />
-        <h5>slide toggle to start receiving tips</h5></center>
+          <h5>slide toggle to start receiving tips</h5></center>
+      </div>
         {
           window.location.pathname === "/profile" ||
           window.location.pathname === "/history"
@@ -25,7 +26,6 @@ class Nav extends React.Component {
               </a></center>
             : ""
         }<br/>
-      </div>
         {
           window.location.pathname === "/search" ||
           window.location.pathname === "/history"

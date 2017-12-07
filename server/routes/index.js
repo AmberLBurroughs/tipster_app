@@ -7,6 +7,9 @@ const { getWorkers }     = UserController;
 const passport       = require('passport');
 const authKey        = require('../utils/authKey');
 
+const locationRoutes = require("./api-location");
+const tipRoutes      = require("./api-tips");
+
 const { StripeCustomer } = require('../models');
 const stripe             = require("stripe")(
   authKey.stripeKey["secretKey"]
@@ -21,6 +24,8 @@ app.get("favicon.ico", (request, response) => {
   response.status(204); 
 });
 
+app.use("/api/location", locationRoutes);
+
 
 //==============================================
 app.get('/api/search', (req, res) => {
@@ -28,6 +33,20 @@ app.get('/api/search', (req, res) => {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
+  
+  // get user connecfg token 
+  function results(userData){
+    console.log("\nYYYYYYYY", userData);
+    res.json(userData)
+  }
+  getUser(getCurrentuserId(req), results);
+
+  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
+
+});
+
+
+// api/user
 
   results = (userData) =>{
     console.log("\nYYYYYYYY", userData);
@@ -44,73 +63,134 @@ app.get('/api/search', (req, res) => {
 // example controller call
 //app.post('/api/user', todosController.create);
 
-
-app.post("/api/tip", (req, res) => {
-  console.log(req.body, req.headers);
-  console.log(req.isAuthenticated());
-  let user = getCurrentuserId(req);
-  console.log(user);
-  let userAccts = getCurrentUserAccts(req);
-  if(userAccts.customer === null) {
-    let user_email = null;
-    getUser2(user, ['email'], data => {
-      user_email = data.email;
-      let newCustomer = {
-        // default_source: req.body.token,
-        source: req.body.token.id,
-        email: user_email,
+// logout of user account
+app.get('/logout', function(req, res) {
+    //req.logout();
+    req.session.destroy(function(err){
+      res.redirect('http://localhost:3000/');
+      if(err){
+        consoloe.log(err)
       }
-      console.log(newCustomer);
-    // stripe.customer.create({
-    //   default_source: req.body.token,
-    //   source: req.body.token,
-    //   email: user_email,
-    // }).then(response => {
-    //   console.log(response);
-    // })
-      createCustomer(newCustomer, ((newStripeCustomer) => {
-        console.log(newStripeCustomer);
-        StripeCustomer.create({
-          key: newStripeCustomer.id,
-          lastFour: req.body.token.card.last4
-        }).then((newEntry) => {
-          console.log(newEntry.dataValues);
-          updateUser({
-            uuid: user
-          },{
-            fk_StripeCustomer: newEntry.dataValues.uuid
-          }, (result) => {
-            console.log(result);
-            req.login(req.user, function(err) {
-              if (err) {
-                throw err;
-                console.log(err);
-                return next(err);
-              }
-              else {
-                res.json("tip received");
-              }
-            });
-          })
-        })
-
-      }));
-      // req.login(user, function(err) {
-      //   if (err) {
-      //     console.log(err);
-      //     return next(err);
-      //   }
-      //   else {
-      //     res.json("tip received");
-      //   }
-      // })
-      // res.json("tip received");
     })
-  }
-  else {
-    res.json("user already has a customer account");
-  }
 });
+
+// process the signup form (passport) ==============================================
+
+// =====================================
+// LOGIN ===============================
+// =====================================
+// process the login form
+app.post('/login', function(req, res, next) {
+  passportAuthenticate('local-login', req, res, next);
+});
+
+// =====================================
+// SIGNUP ==============================
+// =====================================
+// process the signup form
+app.post('/signup', function(req, res, next) {
+  passportAuthenticate('local-signup', req, res, next);
+});
+
+passportAuthenticate = (localStrategy, req, res, next) => {
+  passport.authenticate(localStrategy, function(err, user, info) {
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (! user) {
+      return res.send({ success : false, message : 'authentication failed' });
+    }
+    
+    // ***********************************************************************
+    // "Note that when using a custom callback, it becomes the application's
+    // responsibility to establish a session (by calling req.login()) and send
+    // a response."
+    // Source: http://passportjs.org/docs
+    // ***********************************************************************
+    else{
+      req.login(user, loginErr => {
+        if (loginErr) {
+          //console.log("loginerr", loginErr)
+          return next(loginErr);
+        }
+        console.log(req.isAuthenticated());
+        console.log('sucess');
+        console.log(req.session.passport.user);
+        //
+
+        // do i need to send anthing back for a creating a cookie?
+
+        // res.json("hello")
+        // res.status(400).json( res.json({success: true});
+        return res.redirect("http://localhost:3000/search");
+      });  
+    }  
+  })(req, res, next);
+}
+
+// app.post("/api/tip", (req, res) => {
+//   console.log(req.body, req.headers);
+//   console.log(req.isAuthenticated());
+//   let user = getCurrentuserId(req);
+//   console.log(user);
+//   let userAccts = getCurrentUserAccts(req);
+//   if(userAccts.customer === null) {
+//     let realStripeCust = null;
+//     getUser2(user, ['email', 'fk_StripeCustomer'], (value) => {
+//       realStripeCust = value.fk_StripeCustomer;
+//       if(realStripeCust === null) {
+//         let user_email = value.email;
+//         let newCustomer = {
+//           // default_source: req.body.token,
+//           source: req.body.token.id,
+//           email: user_email,
+//         }
+//         console.log(newCustomer);
+//         createCustomer(newCustomer, ((newStripeCustomer) => {
+//           console.log(newStripeCustomer);
+//           StripeCustomer.create({
+//             key: newStripeCustomer.id,
+//             lastFour: req.body.token.card.last4
+//           }).then((newEntry) => {
+//             console.log(newEntry.dataValues);
+//             updateUser({
+//               uuid: user
+//             },{
+//               fk_StripeCustomer: newEntry.dataValues.uuid
+//             }, (result) => {
+//               console.log(result);
+//               // req.login(req.user, function(err) {
+//               //   if (err) {
+//               //     throw err;
+//               //     console.log(err);
+//               //     return next(err);
+//               //   }
+//               //   else {
+//               //     res.json("tip received");
+//               //   }
+//               // });
+//               res.json({
+//                 message: "StripeCustomer Acct created!",
+//                 data: result
+//               });
+//             })
+//           })
+//         }));
+//       }
+//       else {
+//         console.log(`this is the user's first time on the site. and they have a stripeCustomer account not reflected in this session`);
+//         res.json(`this is the user's first time on the site. and they have a stripeCustomer account not reflected in this session`);
+//       }
+//     })
+//   }
+//   else {
+//     console.log(`this customer has a stripeCustomer account in their session`);
+//     res.json(`this customer has a stripeCustomer account in their session`)
+//   }
+// });
+
+app.use("/api/tip", tipRoutes);
 
 app.get("/api/admin/balance", (req, res) => {
   console.log(req.headers);
@@ -129,11 +209,6 @@ app.get("/api/location/:id/users", (req, res) =>{
     res.status(400).json({success: false, message: "Not logged in"})
   }
 });
-
-
-
-
-
 
 // logout of user account
 app.get('/logout', (req, res) => {

@@ -66,6 +66,7 @@ class Search extends Component {
   } 
 
   onMarkerClick = (info) => {
+    let that = this;
     console.log(info);
     this.setState({
       searchLocation: {
@@ -74,7 +75,6 @@ class Search extends Component {
         name: info.name
       }
     })
-
     fetch(`/api/location/${this.state.searchLocation.id}/users`, {
       method: 'GET',
       credentials: 'include',
@@ -88,14 +88,15 @@ class Search extends Component {
       }
     })
     .then(function(json){
-      // check if users (objects)
-      // add connectUsers to an array
-      // add connectUsers to state
-      // pass state to roster card component
-
-      // example
-      // that.setState({user:{username:json.username, image:json.image }});
-    })
+      console.log("&&&&&&&\n", json);
+      for (let index in json) {
+        if (json[index].username.includes("sahil")) {
+          that.setState({
+            recipient: json[index].username
+          })
+        }
+      }
+    });
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){
         document.cookie = ""; // clear cookie
@@ -103,8 +104,6 @@ class Search extends Component {
       }
       console.log("error", res);
     })
-
-
   }
 
   onOpenModal = () => {

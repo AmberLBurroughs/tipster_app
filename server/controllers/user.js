@@ -22,12 +22,10 @@ module.exports = {
  		.catch(err => console.log(err));
  	},
 
-  getUser2: (id, fields, func) => {
+  getUser2: (findParam, fields, func) => {
     User.find({
       attributes: fields,
-      where: {
-        uuid: id
-      }
+      where: findParam
     }).then(data => func(data.dataValues));
   },
 

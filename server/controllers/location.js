@@ -4,7 +4,9 @@ module.exports = {
   // crud mthods
   getWorkers:(id, cb) => {
   	Location.find({
-  		where: id,
+  		where:{
+        uuid: id
+      },
   		include:[
   			{
   				model: User, 

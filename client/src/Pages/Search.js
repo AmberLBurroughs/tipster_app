@@ -24,7 +24,7 @@ class Search extends Component {
       username: "",
       image: ""
     },
-    connectUsers: [
+    connectusers: [
     {
       first: "girl",
       username: "tipsterGirl",
@@ -92,9 +92,10 @@ class Search extends Component {
         address: info.address,
         id: info.id,
         name: info.name
-      },
-
+      }
+      }
     })
+   
     // fetch(`/api/location/${this.state.searchLocation.id}/users`, {
     //   method: 'GET',
     //   credentials: 'include',

@@ -36,8 +36,6 @@ app.get('/api/search', (req, res) => {
 if(!req.isAuthenticated()){ 
     res.status(400).json({success: false, message: "Not logged in"})
   }
-
-  
   // get user connecfg token 
   function results(userData){
     console.log("\nYYYYYYYY", userData);
@@ -46,7 +44,6 @@ if(!req.isAuthenticated()){
   getUser(getCurrentuserId(req), results);
 
 });
-
 
 // example controller call
 //app.post('/api/user', todosController.create);
@@ -193,7 +190,7 @@ if(!req.isAuthenticated()){
     res.json(userData)
   }
 
-  getWorkers(req.perams.id, results);
+  getWorkers(req.params.id, results);
 
   
 });

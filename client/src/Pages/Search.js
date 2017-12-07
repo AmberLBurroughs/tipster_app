@@ -70,7 +70,7 @@ class Search extends Component {
     })
     .then(function(json){
       console.log("&&&&&&&", json.username);
-      that.setState({connectUsers:{username:json.username, image:json.image }});
+      that.setState({currentUser:{username:json.username, image:json.image }});
     })
     .catch(function(res){
       if(res.error_code && res.error_code == 'invalid_login' ){

@@ -13,8 +13,7 @@ class Login extends Component {
     		<div className="content">
     			<img src="/assets/images/tipster-logo.png" alt={"logo"}/>
     			<h1>TIPSTER</h1>
-    			<h4>some text about</h4>
-    			<h4>tipping / being greateful.</h4>
+    			<h4>give and receive tips instantly from anywhere</h4>
     		</div>
     	</div>
 	      <div className="container" align="center">

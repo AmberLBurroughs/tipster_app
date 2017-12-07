@@ -1,21 +1,13 @@
 'use strict';
-const uuidv1   = require('uuid/v1');
 
 module.exports = (sequelize, DataTypes) => {
   var Location = sequelize.define('Location', {
-
-    uuid: {
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV1,
-      isUnique :true
-    },
-
     placeID: {
       type: DataTypes.STRING,
       required: true,
       allowNull:false,
-      isUnique :true
+      isUnique :true,
+      primaryKey: true,
     },
 
     locationName: {

@@ -13,7 +13,7 @@ import './Search.css';
 
 class Search extends Component {
   state = {
-    markerClicked: {
+    searchLocation: {
       address: "",
       id: "",
       name: "",
@@ -68,12 +68,43 @@ class Search extends Component {
   onMarkerClick = (info) => {
     console.log(info);
     this.setState({
-      markerClicked: {
+      searchLocation: {
         address: info.address,
         id: info.id,
         name: info.name
       }
     })
+
+    fetch(`/api/location/${this.state.searchLocation.id}/users`, {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors'
+    })
+    .then(function(res){
+      console.log("##########")
+       const contentType = res.headers.get("content-type");
+       if(contentType && contentType.includes("application/json")) {
+        return res.json();
+      }
+    })
+    .then(function(json){
+      // check if users (objects)
+      // add connectUsers to an array
+      // add connectUsers to state
+      // pass state to roster card component
+
+      // example
+      // that.setState({user:{username:json.username, image:json.image }});
+    })
+    .catch(function(res){
+      if(res.error_code && res.error_code == 'invalid_login' ){
+        document.cookie = ""; // clear cookie
+        window.location.href = "/" // redirect to login
+      }
+      console.log("error", res);
+    })
+
+
   }
 
   onOpenModal = () => {

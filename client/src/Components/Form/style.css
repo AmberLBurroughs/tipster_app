@@ -1,0 +1,12 @@
+label {
+	color: #fff;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 200;
+  text-transform: lowercase;
+}
+
+form {
+	width: 50%;
+	margin-bottom: 2%;
+}
+

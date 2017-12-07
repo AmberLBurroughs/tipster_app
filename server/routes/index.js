@@ -26,31 +26,16 @@ app.get('/api/search', function(req, res) {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
-// get current user sesion id 
-// query user table
-// get user username , user first name, user last name, user image
 
-// get user connecfg token 
-function results(userData){
-  console.log("\nYYYYYYYY", userData);
-  res.json(userData)
-}
-getUser(getCurrentuserId(req), results);
+  function results(userData){
+    console.log("\nYYYYYYYY", userData);
+    res.json(userData)
+  }
 
-if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
+  getUser(getCurrentuserId(req), results);
 
-    //send response from controller
-  // res.json({
-  //   message: 'Welcome to the Tipster User search!',
-  //   id: getCurrentuserId(req)
-  // });
+  if(!req.isAuthenticated()){ res.status(400).json({success: false, message: "Not logged in"})}
 });
-
-
-// api/user
-
-
-
 
 // example controller call
 //app.post('/api/user', todosController.create);

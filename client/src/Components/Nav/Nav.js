@@ -10,11 +10,14 @@ class Nav extends React.Component {
 
   render () {
     return (
-      <Menu right bodyClassName={ window.location.pathname === "/profile" ||
-                                  window.location.pathname === "/history" || 
-                                  window.location.pathname === "/search"  ? 'nav' : 'nav-green'}>
-        <center><Toggle /></center><br/>
-        <center><h5>SLIDE TOGGLE TO BECOME A TIPSTER</h5></center><br/>
+      <Menu right bodyClassName="nav">
+      <div className="nav-header">
+        <center>
+        <img src="/assets/images/tipster-logo.png" alt={"logo"}/>
+        <h3>TIPSTER</h3>
+        <Toggle />
+          <h5>slide toggle to start receiving tips</h5></center>
+      </div>
         {
           window.location.pathname === "/profile" ||
           window.location.pathname === "/history"
@@ -22,25 +25,25 @@ class Nav extends React.Component {
                 Search
               </a></center>
             : ""
-        }
+        }<br/>
         {
           window.location.pathname === "/search" ||
           window.location.pathname === "/history"
             ? <center><a id="profile" className="menu-item" href="/profile">
-                Profile
+                ACCCOUNT
               </a></center>
             : ""
-        }
+        }<br/>
         {
           window.location.pathname === "/profile" ||
           window.location.pathname === "/search"
             ? <center><a id="history" className="menu-item" href="/history">
-                Past Tips
+                PAST TIPS
               </a></center>
             : ""
-        }<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        }<br/>
         <center><a id="logout" className="menu-item" href="/logout">
-          Log Out
+          LOGOUT
         </a></center>
       </Menu>
     );

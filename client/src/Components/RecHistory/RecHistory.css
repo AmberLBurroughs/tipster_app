@@ -20,13 +20,13 @@
 }
 
 .headertipsnum {
-  color: #23d3ac;
+  color: #7571ff;
   font-size: 18px;
   font-family: 'Fjalla One', sans-serif;
 }
 
 .headeractivenum {
-  color: #7571ff;
+  color: #23d3ac;
   font-size: 18px;
   font-family: 'Fjalla One', sans-serif;
 }
@@ -34,7 +34,7 @@
 .hpanel {
   background: #f4f4f4;
   padding: 10px 0;
-  border: 1px solid #23d3ac;
+  border: 1px solid #7571ff;
   margin-bottom: 3px;
   border-radius: 5px;
 }
@@ -61,7 +61,7 @@
 }
 
 .hpanelanon {
-  color: #7571ff;
+  color: #23d3ac;
   font-size: 14px;
   padding: 7px 0;
 }

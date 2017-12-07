@@ -80,14 +80,14 @@ class TipCard extends Component {
   render() {
     return (
       <div className="col-xs-12 tipcard">
-        <center><img className="tipcardpic img-circle" src={this.props.img} alt="default user image"/></center>
+        <center><img className="tipcardpic img-circle" src={this.props.image} alt="default user image"/></center>
 
         <form>
-          {this.props.state.page1
+          {this.props.page1
             ? 
             <center><div>
-              <h3>{this.props.firstName}</h3>
-              <h4>{`${this.props.title} @ ${this.props.state.markerClicked.name}`}</h4><br/><br/>
+              <h3>{this.props.first}</h3>
+              <h4>@{this.props.location}</h4><br/><br/>
 
               <div className="form-inline">
                 <div className="form-group">
@@ -130,11 +130,11 @@ class TipCard extends Component {
             : ""
           }
 
-          {!this.props.state.page1
+          {!this.props.page1
             ? 
             <center><div><br/>
 
-              <h4>Tipping {this.props.firstName} ${this.state.amount} {this.state.anonymous ?"anonymously" :""}</h4><br/><br/>
+              <h4>Tipping {this.props.first} ${this.state.amount} {this.state.anonymous ?"anonymously" :""}</h4><br/><br/>
 
               <Elements>
                 <StripeCheckout serverProps={this.props} formState={this.state} tip={this.submitTip} />

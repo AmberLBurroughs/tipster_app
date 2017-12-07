@@ -6,6 +6,8 @@ import Login from './Pages/Login.js';
 import Search from './Pages/Search.js';
 import ProfilePage from './Pages/Profile.js';
 import HistoryPage from './Pages/History.js';
+import RecSearch from './Pages/RecSearch.js';
+import RecHistoryPage from './Pages/RecHistory.js';
 
 class App extends Component {
   render() {
@@ -26,9 +28,11 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
-              <Route path="/search" component={Search} />
+              <Route exact path="/search" component={Search} />
               <Route exact path="/profile" component={ProfilePage} />
               <Route exact path="/history" component={HistoryPage} />
+              <Route exact path="/rec/search" component={RecSearch} />
+              <Route exact path="/rec/History" component={RecHistoryPage} />
               <Route path="/" component={Login} />
             </Switch>
           </Router>

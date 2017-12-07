@@ -4,13 +4,12 @@ import Nav from '../Banner';
 
 const Banner = props =>
   <div className="banner">
-    <br/><br/>
     { window.location.pathname === "/search"
       ?
       <div>
-        <p className="bannerwelcome">Welcome Tipster</p>
-        <center><img className="logo" src="https://i.imgur.com/M1VQJnz.png" alt="logo" /></center><br/>
-        <p className="bannerintro">SEARCH A LOCATION TO START TIPPING</p>
+       <h3 className="bannerwelcome">Welcome Tipster</h3>
+       <center><img className="logo" src={props.user.image} alt="logo" /></center>
+       <h2 className="bannerintro">SEARCH A LOCATION TO START TIPPING</h2>
       </div>
       : ""
     }

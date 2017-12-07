@@ -2,7 +2,7 @@ const Location = require('../models').Location;
 
 module.exports = {
   // crud mthods
-  getUsers:(id) => {
+  getWorkers:(id, cb) => {
   	Location.find({
   		where: id
   		include:[
@@ -11,11 +11,18 @@ module.exports = {
   				as:'workPlace'
   			}
   		]
-  	}),
+  	})
+  	.then(users =>{
+  		console.log(users.dataValues);
+  		//return cb(users.dataValues);
+  	})
+  	.catch(err => console.log(err));
+  }
+
+
   		// location.getUsers({
   		// 	where: {
   		// 		locationUUID: id
   		// 	}
   		// })
-  }
 };

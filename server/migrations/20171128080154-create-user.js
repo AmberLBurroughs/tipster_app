@@ -38,12 +38,12 @@ module.exports = {
       allowNull: false,
       type: Sequelize.DATE
     },
-    locationUUID: {
+    placeID: {
       type: Sequelize.UUID,
         references: {
           model: 'Location',
           key: 'uuid',
-          as: 'locationUUID',
+          as: 'placeID',
         },
     }
     });

@@ -23,6 +23,7 @@ function Roster(props) {
   const { classes } = props;
 
   return (
+
     <div className={classes.root}>
       <div id="roster" className="panel-body clearfix" key={props.location.name}>
         <p className="locationname">{props.location.name}</p>
@@ -31,9 +32,11 @@ function Roster(props) {
       </div>
       <Grid container spacing={24}>
       {props.connectusers.map(function(element) {
-        <Grid item xs={6} sm={3}>
-          <RosterCard user={element} buttonclick={props.buttonclick}/>
-        </Grid>
+        return(
+          <Grid item xs={6} sm={3}>
+            <RosterCard user={element} buttonclick={props.buttonclick}/>
+          </Grid>
+        )
       })}
       </Grid>
     </div>

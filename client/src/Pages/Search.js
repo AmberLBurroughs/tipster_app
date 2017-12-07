@@ -16,7 +16,7 @@ class Search extends Component {
     searchLocation: {
       address: "",
       id: "",
-      name: "",
+      name: ""
     },
     open: false,
     page1: true,
@@ -24,7 +24,16 @@ class Search extends Component {
       username: "",
       image: ""
     },
-    connectusers: []
+    connectusers: [{
+      first: "first",
+      username: "usernametest",
+      image: "#"
+    }],
+    recipient: {
+      username: "",
+      image: "",
+      first: ""
+    }
   }
 
   constructor(props){
@@ -105,9 +114,16 @@ class Search extends Component {
       console.log("error", res);
     })
   }
-
-  onOpenModal = () => {
-    this.setState({ open: true });
+//also updates recipient
+  onOpenModal = (name, image, first) => {
+    this.setState({
+      recipient: {
+        username: name,
+        image: image,
+        first: first
+      },
+      open: true
+    })
   }
  
   onCloseModal = () => {
@@ -128,18 +144,18 @@ class Search extends Component {
         <Banner user={this.state.user}/>
         <div className="container">
           <GMap onMarkerClick={this.onMarkerClick}/>
-          <Roster location={this.state.markerClicked} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
+          <Roster location={this.state.searchLocation} buttonclick={this.onOpenModal} connectusers={this.state.connectusers}/>
           <Modal
             open={this.state.open}
             onClose={this.onCloseModal}
             classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
             closeIconSize={0}>
             <TipCard
-              img={`https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png`}
-              firstName="Sahil"
-              title="JerseyClub DJ"
-              state={this.state}
-              toggleModal={this.toggleModal}/>
+              image={this.state.recipient.image}
+              location={this.state.searchLocation.name}
+              firstName={this.state.recipient.first}
+              toggleModal={this.toggleModal}
+              page1={this.state.page1}/>
           </Modal>
         </div>
       </div>

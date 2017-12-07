@@ -10,7 +10,9 @@ class Nav extends React.Component {
 
   render () {
     return (
-      <Menu right bodyClassName="nav">
+      <Menu right bodyClassName={ window.location.pathname === "/profile" ||
+                                  window.location.pathname === "/history" || 
+                                  window.location.pathname === "/search"  ? 'nav' : 'nav-green'}>
         <center><Toggle /></center><br/>
         <center><h5>SLIDE TOGGLE TO BECOME A TIPSTER</h5></center><br/>
         {

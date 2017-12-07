@@ -1,15 +1,21 @@
 .locationname {
   color: #171837;
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 30px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1.8em;
   text-align: center;
+  font-weight: 300;
 }
 
 .locationaddress {
-  color: #171837;
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 22px;
   text-align: center;
+  margin-top: 0;
+  font-size: 1em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #171837;
+  text-align: center;
+  width: auto;
+  font-weight: 200;
+  text-transform: lowercase;
 }
 
 .hr {
@@ -19,4 +25,8 @@
 
 #roster {
   min-height: 150px;
+}
+
+.MuiPaper-shadow2-96 {
+  box-shadow: none !important;
 }

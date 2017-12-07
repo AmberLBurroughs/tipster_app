@@ -186,7 +186,7 @@ app.get("/api/location/:id/users", (req, res) =>{
     res.json(userData)
   }
 
-  getWorkers(req.perams.id, results);
+  getWorkers(req.params.id, results);
 
   if(!req.isAuthenticated()){ 
     res.status(400).json({success: false, message: "Not logged in"})

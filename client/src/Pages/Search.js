@@ -24,11 +24,28 @@ class Search extends Component {
       username: "",
       image: ""
     },
-    connectusers: [{
-      first: "first",
-      username: "usernametest",
-      image: "#"
-    }],
+    connectusers: [
+    {
+      first: "girl",
+      username: "tipsterGirl",
+      image: "/assets/images/tipster4.jpg"
+    },
+    {
+      first: "guy",
+      username: "tipsterGuy",
+      image: "/assets/images/tipster1.jpg"
+    },
+    {
+      first: "dude",
+      username: "tipsterDude",
+      image: "/assets/images/tipster2.jpg"
+    },
+    {
+      first: "gal",
+      username: "tipsterGal",
+      image: "/assets/images/tipster3.jpg"
+    }
+    ],
     recipient: {
       username: "",
       image: "",

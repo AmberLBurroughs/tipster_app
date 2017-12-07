@@ -27,14 +27,14 @@ h4 {
   font-size: 18px;
   /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
   font-family: 'Julius Sans One', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .btnz {
   background-color: #fff;
   color: #171837;
   width: 85%;
-  margin: 12px 0;
+  margin: 0 0 20px;
 }
 
 .btns:hover, .btnz:hover {

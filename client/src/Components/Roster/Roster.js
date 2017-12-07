@@ -30,9 +30,11 @@ function Roster(props) {
         <hr className="hr" />
       </div>
       <Grid container spacing={24}>
+      {props.connectusers.map(function(element) {
         <Grid item xs={6} sm={3}>
-          <RosterCard buttonclick={props.buttonclick}/>
+          <RosterCard user={element} buttonclick={props.buttonclick}/>
         </Grid>
+      })}
       </Grid>
     </div>
   );

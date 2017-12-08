@@ -3,7 +3,7 @@ const { Location, User } = require('../models');
 module.exports = {
   // crud mthods
   getWorkers:(id, cb) => {
-  	Location.findAll({
+  	Location.find({
       where: {placeID: id},
       include: [{
         model: User,

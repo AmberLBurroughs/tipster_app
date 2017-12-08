@@ -24,28 +24,7 @@ class Search extends Component {
       username: "",
       image: ""
     },
-    connectUsers: [
-    // {
-    //   first: "girl",
-    //   username: "tipsterGirl",
-    //   image: "/assets/images/tipster4.jpg"
-    // },
-    // {
-    //   first: "guy",
-    //   username: "tipsterGuy",
-    //   image: "/assets/images/tipster1.jpg"
-    // },
-    // {
-    //   first: "Sahil",
-    //   username: "sahilxmnkpc",
-    //   image: "/assets/images/tipster2.jpg"
-    // },
-    // {
-    //   first: "gal",
-    //   username: "tipsterGal",
-    //   image: "/assets/images/tipster3.jpg"
-    // }
-    ],
+    connectUsers: [],
     recipient: {
       username: "",
       image: "",
@@ -108,14 +87,14 @@ class Search extends Component {
       }
     })
     .then(function(json){
-      console.log("&&&&&&&\n", json);
+      console.log("&&&&&&&\n", json.Worker);
       that.setState({
         searchLocation: {
           address: info.address,
           id: info.id,
           name: info.name
         },
-        recipient: json,
+        connectUsers: json.Worker
       })
     })
     .catch(function(res){
@@ -162,12 +141,6 @@ class Search extends Component {
             onClose={this.onCloseModal}
             classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
             closeIconSize={0}>
-            <TipCard
-              image={this.state.recipient.image}
-              location={this.state.searchLocation}
-              recipient={this.state.recipient}
-              toggleModal={this.toggleModal}
-              page1={this.state.page1}/>
           </Modal>
         </div>
       </div>

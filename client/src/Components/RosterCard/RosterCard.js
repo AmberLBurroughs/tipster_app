@@ -24,7 +24,7 @@ class RosterCard extends Component {
         <div className="card" data-name={this.props.user.username}><br/><br/>
           <center><img className="cardpic img-circle" src={this.props.user.image} alt="cardpic" /></center><br/>
           <center><button className="btns btnz" onClick={this.grabberhelper}>
-          TIP {this.props.user.first}</button></center>
+          TIP {this.props.user.firstName}</button></center>
         </div>
       </Paper>
     )

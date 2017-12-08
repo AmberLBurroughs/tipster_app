@@ -20,13 +20,14 @@ const { getTipsterBalance, createCustomer } = require('../stripe/stripe-api');
 
 module.exports = (app, passport) => {
 
+app.use("/api/tip", tipRoutes);
+app.use("/api/location", locationRoutes);
+app.use("/api/user", userRoutes);
+
 // hack for console error
 app.get("favicon.ico", (request, response) => {
   response.status(204); 
 });
-
-app.use("/api/location", locationRoutes);
-
 
 //==============================================
 app.get('/api/search', (req, res) => {
@@ -114,10 +115,6 @@ passportAuthenticate = (localStrategy, req, res, next) => {
     }  
   })(req, res, next);
 }
-
-app.use("/api/tip", tipRoutes);
-app.use("/api/location", locationRoutes);
-app.use("/api/user", userRoutes);
 
 app.get("/api/admin/balance", (req, res) => {
   console.log(req.headers);

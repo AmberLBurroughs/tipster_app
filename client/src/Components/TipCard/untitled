@@ -1,0 +1,33 @@
+
+INSERT INTO "UserLocations" ("createdAt", "updatedAt", "placeID", "UserUUID") VALUES ('2017-12-06 14:12:36.125-08','2017-12-06 14:12:36.125-08', 'd05ded174f999b7f9886701c60812e5dab73f815', 'ca2018d0-dbee-11e7-904a-313ebd62eb40');
+
+INSERT INTO "UserLocations" ("createdAt", "updatedAt", "placeID", "UserUUID") VALUES ('2017-12-06 14:12:36.125-08','2017-12-06 14:12:36.125-08', 'd05ded174f999b7f9886701c60812e5dab73f815', 'cc96e530-dbee-11e7-904a-313ebd62eb40');
+
+INSERT INTO "UserLocations" ("createdAt", "updatedAt", "placeID", "UserUUID") VALUES ('2017-12-06 14:12:36.125-08','2017-12-06 14:12:36.125-08', 'd05ded174f999b7f9886701c60812e5dab73f815', 'd12e6eb0-dbee-11e7-904a-313ebd62eb40');
+
+INSERT INTO "UserLocations" ("createdAt", "updatedAt", "placeID", "UserUUID") VALUES ('2017-12-06 14:12:36.125-08','2017-12-06 14:12:36.125-08', 'd05ded174f999b7f9886701c60812e5dab73f815', 'd3ec0810-dbee-11e7-904a-313ebd62eb40');
+
+
+
+
+
+// add location
+INSERT INTO "Locations" ("placeID", "locationName", "locationAddress", "createdAt", "updatedAt") VALUES ('d05ded174f999b7f9886701c60812e5dab73f815', 'Smuggler\'s Cove' , '650 Gough St, San Francisco, CA 94102, USA', '2017-12-06 14:12:36.125-08', '2017-12-06 16:05:16.471-08');
+
+
+// add first name to users
+UPDATE "Users" SET ("firstName") = ('sahil') WHERE "uuid" = 'ca2018d0-dbee-11e7-904a-313ebd62eb40';
+
+UPDATE "Users" SET ("firstName") = ('amber') WHERE "uuid" = 'cc96e530-dbee-11e7-904a-313ebd62eb40';
+
+UPDATE "Users" SET ("firstName") = ('derrick') WHERE "uuid" = 'd12e6eb0-dbee-11e7-904a-313ebd62eb40';
+
+UPDATE "Users" SET ("firstName") = ('justin') WHERE "uuid" = 'd3ec0810-dbee-11e7-904a-313ebd62eb40';
+
+
+ALTER TABLE StripeConnects ADD "accessToken" varchar(511);
+
+ALTER TABLE "StripeConnects" ADD "refreshToken" varchar(511);
+ALTER TABLE "StripeConnects" ADD "publishableKey" varchar(511);
+ALTER TABLE "StripeConnects" ADD "connectUserId" varchar(511);
+ALTER TABLE "StripeConnects" ADD "livemode" BOOLEAN;

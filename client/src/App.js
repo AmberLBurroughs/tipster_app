@@ -28,11 +28,11 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
-              <Route exact path="/search" component={Search} />
+              <Route path="/search" component={Search} />
               <Route exact path="/profile" component={ProfilePage} />
               <Route exact path="/history" component={HistoryPage} />
               <Route exact path="/rec/search" component={RecSearch} />
-              <Route exact path="/rec/History" component={RecHistoryPage} />
+              <Route path="/rec/history" component={RecHistoryPage} />
               <Route path="/" component={Login} />
             </Switch>
           </Router>

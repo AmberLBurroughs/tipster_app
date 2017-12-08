@@ -10,12 +10,22 @@ module.exports = (sequelize, DataTypes) => {
       isUnique: true
     },
 
-    key: {
-     type: DataTypes.STRING,
+    accessToken: {
+     type: DataTypes.STRING
     },
 
-    lastFour: {
+    livemode: {
+      type: DataTypes.BOOLEAN
+    },
+    refreshToken: {
+      type: DataTypes.STRING
+    },
+    publishableKey: {
+      type: DataTypes.STRING
+    },
+    connectUserId: {
       type: DataTypes.STRING,
+      isUnique: true
     }
 
   });

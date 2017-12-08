@@ -11,14 +11,15 @@ const locationRoutes = require("./api-location");
 const tipRoutes      = require("./api-tips");
 const userRoutes     = require("./api-user");
 
-const { StripeCustomer } = require('../models');
-const stripe             = require("stripe")(
+const { StripeCustomer, StripeConnect, User } = require('../models');
+
+const stripe = require("stripe")(
   authKey.stripeKey["secretKey"]
 );
 
 const { getTipsterBalance, createCustomer } = require('../stripe/stripe-api');
 
-module.exports = (app, passport) => {
+module.exports = (app, passport, axios) => {
 
 app.use("/api/tip", tipRoutes);
 app.use("/api/location", locationRoutes);
@@ -61,60 +62,60 @@ app.get('/logout', function(req, res) {
     })
 });
 
-// process the signup form (passport) ==============================================
+// // process the signup form (passport) ==============================================
 
-// =====================================
-// LOGIN ===============================
-// =====================================
-// process the login form
-app.post('/login', function(req, res, next) {
-  passportAuthenticate('local-login', req, res, next);
-});
+// // =====================================
+// // LOGIN ===============================
+// // =====================================
+// // process the login form
+// app.post('/login', function(req, res, next) {
+//   passportAuthenticate('local-login', req, res, next);
+// });
 
-// =====================================
-// SIGNUP ==============================
-// =====================================
-// process the signup form
-app.post('/signup', function(req, res, next) {
-  passportAuthenticate('local-signup', req, res, next);
-});
+// // =====================================
+// // SIGNUP ==============================
+// // =====================================
+// // process the signup form
+// app.post('/signup', function(req, res, next) {
+//   passportAuthenticate('local-signup', req, res, next);
+// });
 
-passportAuthenticate = (localStrategy, req, res, next) => {
-  passport.authenticate(localStrategy, function(err, user, info) {
-    if (err) {
-      return next(err); // will generate a 500 error
-    }
-    // Generate a JSON response reflecting authentication status
-    if (! user) {
-      return res.send({ success : false, message : 'authentication failed' });
-    }
+// passportAuthenticate = (localStrategy, req, res, next) => {
+//   passport.authenticate(localStrategy, function(err, user, info) {
+//     if (err) {
+//       return next(err); // will generate a 500 error
+//     }
+//     // Generate a JSON response reflecting authentication status
+//     if (! user) {
+//       return res.send({ success : false, message : 'authentication failed' });
+//     }
     
-    // ***********************************************************************
-    // "Note that when using a custom callback, it becomes the application's
-    // responsibility to establish a session (by calling req.login()) and send
-    // a response."
-    // Source: http://passportjs.org/docs
-    // ***********************************************************************
-    else{
-      req.login(user, loginErr => {
-        if (loginErr) {
-          //console.log("loginerr", loginErr)
-          return next(loginErr);
-        }
-        console.log(req.isAuthenticated());
-        console.log('sucess');
-        console.log(req.session.passport.user);
-        //
+//     // ***********************************************************************
+//     // "Note that when using a custom callback, it becomes the application's
+//     // responsibility to establish a session (by calling req.login()) and send
+//     // a response."
+//     // Source: http://passportjs.org/docs
+//     // ***********************************************************************
+//     else{
+//       req.login(user, loginErr => {
+//         if (loginErr) {
+//           //console.log("loginerr", loginErr)
+//           return next(loginErr);
+//         }
+//         console.log(req.isAuthenticated());
+//         console.log('sucess');
+//         console.log(req.session.passport.user);
+//         //
 
-        // do i need to send anthing back for a creating a cookie?
+//         // do i need to send anthing back for a creating a cookie?
 
-        // res.json("hello")
-        // res.status(400).json( res.json({success: true});
-        return res.redirect("http://localhost:3000/search");
-      });  
-    }  
-  })(req, res, next);
-}
+//         // res.json("hello")
+//         // res.status(400).json( res.json({success: true});
+//         return res.redirect("http://localhost:3000/search");
+//       });  
+//     }  
+//   })(req, res, next);
+// }
 
 app.get("/api/admin/balance", (req, res) => {
   console.log(req.headers);
@@ -181,6 +182,8 @@ passportAuthenticate = (localStrategy, req, res, next) => {
 
         // res.json("hello")
         // res.status(400).json( res.json({success: true});
+        res.cookie('user_id', user.username );
+        res.cookie('connect_id', (user.fk_StripeConnect && user.fk_StripeConnect.length > 0)  );
         return res.redirect("http://localhost:3000/search");
       });  
     }  
@@ -211,6 +214,85 @@ getCurrentUserAccts = (req) => {
   }
   return userAccts
 }
+
+
+/*
+curl https://connect.stripe.com/oauth/token \
+   -d client_secret=sk_test_23uVzt61uqtKFblZHRDc9Lw7 \
+   -d code="{AUTHORIZATION_CODE}" \
+   -d grant_type=authorization_code
+   */
+//http://localhost:8000/?scope=read_write&code=ac_BuZu3ECAnvpUwFOqur2w29CUwMIo5jb4#
+//8000/api/connect?scope=read_write&code=ac_BuafiShwXFN5LQe40rNCtZqnsqtYGFSL
+
+// connect URL: https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_BuZkGIRpYOb0ib9eQwxxYgkBC5kfXQ7b&scope=read_write&state=${username}
+app.get("/api/connect", (req, res) =>{
+  const stripeCode = req.query.code;
+  const stripeState = req.query.state;
+  console.log('query', req.query)
+  axios.post("https://connect.stripe.com/oauth/token",{
+    client_secret:"sk_test_23uVzt61uqtKFblZHRDc9Lw7",
+    code:stripeCode,
+    grant_type:"authorization_code"
+  })
+  .then(function (response) {
+    // console.log("1111111",response);
+
+    var stripe = require("stripe")(
+      "sk_test_23uVzt61uqtKFblZHRDc9Lw7"
+    );
+
+    stripe.accounts.retrieve(
+      "acct_1BTfrWEHoxuvzr1B",
+      function(err, account) {
+        // asynchronously called
+        // console.log("account", account);
+        // console.log("22222",response);
+         StripeConnect.create({
+            accessToken: response.data.access_token,
+            livemode: response.data.livemode,
+            refreshToken: response.data.refresh_token,
+            publishableKey: response.data.stripe_publishable_key,
+            connectUserId: response.data.stripe_user_id,
+          })
+          .then(function(connectedUser){
+            console.log(connectedUser)
+            User.update({ 
+              fk_StripeConnect: connectedUser.dataValues.uuid},
+              { where: { username:  stripeState} }).then(function(response){
+                console.log(response);
+                res.cookie('connect_id', true); // update cookie to note this user has a connect ID now.
+                res.redirect("http://localhost:3000/rec/history")
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    );
+   
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+})
+ // {
+//   "access_token": "{ACCESS_TOKEN}",
+//   "livemode": false,
+//   "refresh_token": "{REFRESH_TOKEN}",
+//   "stripe_publishable_key": "{PUBLISHABLE_KEY}",
+//   "stripe_user_id": "{ACCOUNT_ID}",
+// }
+
+
+
+
+
+
 
 // checkCookie = (req, res) => {
 

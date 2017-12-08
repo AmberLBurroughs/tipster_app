@@ -65,7 +65,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
 
-const routes = require('./server/routes')(app, passport);;
+const routes = require('./server/routes')(app, passport, axios);;
 
 /*
 // Setup a default catch-all route that sends back a welcome message in JSON format.

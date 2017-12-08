@@ -31,3 +31,4 @@ ALTER TABLE "StripeConnects" ADD "refreshToken" varchar(511);
 ALTER TABLE "StripeConnects" ADD "publishableKey" varchar(511);
 ALTER TABLE "StripeConnects" ADD "connectUserId" varchar(511);
 ALTER TABLE "StripeConnects" ADD "livemode" BOOLEAN;
+ALTER TABLE "Users" ADD "phone" varchar(511);

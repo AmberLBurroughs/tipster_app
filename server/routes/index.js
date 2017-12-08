@@ -51,16 +51,16 @@ app.get('/api/search', (req, res) => {
 // example controller call
 //app.post('/api/user', todosController.create);
 
-// logout of user account
-app.get('/logout', function(req, res) {
-    //req.logout();
-    req.session.destroy(function(err){
-      res.redirect('http://localhost:3000/');
-      if(err){
-        consoloe.log(err)
-      }
-    })
-});
+// // logout of user account
+// app.get('/logout', function(req, res) {
+//     //req.logout();
+//     req.session.destroy(function(err){
+//       res.redirect('http://localhost:3000/');
+//       if(err){
+//         consoloe.log(err)
+//       }
+//     })
+// });
 
 // // process the signup form (passport) ==============================================
 
@@ -256,8 +256,11 @@ app.get("/api/connect", (req, res) =>{
             connectUserId: response.data.stripe_user_id,
           })
           .then(function(connectedUser){
-            console.log(connectedUser)
+            console.log(connectedUser, account)
             User.update({ 
+              firstName: account.legal_entity.first_name,
+              email: account.legal_entity.phone_number,
+              phone:account.email,
               fk_StripeConnect: connectedUser.dataValues.uuid},
               { where: { username:  stripeState} }).then(function(response){
                 console.log(response);

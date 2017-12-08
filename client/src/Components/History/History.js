@@ -11,12 +11,12 @@ const History = props => {
       <div className="row historyheader">
         <div className="col-xs-1"></div>
         <div className="col-xs-2"><center>
-          <p className="headertipsnum">69</p>
+          <p className="headertipsnum">2</p>
           <p className="headertips">Tips Sent</p>
         </center></div>
         <div className="col-xs-6"></div>
         <div className="col-xs-2"><center>
-          <p className="headeractivenum">6969</p>
+          <p className="headeractivenum">1234</p>
           <p className="headeractive">Active Card</p>
         </center></div>
       </div>
@@ -27,8 +27,8 @@ const History = props => {
             <img className="hpanelpic img-circle" src="http://via.placeholder.com/50x50" alt="hpanel pic"/>
           </div>
           <div className="col-xs-7">
-            <p className="hpaneltext hpanelrecname">Amber</p>
-            <p className="hpaneltext hpanelreclocation">Place Worked At</p>
+            <p className="hpaneltext hpanelrecname">Sahil</p>
+            <p className="hpaneltext hpanelreclocation">F8</p>
           </div>
           <div className="col-xs-2"><center>
             <p className="hpaneltext hpanelstatus">Status</p>
@@ -44,8 +44,8 @@ const History = props => {
             <img className="hpanelpic img-circle" src="http://via.placeholder.com/50x50" alt="hpanel pic"/>
           </div>
           <div className="col-xs-7">
-            <p className="hpaneltext hpanelrecname">Justin</p>
-            <p className="hpaneltext hpanelreclocation">Place Worked At</p>
+            <p className="hpaneltext hpanelrecname">Amber</p>
+            <p className="hpaneltext hpanelreclocation">Starbucks</p>
           </div>
           <div className="col-xs-2"><center>
             <p className="hpaneltext hpanelstatus">Status</p>
@@ -54,6 +54,7 @@ const History = props => {
           </center></div>
         </div>
       </div>
+ 
     </div>
   )
 }

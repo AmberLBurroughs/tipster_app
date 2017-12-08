@@ -13,6 +13,9 @@
 h1 {
 	font-size: 2em;
 }
+#hero h4 {
+	color: #fff;
+}
 .home-btn-wrap {
 	padding-top: 3%;
 }

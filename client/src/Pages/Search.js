@@ -25,26 +25,26 @@ class Search extends Component {
       image: ""
     },
     connectUsers: [
-    {
-      first: "girl",
-      username: "tipsterGirl",
-      image: "/assets/images/tipster4.jpg"
-    },
-    {
-      first: "guy",
-      username: "tipsterGuy",
-      image: "/assets/images/tipster1.jpg"
-    },
-    {
-      first: "dude",
-      username: "sahilxmnkpc",
-      image: "/assets/images/tipster2.jpg"
-    },
-    {
-      first: "gal",
-      username: "tipsterGal",
-      image: "/assets/images/tipster3.jpg"
-    }
+    // {
+    //   first: "girl",
+    //   username: "tipsterGirl",
+    //   image: "/assets/images/tipster4.jpg"
+    // },
+    // {
+    //   first: "guy",
+    //   username: "tipsterGuy",
+    //   image: "/assets/images/tipster1.jpg"
+    // },
+    // {
+    //   first: "Sahil",
+    //   username: "sahilxmnkpc",
+    //   image: "/assets/images/tipster2.jpg"
+    // },
+    // {
+    //   first: "gal",
+    //   username: "tipsterGal",
+    //   image: "/assets/images/tipster3.jpg"
+    // }
     ],
     recipient: {
       username: "",
@@ -95,35 +95,36 @@ class Search extends Component {
       }
     })
    
-    // fetch(`/api/location/${this.state.searchLocation.id}/users`, {
-    //   method: 'GET',
-    //   credentials: 'include',
-    //   mode: 'cors'
-    // })
-    // .then(function(res){
-    //   console.log("##########")
-    //    const contentType = res.headers.get("content-type");
-    //    if(contentType && contentType.includes("application/json")) {
-    //     return res.json();
-    //   }
-    // })
-    // .then(function(json){
-    //   console.log("&&&&&&&\n", json);
-    //   for (let index in json) {
-    //     if (json[index].username.includes("sahil")) {
-    //       that.setState({
-    //         recipient: json[index].username
-    //       })
-    //     }
-    //   }
-    // })
-    // .catch(function(res){
-    //   if(res.error_code && res.error_code == 'invalid_login' ){
-    //     document.cookie = ""; // clear cookie
-    //     window.location.href = "/" // redirect to login
-    //   }
-    //   console.log("error", res);
-    // })
+    fetch(`/api/location/${info.id}/users`, {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors'
+    })
+    .then(function(res){
+      console.log("##########")
+       const contentType = res.headers.get("content-type");
+       if(contentType && contentType.includes("application/json")) {
+        return res.json();
+      }
+    })
+    .then(function(json){
+      console.log("&&&&&&&\n", json);
+      that.setState({
+        searchLocation: {
+          address: info.address,
+          id: info.id,
+          name: info.name
+        },
+        recipient: json,
+      })
+    })
+    .catch(function(res){
+      if(res.error_code && res.error_code == 'invalid_login' ){
+        document.cookie = ""; // clear cookie
+        window.location.href = "/" // redirect to login
+      }
+      console.log("error", res);
+    })
   }
 //also updates recipient
   onOpenModal = (name, image, first) => {

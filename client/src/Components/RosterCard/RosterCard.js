@@ -31,7 +31,7 @@ class RosterCard extends Component {
   }
 
   componentDidUpdate() {
-    document.getElementById("roster").scrollIntoView();
+    document.getElementById("roster").scrollIntoView({behavior: "smooth"});
   }
 }
 

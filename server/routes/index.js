@@ -9,6 +9,7 @@ const authKey        = require('../utils/authKey');
 
 const locationRoutes = require("./api-location");
 const tipRoutes      = require("./api-tips");
+const userRoutes     = require("./api-user");
 
 const { StripeCustomer } = require('../models');
 const stripe             = require("stripe")(
@@ -33,7 +34,7 @@ app.get('/api/search', (req, res) => {
   console.log("\n>>>>>>hello", req.headers);
   console.log("%%%%%",req.isAuthenticated())
   console.log(getCurrentuserId(req));
-if(!req.isAuthenticated()){ 
+  if(!req.isAuthenticated()){ 
     res.status(400).json({success: false, message: "Not logged in"})
   }
   // get user connecfg token 
@@ -115,24 +116,13 @@ passportAuthenticate = (localStrategy, req, res, next) => {
 }
 
 app.use("/api/tip", tipRoutes);
+app.use("/api/location", locationRoutes);
+app.use("/api/user", userRoutes);
 
 app.get("/api/admin/balance", (req, res) => {
   console.log(req.headers);
   getTipsterBalance((bal) => res.json(bal));
 })
-
-app.get("/api/location/:id/users", (req, res) =>{
-if(!req.isAuthenticated()){ 
-    res.status(400).json({success: false, message: "Not logged in"})
-  }
-  results = (usersData) => {
-    res.json(userData)
-  }
-
-  getWorkers(req.params.id, results);
-
-  
-});
 
 // logout of user account
 app.get('/logout', (req, res) => {

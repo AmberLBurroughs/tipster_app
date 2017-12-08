@@ -49,10 +49,14 @@ module.exports = (sequelize, DataTypes) => {
 
   // methods ======================
   User.associate = models => {
-    User.belongsToMany(models.Location, { as: 'workPlace', through: 'userLocations', foreignKey: 'placeID' }),
+    User.belongsToMany(models.Location, { 
+      as: 'WorkPlace',
+      through: 'UserLocations',
+      foreignKey: 'UserUUID'
+    }),
 
-    // has many transactions
-    User.hasMany(models.Transaction);
+    // // has many transactions
+    // User.hasMany(models.Transaction);
 
     User.belongsTo(models.StripeCustomer, {
       foreignKey: 'fk_StripeCustomer',

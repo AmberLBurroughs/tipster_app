@@ -37,7 +37,7 @@ class Search extends Component {
     },
     {
       first: "dude",
-      username: "tipsterDude",
+      username: "sahilxmnkpc",
       image: "/assets/images/tipster2.jpg"
     },
     {
@@ -163,8 +163,8 @@ class Search extends Component {
             closeIconSize={0}>
             <TipCard
               image={this.state.recipient.image}
-              location={this.state.searchLocation.name}
-              firstName={this.state.recipient.first}
+              location={this.state.searchLocation}
+              recipient={this.state.recipient}
               toggleModal={this.toggleModal}
               page1={this.state.page1}/>
           </Modal>

@@ -8,6 +8,8 @@ import StripeCheckout from "../Stripe-Checkout";
 import helper from "../../Utils/helper.js";
 import './TipCard.css';
 
+import Card from 'react-credit-cards'
+
 const { tipHelper } = helper;
 
 
@@ -15,7 +17,12 @@ class TipCard extends Component {
   state = {
     anonymous: false,
     amount: "",
-    note: ""
+    note: "",
+    number: '',
+    name: '',
+    expiry: '',
+    cvc: '',
+    focused: '',
   }
 
   handleInputChange = (event) => {
@@ -64,8 +71,8 @@ class TipCard extends Component {
     //   note: this.state.note
     // })
     let transaction = {
-      location: this.props.state.markerClicked,
-      recipient: this.props.state.recipient,
+      location: this.props.location,
+      recipient: this.props.recipient.username,
       amount: this.state.amount,
       anonymous: this.state.anonymous,
       note: this.state.note,
@@ -77,17 +84,51 @@ class TipCard extends Component {
     console.log(`tip sent!`)
   }
 
+  // componentDidMount() {
+  //   Payment.formatCardNumber(document.querySelector('[name="number"]'));
+  //   Payment.formatCardExpiry(document.querySelector('[name="expiry"]'));
+  //   Payment.formatCardCVC(document.querySelector('[name="cvc"]'));
+  // }
+
+  handleInputFocus = ({ target }) => {
+    this.setState({
+      focused: target.name,
+    });
+  }
+
+  handleInputChange = ({ target }) => {
+    if (target.name === 'number') {
+      this.setState({
+        [target.name]: target.value.replace(/ /g, ''),
+      });
+    }
+    else if (target.name === 'expiry') {
+      this.setState({
+        [target.name]: target.value.replace(/ |\//g, ''),
+      });
+    }
+    else {
+      this.setState({
+        [target.name]: target.value,
+      });
+    }
+  }
+
+  handleCallback(type, isValid) {
+    console.log(type, isValid); //eslint-disable-line no-console
+  }
+
   render() {
     return (
       <div className="col-xs-12 tipcard">
-        <center><img className="tipcardpic img-circle" src={this.props.image} alt="default user image"/></center>
         <center>
+              <img className="tipcardpic img-circle" src={this.props.image} alt="default user image"/>
         <form>
           {this.props.page1
             ? 
             <center><div>
               <h3>{this.props.first}</h3>
-              <h4>@{this.props.location}</h4><br/><br/>
+              <h4>@{this.props.location.name}</h4><br/><br/>
 
               <div className="form-inline">
                 <div className="form-group">
@@ -134,10 +175,19 @@ class TipCard extends Component {
             ? 
             <center><div><br/>
 
+            <Card
+            number={this.state.number}
+            name={this.state.name}
+            expiry={this.state.expiry}
+            cvc={this.state.cvc}
+            focused={this.state.focused}
+            callback={this.handleCallback}
+          />
+
               <h4>Tipping {this.props.first} ${this.state.amount} {this.state.anonymous ?"anonymously" :""}</h4><br/><br/>
 
               <Elements>
-                <StripeCheckout serverProps={this.props} formState={this.state} tip={this.submitTip} />
+                <StripeCheckout serverProps={this.props} formState={this.state} tip={this.submitTip} cardchange={this.handleInputChange}/>
               </Elements>
             </div></center>
             : ""

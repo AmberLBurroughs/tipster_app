@@ -17,6 +17,7 @@ const handleBlur = () => {
   console.log('[blur]');
 };
 const handleChange = change => {
+  this.props.cardchange()
   console.log('[change]', change);
 };
 const handleClick = () => {
@@ -66,7 +67,7 @@ class _CardForm extends Component {
         <label>
           <CardElement
             onBlur={handleBlur}
-            onChange={handleChange}
+            onChange={this.props.cardchange}
             onFocus={handleFocus}
             onReady={handleReady}
             {...createOptions(this.props.fontSize)}

@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
   //   console.log(data);
   //   tipperData =  data;
   User.find({
-    attributes: ['uuid','email','fk_StripeCustomer'],
+    attributes: ['uuid','email','fk_StripeCustomer', 'phone'],
     where: {
       uuid: user
     },

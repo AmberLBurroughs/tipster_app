@@ -11,13 +11,13 @@ const RecHistory = props => {
       <div className="row historyheader">
         <div className="col-xs-1"></div>
         <div className="col-xs-2"><center>
-          <p className="headertipsnum">69</p>
+          <p className="headertipsnum">2</p>
           <p className="headertips">Tips Received</p>
         </center></div>
         <div className="col-xs-6"></div>
         <div className="col-xs-2"><center>
-          <p className="headeractivenum">6969</p>
-          <p className="headeractive">Active Card</p>
+          <p className="headeractivenum">$8</p>
+          <p className="headeractive">total tips</p>
         </center></div>
       </div>
       
@@ -27,13 +27,13 @@ const RecHistory = props => {
             <img className="hpanelpic img-circle" src="http://via.placeholder.com/50x50" alt="hpanel pic"/>
           </div>
           <div className="col-xs-7">
-            <p className="hpaneltext hpanelrecname">Amber</p>
+            <p className="hpaneltext hpanelrecname">Amber tipped $5</p>
             <p className="hpaneltext hpanelreclocation">Place Worked At</p>
           </div>
           <div className="col-xs-2"><center>
             <p className="hpaneltext hpanelstatus">Status</p>
-            <p>check or x</p>
-            <p className="hpaneltext hpanelanon">Sent Anonymously</p>
+             <p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></p>
+            <p className="hpaneltext hpanelanon"></p>
           </center></div>
         </div>
       </div>
@@ -44,12 +44,12 @@ const RecHistory = props => {
             <img className="hpanelpic img-circle" src="http://via.placeholder.com/50x50" alt="hpanel pic"/>
           </div>
           <div className="col-xs-7">
-            <p className="hpaneltext hpanelrecname">Justin</p>
+            <p className="hpaneltext hpanelrecname">Anonymous tipped $3</p>
             <p className="hpaneltext hpanelreclocation">Place Worked At</p>
           </div>
           <div className="col-xs-2"><center>
             <p className="hpaneltext hpanelstatus">Status</p>
-            <p>check or x</p>
+            <p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></p>
             <p className="hpaneltext hpanelanon">Sent Anonymously</p>
           </center></div>
         </div>

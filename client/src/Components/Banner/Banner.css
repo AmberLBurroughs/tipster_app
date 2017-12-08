@@ -37,8 +37,10 @@
 
 .bannernologo {
   font-size: 36px;
-  font-family: 'Fjalla One', sans-serif;
-  color: #171837;
+  font-family: 'Julius Sans One', sans-serif; 
+  margin-bottom:0 !important; 
+  font-weight: 600;
+  color:#fff;
   text-align: center;
   width: auto;
 }

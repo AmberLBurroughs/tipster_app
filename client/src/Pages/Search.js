@@ -28,7 +28,7 @@ class Search extends Component {
     recipient: {
       username: "",
       image: "",
-      first: ""
+      firstName: ""
     }
   }
 
@@ -106,12 +106,12 @@ class Search extends Component {
     })
   }
 //also updates recipient
-  onOpenModal = (name, image, first) => {
+  onOpenModal = (name, image, firstName) => {
     this.setState({
       recipient: {
         username: name,
         image: image,
-        first: first
+        first: firstName
       },
       open: true
     })
@@ -141,6 +141,13 @@ class Search extends Component {
             onClose={this.onCloseModal}
             classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
             closeIconSize={0}>
+            <TipCard
+              image={this.state.recipient.image}
+              location={this.state.searchLocation}
+              firstName={this.state.recipient.firstName}
+              username={this.state.recipient.username}
+              toggleModal={this.toggleModal}
+              page1={this.state.page1}/>
           </Modal>
         </div>
       </div>

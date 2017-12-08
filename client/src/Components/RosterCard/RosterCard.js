@@ -8,14 +8,9 @@ class RosterCard extends Component {
 
   }
 
-  componentDidMount = () => {
-    this.setState({
-      username: {}
-    })
-  }
 
   grabberhelper = () => {
-    this.props.buttonclick(this.props.user.username, this.props.user.image, this.props.user.first);
+    this.props.buttonclick(this.props.user.username, this.props.user.image, this.props.user.firstName);
   }
 
   render() {

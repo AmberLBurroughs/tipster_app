@@ -1,5 +1,7 @@
 .panelprofile {
   margin-top: -112px;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .profilepic {
@@ -14,13 +16,15 @@
 .profileelement {
   margin-bottom: 35px;
   font-size: 24px;
-  font-family: 'Fjalla One', sans-serif;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #171837;
   padding: 10px 0;
 }
 
 .profilepanel {
-  border: 1px solid #23d3ac;
+  border: none;
+  border-radius: 5px;
   background: #f4f4f4;  
 }
 

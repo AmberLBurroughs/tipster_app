@@ -12,7 +12,7 @@ import Card from 'react-credit-cards'
 
 const { tipHelper } = helper;
 
-
+// add a back button and a close button that resets the card
 class TipCard extends Component {
   state = {
     anonymous: false,
@@ -126,8 +126,8 @@ class TipCard extends Component {
         <form>
           {this.props.page1
             ? 
-            <center><div>
-              <h3>{this.props.first}</h3>
+            <center><div >
+              <h3>{this.props.firstName}</h3>
               <h4>@{this.props.location.name}</h4><br/><br/>
 
               <div className="form-inline">

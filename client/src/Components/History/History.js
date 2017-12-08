@@ -32,7 +32,7 @@ const History = props => {
           </div>
           <div className="col-xs-2"><center>
             <p className="hpaneltext hpanelstatus">Status</p>
-            <p>check or x</p>
+             <p><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></p>
             <p className="hpaneltext hpanelanon">Sent Anonymously</p>
           </center></div>
         </div>
@@ -49,7 +49,7 @@ const History = props => {
           </div>
           <div className="col-xs-2"><center>
             <p className="hpaneltext hpanelstatus">Status</p>
-            <p>check or x</p>
+            <p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></p>
             <p className="hpaneltext hpanelanon">Sent Anonymously</p>
           </center></div>
         </div>

@@ -1,5 +1,8 @@
 .historypanel {
   margin-top: -112px;
+  color: #171837;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .historypic {
@@ -15,28 +18,36 @@
 }
 
 .headertips, .headeractive {
-  font-size: 18px;
-  font-family: 'Fjalla One', sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-transform: uppercase;
 }
 
 .headertipsnum {
   color: #23d3ac;
-  font-size: 18px;
-  font-family: 'Fjalla One', sans-serif;
+  font-size: 32px !important;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;;
 }
 
 .headeractivenum {
   color: #7571ff;
-  font-size: 18px;
-  font-family: 'Fjalla One', sans-serif;
+  font-size: 32px !important;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
 .hpanel {
   background: #f4f4f4;
   padding: 10px 0;
-  border: 1px solid #23d3ac;
-  margin-bottom: 3px;
+  border: 1px solid #a1a1a1 !important;
+  margin-bottom: 0 !important;
   border-radius: 5px;
+  
+}
+.hpanel:first-of-type {
+  border-bottom: 0 !important;
 }
 
 .hpanelpic {
@@ -47,7 +58,8 @@
 
 .hpaneltext {
   color: #171837;
-  font-family: 'Fjalla One', sans-serif;
+  font-weight: 200;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .hpanelrecname, .hpanelreclocation {

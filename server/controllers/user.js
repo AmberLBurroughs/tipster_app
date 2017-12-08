@@ -25,14 +25,15 @@ module.exports = {
   getUser2: (findParam, fields, func) => {
     User.find({
       attributes: fields,
-      where: findParam
+      where: findParam,
     }).then(data => func(data.dataValues));
   },
 
   updateUser: (identifier, newData, func) => {
     User.update(
       newData,{
-        where: identifier
+        where: identifier,
+        returning: true,
       }
     ).then(data => func(data));
   }

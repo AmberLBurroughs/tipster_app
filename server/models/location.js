@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   // methods ======================
   Location.associate = models => { 
     Location.belongsToMany(models.User,{
-      as:'Workers', through: 'userLocations', foreignKey: 'userUUID'
+      as:'Worker', through: 'UserLocations', foreignKey: 'placeID'
     });
   }
 

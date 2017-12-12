@@ -111,4 +111,123 @@ Required packages for server:
     this.resetState();
   }```
 
-<hr>
+
+**SERVER**
+
+```www
+db.sequelize.sync({}).then(function() {
+  app.listen(port, function() {
+    console.log("App listening on PORT " + port);
+  });
+});
+
+
+User Model
+'use strict';
+const uuidv1   = require('uuid/v1');
+
+module.exports = (sequelize, DataTypes) => {
+  const User   = sequelize.define('User', {
+    uuid: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      isUnique :true
+    },
+    ,{
+      hooks: {
+        beforeCreate: user => {
+          const emailArr = user.email.split("@");
+          user.username = emailArr[0] + Math.random().toString(36).substring(7);
+      }
+    }
+  });
+// methods ======================
+  User.associate = models => {
+    User.belongsToMany(models.Location, { 
+      as: 'WorkPlace',
+      through: 'UserLocations',
+      foreignKey: 'UserUUID'
+    }),
+    User.belongsTo(models.StripeCustomer, {
+      foreignKey: 'fk_StripeCustomer',
+      onDelete: 'CASCADE'
+    });
+    User.belongsTo(models.StripeConnect, { 
+      foreignKey: 'fk_StripeConnect',
+      onDelete: 'CASCADE'
+    });
+  }
+
+  return User;
+};
+
+Signup / Login
+
+app.post('/login', (req, res, next) => {
+  passportAuthenticate('local-login', req, res, next);
+});
+
+// process the signup form
+app.post('/signup', (req, res, next) => {
+  passportAuthenticate('local-signup', req, res, next);
+});
+
+Stripe
+
+charge: (req, sender, recip, func) => {
+    let chargeObject = {
+      amount: req.body.amount * 100, //need to convert to cents
+      currency: "usd",
+      description: `Tip to ${req.body.recipient}for $${req.body.amount} at ${req.body.location.name}\nNote: ${req.body.note}`,
+      metadata: {
+        for: recip.username
+      },
+      receipt_email: sender.email,
+      customer: sender['StripeCustomer'].dataValues.key
+    }
+    stripe.charges.create(chargeObject,
+      function(err, charge) {
+      // asynchronously called
+      if (err) {
+        throw err;
+        console.log(`error`);
+      }
+      func(charge); 
+    });
+  }
+
+Stripe Connect 
+
+StripeConnect.create({
+    accessToken: response.data.access_token,
+    livemode: response.data.livemode,
+    refreshToken: response.data.refresh_token,
+    publishableKey: response.data.stripe_publishable_key,
+    connectUserId: response.data.stripe_user_id,
+  })
+  .then(function(connectedUser){
+    console.log(connectedUser, account)
+    User.update({ 
+      firstName: account.legal_entity.first_name,
+      email: account.legal_entity.phone_number,
+      phone:account.email,
+      fk_StripeConnect: connectedUser.dataValues.uuid},
+      { where: { username:  stripeState} })
+    .then(function(response){
+        console.log(response);
+        res.cookie('connect_id', true); // update cookie to note this user has a connect ID now.
+        res.redirect("http://localhost:3000/rec/history")
+      })
+
+
+Twillio
+
+var client = new twilio(accountSid, authToken);
+
+client.messages.create({
+    body: 'You have received a new tip on Tipster',
+    to: req.body.number,  // Text this number
+    from: '+12345678901' // From a valid Twilio number
+})
+.then((message) => console.log(message.sid));```

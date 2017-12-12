@@ -51,7 +51,7 @@ Required packages for server:
 * [twilio](https://www.npmjs.com/package/twilio) - SMS Notifications
 
 ### Additions
-`search Page 
+```search Page 
  constructor(props){
     super(props);
     const that = this;
@@ -221,7 +221,9 @@ client.messages.create({
     to: req.body.number,  // Text this number
     from: '+12345678901' // From a valid Twilio number
 })
-.then((message) => console.log(message.sid));`
+.then((message) => console.log(message.sid));```
+
+```
 
 
 

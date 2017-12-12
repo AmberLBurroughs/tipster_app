@@ -53,7 +53,6 @@ Required packages for server:
 
 
 
-
 ### Additions
 search page 
  ```constructor(props){

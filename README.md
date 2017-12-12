@@ -54,6 +54,7 @@ Required packages for server:
 **CLIENT**
 
 search Page 
+
  ```constructor(props){
     super(props);
     const that = this;
@@ -82,6 +83,7 @@ search Page
 
 
   Stripe Checkout
+
   ```class _CardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
@@ -95,6 +97,7 @@ search Page
 
 
   Tip Card
+
   ```submitTip = (token) => {
     let transaction = {
       location: this.props.location,
@@ -108,7 +111,7 @@ search Page
     this.resetState();
   }```
 
-
+<hr>
 **SERVER**
 
 www
@@ -160,6 +163,7 @@ module.exports = (sequelize, DataTypes) => {
 };```
 
 Signup / Login
+
 ```app.post('/login', (req, res, next) => {
   passportAuthenticate('local-login', req, res, next);
 });
@@ -170,6 +174,7 @@ app.post('/signup', (req, res, next) => {
 });```
 
 Stripe
+
 ```charge: (req, sender, recip, func) => {
     let chargeObject = {
       amount: req.body.amount * 100, //need to convert to cents
@@ -193,29 +198,31 @@ Stripe
   }```
 
 Stripe Connect 
+
 ```StripeConnect.create({
-            accessToken: response.data.access_token,
-            livemode: response.data.livemode,
-            refreshToken: response.data.refresh_token,
-            publishableKey: response.data.stripe_publishable_key,
-            connectUserId: response.data.stripe_user_id,
-          })
-          .then(function(connectedUser){
-            console.log(connectedUser, account)
-            User.update({ 
-              firstName: account.legal_entity.first_name,
-              email: account.legal_entity.phone_number,
-              phone:account.email,
-              fk_StripeConnect: connectedUser.dataValues.uuid},
-              { where: { username:  stripeState} })
-            .then(function(response){
-                console.log(response);
-                res.cookie('connect_id', true); // update cookie to note this user has a connect ID now.
-                res.redirect("http://localhost:3000/rec/history")
-              })```
+    accessToken: response.data.access_token,
+    livemode: response.data.livemode,
+    refreshToken: response.data.refresh_token,
+    publishableKey: response.data.stripe_publishable_key,
+    connectUserId: response.data.stripe_user_id,
+  })
+  .then(function(connectedUser){
+    console.log(connectedUser, account)
+    User.update({ 
+      firstName: account.legal_entity.first_name,
+      email: account.legal_entity.phone_number,
+      phone:account.email,
+      fk_StripeConnect: connectedUser.dataValues.uuid},
+      { where: { username:  stripeState} })
+    .then(function(response){
+        console.log(response);
+        res.cookie('connect_id', true); // update cookie to note this user has a connect ID now.
+        res.redirect("http://localhost:3000/rec/history")
+      })```
 
 
 Twillio
+
 ```var client = new twilio(accountSid, authToken);
 
 client.messages.create({
@@ -223,5 +230,4 @@ client.messages.create({
     to: req.body.number,  // Text this number
     from: '+12345678901' // From a valid Twilio number
 })
-.then((message) => console.log(message.sid));
-```
+.then((message) => console.log(message.sid));```

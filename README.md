@@ -1,7 +1,7 @@
 # TIPSTER
 Tipster allows you to thank your service providers without the hassle of cash or the awkwardness of a physical transaction.
 
-<img src="./client/public/assets/images/home-1.png" style="height:350px;margin:0 auto;text-align:center">
+<img src="./client/public/assets/images/home-1.png" height="400">
 
 *[tipster live](https://gettipster.io) coming soon!*
 

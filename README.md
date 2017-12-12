@@ -51,7 +51,7 @@ Required packages for server:
 * [twilio](https://www.npmjs.com/package/twilio) - SMS Notifications
 
 ### Additions
-*CLIENT*
+**CLIENT**
 
 search Page 
  ```constructor(props){
@@ -111,7 +111,7 @@ search Page
   }```
 
 
-*SERVER*
+**SERVER**
 
 www
 ```db.sequelize.sync({}).then(function() {

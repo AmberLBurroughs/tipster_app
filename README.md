@@ -1,5 +1,5 @@
 # TIPSTER
-** gettipster.io coming soon!
+*gettipster.io coming soon!*
 <img src="" >
 
 Tipster allows you to thank your service providers without the hassle of cash or the awkwardness of a physical transaction.

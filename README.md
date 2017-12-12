@@ -31,19 +31,25 @@ Clone to a local repository. Enjoy!
 * `stripe` and `twilio` keys are not provided
 
 ## Built With
-Required packages:
-* [body-parser](https://www.npmjs.com/package/body-parser)
-* [express](https://www.npmjs.com/package/express)
+Required packages for server:
+* [axios](https://www.npmjs.com/package/body-parser) - Promise based HTTP request library
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
+* [body-parser](https://www.npmjs.com/package/body-parser)
 * [connect-flash](https://www.npmjs.com/package/connect-flash)
 * [cookie-parser](https://www.npmjs.com/package/cookie-parser)
-* [express-fileupload](https://www.npmjs.com/package/express-fileupload)
-* [express-handlebars](https://www.npmjs.com/package/express-handlebars)
+* [express](https://www.npmjs.com/package/express)
 * [express-session](https://www.npmjs.com/package/express-session)
 * [method-override](https://www.npmjs.com/package/method-override)
-* [passport](https://www.npmjs.com/package/passport)
-* [passport-local](https://www.npmjs.com/package/passport-local)
-* [sequelize](https://www.npmjs.com/package/sequelize)
+* [morgan](https://www.npmjs.com/package/morgan) - HTTP Logger
+* [passport](https://www.npmjs.com/package/passport) - Login System
+* [passport-local](https://www.npmjs.com/package/passport-local) - Local Login Strategy
+* [pg](https://www.npmjs.com/package/pg) - Postgresql Database
+* [sequelize](https://www.npmjs.com/package/sequelize) - ORM
+* [stripe](https://www.npmjs.com/package/stripe) - Payments Processor 
+* [twilio](https://www.npmjs.com/package/twilio) - SMS Notifications
+
+
+
 
 
 ### Additions

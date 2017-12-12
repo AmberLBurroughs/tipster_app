@@ -8,7 +8,7 @@
 	text-align: center;
 	background: url("/assets/images/background.png") no-repeat bottom;
 	background-size: cover;
-	min-height: 485px;
+	min-height: 750px;
 }
 h1 {
 	font-size: 2em;
@@ -20,7 +20,7 @@ h1 {
 	padding-top: 3%;
 }
 #hero>.content {
-	padding-top: 6%;
+	padding-top: 5%;
 }
 .btns {
 	border:1px solid #FFF;

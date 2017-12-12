@@ -11,7 +11,7 @@ const Banner = props =>
       ?
       <div>
        <h3 className="bannerwelcome">Welcome Tipster</h3>
-       <center><img className="logo" src={props.currentUser.image} alt="default" /></center>
+       <center><img className="logo" src="/assets/images/default.png" alt="default" /></center>
        <h2 className="bannerintro">SEARCH A LOCATION TO START TIPPING</h2>
       </div>
       : ""
@@ -34,7 +34,7 @@ const Banner = props =>
       ?
       <div>
         <p className="bannerwelcome">Welcome Tipster</p>
-        <center><img className="logo" src={props.currentUser.image} alt="default" /></center><br/>
+        <center><img className="logo" src="/assets/images/default.png" alt="default" /></center><br/>
         <p className="bannerintro">SEARCH A LOCATION TO CHECK IN</p>
       </div>
       : ""

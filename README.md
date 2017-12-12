@@ -1,5 +1,5 @@
 # TIPSTER
-<img src="/client/public/images/home-1.png" >
+<img src="./client/public/images/home-1.png" >
 
 Tipster allows you to thank your service providers without the hassle of cash or the awkwardness of a physical transaction.
 *[tipster live](https://gettipster.io) coming soon!*

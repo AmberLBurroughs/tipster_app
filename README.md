@@ -1,4 +1,5 @@
-# TiPSTER
+# TIPSTER
+** gettipster.io coming soon!
 <img src="" >
 
 Tipster allows you to thank your service providers without the hassle of cash or the awkwardness of a physical transaction.
@@ -27,7 +28,7 @@ Clone to a local repository. Enjoy!
 
 * view from yarn `localhost:3000`
 
-* stripe and twilio keys are not provided
+* `stripe` and `twilio` keys are not provided
 
 ## Built With
 Required packages:

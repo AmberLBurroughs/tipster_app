@@ -51,10 +51,7 @@ Required packages for server:
 * [twilio](https://www.npmjs.com/package/twilio) - SMS Notifications
 
 ### Additions
-**CLIENT**
-
-```search Page 
-
+`search Page 
  constructor(props){
     super(props);
     const that = this;
@@ -83,7 +80,6 @@ Required packages for server:
 
 
   Stripe Checkout
-
   class _CardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
@@ -97,7 +93,6 @@ Required packages for server:
 
 
   Tip Card
-
   submitTip = (token) => {
     let transaction = {
       location: this.props.location,
@@ -109,12 +104,10 @@ Required packages for server:
     }
     tipHelper(transaction);
     this.resetState();
-  }```
-
-
-**SERVER**
-
-```www
+  }
+ 
+ 
+www
 db.sequelize.sync({}).then(function() {
   app.listen(port, function() {
     console.log("App listening on PORT " + port);
@@ -162,19 +155,18 @@ module.exports = (sequelize, DataTypes) => {
   return User;
 };
 
-Signup / Login
 
+Signup / Login
 app.post('/login', (req, res, next) => {
   passportAuthenticate('local-login', req, res, next);
 });
-
 // process the signup form
 app.post('/signup', (req, res, next) => {
   passportAuthenticate('local-signup', req, res, next);
 });
 
-Stripe
 
+Stripe
 charge: (req, sender, recip, func) => {
     let chargeObject = {
       amount: req.body.amount * 100, //need to convert to cents
@@ -196,9 +188,9 @@ charge: (req, sender, recip, func) => {
       func(charge); 
     });
   }
-
+  
+  
 Stripe Connect 
-
 StripeConnect.create({
     accessToken: response.data.access_token,
     livemode: response.data.livemode,
@@ -219,10 +211,9 @@ StripeConnect.create({
         res.cookie('connect_id', true); // update cookie to note this user has a connect ID now.
         res.redirect("http://localhost:3000/rec/history")
       })
-
+      
 
 Twillio
-
 var client = new twilio(accountSid, authToken);
 
 client.messages.create({
@@ -230,4 +221,17 @@ client.messages.create({
     to: req.body.number,  // Text this number
     from: '+12345678901' // From a valid Twilio number
 })
-.then((message) => console.log(message.sid));```
+.then((message) => console.log(message.sid));`
+
+
+
+
+
+## Authors
+
+participant of this project.
+
+* [Sahil Najeeb](https://github.com/Sahil-N)
+* [Derrick Lee](https://github.com/FEEDKurumu)
+* [Justin Wong](https://github.com/jwong1219)
+* [Amber Burroughs](https://github.com/AmberLBurroughs)

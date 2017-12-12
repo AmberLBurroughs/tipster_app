@@ -82,8 +82,7 @@ search Page
 
 
   Stripe Checkout
-  ``` 
-  class _CardForm extends Component {
+  ```class _CardForm extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
     this.props.stripe.createToken()
@@ -96,8 +95,7 @@ search Page
 
 
   Tip Card
-  ```
-  submitTip = (token) => {
+  ```submitTip = (token) => {
     let transaction = {
       location: this.props.location,
       recipient: this.props.username,
@@ -122,8 +120,7 @@ www
 
 
 User Model
-```  
-'use strict';
+```'use strict';
 const uuidv1   = require('uuid/v1');
 
 module.exports = (sequelize, DataTypes) => {
@@ -215,8 +212,7 @@ Stripe Connect
                 console.log(response);
                 res.cookie('connect_id', true); // update cookie to note this user has a connect ID now.
                 res.redirect("http://localhost:3000/rec/history")
-              })
-```
+              })```
 
 
 Twillio

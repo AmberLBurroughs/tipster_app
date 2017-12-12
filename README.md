@@ -20,13 +20,14 @@ Clone to a local repository. Enjoy!
 `npm i` for root and  `yarn` for client
 
 <img src="" >
+
 ## Usage
 
-*run `node bin/www` and `yarn start`
+* run `node bin/www` and `yarn start`
 
-*view from yarn `localhost:3000`
+* view from yarn `localhost:3000`
 
-*stripe and twilio keys are not provided
+* stripe and twilio keys are not provided
 
 ## Built With
 Required packages:

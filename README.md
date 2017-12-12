@@ -15,7 +15,7 @@ Have you ever wanted to show someone gratitude for a service but are unable to d
 
 These instructions will get you a copy of the project up and running on your local machine.
 
-<img src="./client/public/assets/images/tree.png" height="250">
+<img src="./client/public/assets/images/tree.png" height="350">
 
 ### Installing
 

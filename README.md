@@ -1,9 +1,8 @@
 # TIPSTER
-*[tipster live](https://gettipster.io) coming soon!*
 <img src="" >
 
 Tipster allows you to thank your service providers without the hassle of cash or the awkwardness of a physical transaction.
-
+*[tipster live](https://gettipster.io) coming soon!*
 
 ## Motivation
 Have you ever wanted to show someone gratitude for a service but are unable to due to lack of cash on hand or the option to tip just wasn’t available. Lets face it we have all been there and thats why the tipster team to came together to create a platform for giving back.

@@ -55,4 +55,29 @@ Required packages for server:
 
 
 ### Additions
-
+search page 
+ ```constructor(props){
+    super(props);
+    const that = this;
+    fetch("/api/search", {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors'
+    })
+    .then(function(res){
+      const contentType = res.headers.get("content-type");
+      if(contentType && contentType.includes("application/json")) {
+        return res.json();
+      }
+    })
+    .then(function(json){
+      that.setState({currentUser:{username:json.username, image:json.image }});
+    })
+    .catch(function(res){
+      if(res.error_code && res.error_code == 'invalid_login' ){
+        document.cookie = ""; // clear cookie
+        window.location.href = "/" // redirect to login
+      }
+      console.log("error", res);
+    })
+  }```

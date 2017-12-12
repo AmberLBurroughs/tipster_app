@@ -1,10 +1,11 @@
 # TiPSTER
 <img src="" >
 
+Tipster allows you to thank your service providers without the hassle of cash or the awkwardness of a physical transaction.
 
 
 ## Motivation
-
+Have you ever wanted to show someone gratitude for a service but are unable to due to lack of cash on hand or the option to tip just wasn’t available. Lets face it we have all been there and thats why the tipster team to came together to create a platform for giving back.
 
 
 <img src="" >
@@ -16,13 +17,19 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 Clone to a local repository. Enjoy!
+`npm i` for root and  `yarn` for client
 
+<img src="" >
 ## Usage
 
-run `node server.js`
+*run `node bin/www` and `yarn start`
+
+*view from yarn `localhost:3000`
+
+*stripe and twilio keys are not provided
 
 ## Built With
-Required packages - `npm i` 
+Required packages:
 * [body-parser](https://www.npmjs.com/package/body-parser)
 * [express](https://www.npmjs.com/package/express)
 * [bcrypt](https://www.npmjs.com/package/bcrypt)

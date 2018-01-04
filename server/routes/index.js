@@ -183,7 +183,7 @@ passportAuthenticate = (localStrategy, req, res, next) => {
         // res.json("hello")
         // res.status(400).json( res.json({success: true});
         res.cookie('user_id', user.username );
-        res.cookie('connect_id', (user.fk_StripeConnect && user.fk_StripeConnect.length > 0)  );
+        res.cookie('connect_id', /*(user.fk_StripeConnect && user.fk_StripeConnect.length > 0)*/ null );
         return res.redirect("http://localhost:3000/search");
       });  
     }  
@@ -246,7 +246,7 @@ app.get("/api/connect", (req, res) =>{
       "acct_1BTfrWEHoxuvzr1B",
       function(err, account) {
         // asynchronously called
-        // console.log("account", account);
+        console.log("account", account);
         // console.log("22222",response);
          StripeConnect.create({
             accessToken: response.data.access_token,
@@ -259,6 +259,7 @@ app.get("/api/connect", (req, res) =>{
             console.log(connectedUser, account)
             User.update({ 
               firstName: account.legal_entity.first_name,
+              lastName: account.legal_entity.last_name,
               email: account.legal_entity.phone_number,
               phone:account.email,
               fk_StripeConnect: connectedUser.dataValues.uuid},

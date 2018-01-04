@@ -85,13 +85,21 @@ router.post("/", (req, res) => {
                   console.log(newTransaction);
                   Transaction.create(newTransaction)
                   .then(insertionOutcome => {
-                    console.log(insertionOutcome.dataValues);
-                    res.json({
-                      message: "StripeCustomer Acct created and tip sent!",
-                      result: result,
-                      transactionWrite: insertionOutcome
-                    }); 
-                  })
+                    console.log(insertionOutcome);
+                    client.messages.create({
+                      body: 'Hello from Node',
+                      to: '+14154299564',  // Text this number
+                      from: '+12563300750' // From a valid Twilio number
+                    })
+                    .then((message) => {
+                      console.log(message.sid);
+                      res.json({
+                        message: "StripeCustomer Acct created and tip sent!",
+                        result: result,
+                        transactionWrite: insertionOutcome
+                      }); 
+                    });
+                  });
                 }));
               })
             })
@@ -116,11 +124,19 @@ router.post("/", (req, res) => {
           Transaction.create(newTransaction)
           .then(insertionOutcome => {
             console.log(insertionOutcome);
-            res.json({
-              message: "StripeCustomer Acct created and tip sent!",
-              result: result,
-              transactionWrite: insertionOutcome
-            }); 
+            client.messages.create({
+              body: 'Hello from Node',
+              to: '+14154299564',  // Text this number
+              from: '+12563300750' // From a valid Twilio number
+            })
+            .then((message) => {
+              console.log(message.sid);
+              res.json({
+                message: "StripeCustomer Acct created and tip sent!",
+                result: result,
+                transactionWrite: insertionOutcome
+              }); 
+            });
           })
         }));
       }

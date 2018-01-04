@@ -4,6 +4,18 @@ import './Nav.css';
 import Toggle from '../Toggle';
 
 class Nav extends React.Component {
+  constructor (props) {
+    super(props);
+    let cookieObj = {};
+    let cookies = document.cookie.split("; ");
+    for (let index in cookies) {
+      let cookie = cookies[index].split("=");
+      cookieObj[cookie[0]] = cookie[1];
+    }
+    this.state = cookieObj;
+  }
+
+
   showSettings (event) {
     event.preventDefault();
   }
@@ -15,7 +27,9 @@ class Nav extends React.Component {
         <center>
         <img src="/assets/images/tipster-logo.png" alt={"logo"}/>
         <h3>TIPSTER</h3>
-        <Toggle />
+        <Toggle
+          cookies={this.state}
+        />
           <h5>slide toggle to start receiving tips</h5></center>
       </div>
         {
